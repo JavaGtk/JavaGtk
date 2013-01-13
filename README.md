@@ -1,5 +1,5 @@
 JavaGtk
 =======
 
-Java bindings for GTK+ for Windows.  JavaGTK is free software, licensed under the ISC license.
+Java bindings for GTK+ for Windows.  JavaGtk is free software, licensed under the ISC license.
 
