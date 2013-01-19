@@ -20,7 +20,7 @@ package org.java_gtk.gtk;
 
 /**
  * 
- * @author Bill
+ * @author Bill Hull
  *
  */
 public class Misc extends Container {

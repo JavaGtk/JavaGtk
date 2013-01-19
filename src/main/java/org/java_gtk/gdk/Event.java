@@ -22,7 +22,7 @@ import org.java_gtk.gobject.GObject;
 
 /**
  * 
- * @author Bill
+ * @author Bill Hull
  *
  */
 public class Event extends GObject {

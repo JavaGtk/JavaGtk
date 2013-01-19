@@ -26,7 +26,7 @@ import org.java_gtk.gtk.Window;
 
 /**
  * 
- * @author Bill
+ * @author Bill Hull
  *
  */
 public class App 
