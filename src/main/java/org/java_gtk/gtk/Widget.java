@@ -24,7 +24,7 @@ import org.java_gtk.gobject.GObject;
 
 /**
  * 
- * @author Bill
+ * @author Bill Hull
  *
  */
 public class Widget extends GObject {
@@ -37,11 +37,23 @@ public class Widget extends GObject {
 	}
 	
 	public void showAll() {
-		gtk_widget_show_all(pointer);
+		lock.lock();
+		try {
+			gtk_widget_show_all(pointer);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 	
 	public void addDeleteHandler(DeleteEventHandler handler) {
-		gtk_widget_add_delete_event_handler(this.pointer, handler, this);
+		lock.lock();
+		try {
+			gtk_widget_add_delete_event_handler(this.pointer, handler, this);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 
 	public interface DeleteEventHandler {

@@ -22,7 +22,7 @@ import org.java_gtk.ObjectCache;
 
 /**
  * 
- * @author Bill
+ * @author Bill Hull
  *
  */
 public class Button extends Bin {
@@ -36,21 +36,46 @@ public class Button extends Bin {
 	}
 
 	public Button() {
-		this(gtk_button_new());
+		super(newButton());
+	}
+	
+	private static long newButton() {
+		lock.lock();
+		try {
+			return gtk_button_new();
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 	
 	public Button(String label) {
-		this(gtk_button_new_with_label(label));
+		this(newButtonWithLabel(label));
+	}
+	
+	private static long newButtonWithLabel(String label) {
+		lock.lock();
+		try {
+			return gtk_button_new_with_label(label);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 	
 	public void addClickedHandler(ClickedEventHandler handler) {
-		gtk_button_add_clicked_event_handler(this.pointer, handler, this);
+		lock.lock();
+		try {
+			gtk_button_add_clicked_event_handler(this.pointer, handler, this);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 
-	public interface ClickedEventHandler
-    {
-        boolean handle(Button source);
-    }
+	public interface ClickedEventHandler {
+		boolean handle(Button source);
+	}
 	
 	static boolean clickedEventReceiver(ClickedEventHandler handler, long sourcePointer) {
 		return handler.handle((Button)ObjectCache.lookup(sourcePointer));

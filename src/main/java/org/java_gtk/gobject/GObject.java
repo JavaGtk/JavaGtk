@@ -18,20 +18,38 @@
 
 package org.java_gtk.gobject;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 import org.java_gtk.ObjectCache;
 
 /**
  * 
- * @author Bill
+ * Base class for all objects in GTK.  Contains lock and pointer properties.
+ * <p>
+ * lock is used to ensure that methods are not called from multiple threads
+ * at the same time since GTK is not thread safe (however it is thread aware).
+ * <p>
+ * pointer is used to maintain a reference to the underlying c object.
+ * 
+ * @author Bill Hull
  *
  */
 public abstract class GObject {
 
 	protected final long pointer;
-
+	
+	protected static final ReentrantLock lock = new ReentrantLock(true);
+	
+	/**
+	 * Create a new GObject with the specified address as its pointer.
+	 * GObjects are cached in {@link org.java_gtk.ObjectCache ObjectCache} upon instantiation.
+	 * 
+	 * @param pointer
+	 */
 	protected GObject(long pointer) {
 		this.pointer = pointer;
-		ObjectCache.cache(this);
+		if (pointer != 0)
+			ObjectCache.cache(this);
 	}
 	
 	public long getPointer() {
@@ -42,4 +60,13 @@ public abstract class GObject {
 		ObjectCache.remove(this);
 	}
 	
+	/**
+	 * Ensure that this GObject is removed from the cache when garbage collected.
+	 * You should not solely rely on this method.  Instead you should attempt to 
+	 * call the {@link #cleanup() cleanup} method when the object is no longer needed.
+	 */
+    protected void finalize() throws Throwable {
+    	ObjectCache.remove(this);
+        super.finalize();
+    }
 }

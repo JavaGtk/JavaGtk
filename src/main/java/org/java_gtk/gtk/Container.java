@@ -20,7 +20,7 @@ package org.java_gtk.gtk;
 
 /**
  * 
- * @author Bill
+ * @author Bill Hull
  *
  */
 public class Container extends Widget {
@@ -34,14 +34,32 @@ public class Container extends Widget {
 	}
 	
 	public void add(Widget widget) {
-		gtk_container_add(this.pointer, widget.getPointer());
+		lock.lock();
+		try {
+			gtk_container_add(this.pointer, widget.getPointer());
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 	
 	public void setBorderWidth(int width) {
-		gtk_container_set_border_width(this.pointer, width);
+		lock.lock();
+		try {
+			gtk_container_set_border_width(this.pointer, width);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 
 	public int getBorderWidth() {
-		return gtk_container_get_border_width(this.pointer);
+		lock.lock();
+		try {
+			return gtk_container_get_border_width(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 }

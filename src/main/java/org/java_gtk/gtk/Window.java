@@ -20,7 +20,7 @@ package org.java_gtk.gtk;
 
 /**
  * 
- * @author Bill
+ * @author Bill Hull
  *
  */
 public class Window extends Bin {
@@ -49,14 +49,36 @@ public class Window extends Bin {
 	}
 	
 	public Window () {
-		this(gtk_window_new(WindowType.TOPLEVEL.getValue()));
+		this(newWindow());
 	}
 		
+	private static long newWindow() {
+		lock.lock();
+		try {
+			return gtk_window_new(WindowType.TOPLEVEL.getValue());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
 	public void setTitle(String title) {
-		gtk_window_set_title(pointer, title);
+		lock.lock();
+		try {
+			gtk_window_set_title(pointer, title);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 	
 	public String getTitle() {
-		return gtk_window_get_title(pointer);
+		lock.lock();
+		try {
+			return gtk_window_get_title(pointer);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 }

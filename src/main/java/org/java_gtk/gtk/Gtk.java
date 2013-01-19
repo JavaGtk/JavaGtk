@@ -23,37 +23,59 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.java_gtk.gobject.GObject;
+
 /**
  * 
- * @author Bill
+ * @author Bill Hull
  *
  */
-public class Gtk {
+public class Gtk extends GObject {
 	
 	private static native final void gtk_init(java.lang.Object argc, String[] argv);
-    private static native final void gtk_main();
-    private static native final void gtk_main_quit();
+	private static native final void gtk_main();
+	private static native final void gtk_main_quit();
 	    
 	static {
 		loadLibraries();
 	}
 
-	private Gtk() {}
+	private Gtk() {
+		super(0);
+	}
 	
 	public static void init(String[] argv) {
-		gtk_init(argv.length, argv);
+		lock.lock();
+		try {
+			gtk_init(argv.length, argv);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 
-    public static void main() {
-    	gtk_main();
-    }
-    
+	public static void main() {
+		lock.lock();
+		try {
+		   	gtk_main();
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
 	public static void mainQuit() {
-		gtk_main_quit();
+		lock.lock();
+		try {
+			gtk_main_quit();
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 	
 	private static void loadLibraries() {
-	    Properties props = new Properties();
+		Properties props = new Properties();
 		String gtkLibPath = System.getProperty("java.library.path");
 		String javaGtkLibPath = System.getProperty("java.library.path");
 		String libraryExtension = ".dll";

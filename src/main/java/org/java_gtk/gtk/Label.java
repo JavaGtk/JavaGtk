@@ -20,7 +20,7 @@ package org.java_gtk.gtk;
 
 /**
  * 
- * @author Bill
+ * @author Bill Hull
  *
  */
 public class Label extends Misc {
@@ -32,7 +32,17 @@ public class Label extends Misc {
 	}
 	
 	public Label(String label) {
-		this(gtk_label_new(label));
+		this(newLabel(label));
+	}
+	
+	private static long newLabel(String label) {
+		lock.lock();
+		try {
+			return gtk_label_new(label);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 	
 }
