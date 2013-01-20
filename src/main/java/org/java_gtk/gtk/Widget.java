@@ -30,16 +30,36 @@ import org.java_gtk.gobject.GObject;
 public class Widget extends GObject {
 	
 	private static native final void gtk_widget_show_all(long widget_id);
+	private static native final void gtk_widget_destroy(long widget_id);
 	private static native final void gtk_widget_add_delete_event_handler(long widget_id, DeleteEventHandler handler, Widget receiver);
+	private static native final void gtk_widget_add_destroy_handler(long widget_id, DestroyHandler handler, Widget receiver);
 
 	protected Widget(long pointer) {
 		super(pointer);
+		this.addDestroyHandler(new DestroyHandler() {
+			@Override
+			public boolean handle(Widget source) {
+				source.cleanup();
+				return true;
+			}
+			
+		});
 	}
 	
 	public void showAll() {
 		lock.lock();
 		try {
 			gtk_widget_show_all(pointer);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	public void destroy() {
+		lock.lock();
+		try {
+			gtk_widget_destroy(pointer);
 		}
 		finally {
 			lock.unlock();
@@ -62,6 +82,24 @@ public class Widget extends GObject {
 	
 	static boolean deleteEventReceiver(DeleteEventHandler handler, long sourcePointer, long eventPointer) {
 		return handler.handle((Widget)ObjectCache.lookup(sourcePointer), new Event(eventPointer));
+	}
+
+	public void addDestroyHandler(DestroyHandler handler) {
+		lock.lock();
+		try {
+			gtk_widget_add_destroy_handler(this.pointer, handler, this);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	public interface DestroyHandler {
+        boolean handle(Widget source);
+    }
+
+	static void destroyReceiver(DestroyHandler handler, long sourcePointer) {
+		handler.handle((Widget)ObjectCache.lookup(sourcePointer));
 	}
 
 }

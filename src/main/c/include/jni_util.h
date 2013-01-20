@@ -16,8 +16,8 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifndef UTIL_H_
-#define UTIL_H_
+#ifndef JNI_UTIL_H_
+#define JNI_UTIL_H_
 
 #include <jni.h>
 #include <stdbool.h>
@@ -34,10 +34,14 @@ typedef struct callback_tag {
 
 callback* create_callback(JNIEnv *, jobject, jobject, const char *, const char *);
 
+void connect_callback(gpointer, const gchar *, GCallback, callback *);
+
 void callback_start(callback*);
 
 void callback_end(callback*);
 
+void free_callback(gpointer);
+
 void printClassName(JNIEnv *, jobject);
 
-#endif /* UTIL_H_ */
+#endif /* JNI_UTIL_H_ */

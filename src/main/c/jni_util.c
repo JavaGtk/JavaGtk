@@ -22,7 +22,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/util.h"
+#include "include/jni_util.h"
 
 static JavaVM*	cached_jvm;
 
@@ -53,6 +53,10 @@ callback* create_callback(JNIEnv *env, jobject handler, jobject receiver, const 
 	return c;
 }
 
+void connect_callback(gpointer instance, const gchar *signal, GCallback handler, callback* c) {
+	g_signal_connect_data(instance, signal, handler, c, (GClosureNotify)free_callback, 0);
+}
+
 void callback_start(callback *c) {
 	c->attached = false;
 	int status = (*cached_jvm)->GetEnv(cached_jvm, (void **)&c->env, JNI_VERSION_1_6);
@@ -70,6 +74,10 @@ void callback_end(callback *c) {
 		(*cached_jvm)->DetachCurrentThread(cached_jvm);
 		c->attached = false;
 	}
+}
+
+void free_callback(gpointer data) {
+	free(data);
 }
 
 void printClassName(JNIEnv *env, jobject obj) {

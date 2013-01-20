@@ -19,7 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_Widget.h"
-#include "include/util.h"
+#include "include/jni_util.h"
 
 /*
  * Class:     org_java_gtk_gtk_Widget
@@ -30,6 +30,17 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1show_1all
   (JNIEnv* env, jclass cls, jlong widget)
 {
 	gtk_widget_show_all((GtkWidget*)widget);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_destroy
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1destroy
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	gtk_widget_destroy((GtkWidget*)widget);
 }
 
 void delete_event_handler(GtkWidget *widget, GdkEvent *event, gpointer data) {
@@ -45,9 +56,30 @@ void delete_event_handler(GtkWidget *widget, GdkEvent *event, gpointer data) {
  * Signature: (JLorg/java_gtk/gtk/Widget/DeleteEventHandler;Lorg/java_gtk/gtk/Widget;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1delete_1event_1handler
-  (JNIEnv * env, jclass cls, jlong instance, jobject handler, jobject receiver)
+  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
 {
 	callback *c;
 	c = create_callback(env, handler, receiver, "deleteEventReceiver", "(Lorg/java_gtk/gtk/Widget$DeleteEventHandler;JJ)Z");
-	g_signal_connect((GtkWidget *)instance, "delete-event", G_CALLBACK(delete_event_handler), c);
+	connect_callback((gpointer)instance, "delete-event", G_CALLBACK(delete_event_handler), c);
+}
+
+void destroy_handler(GtkWidget *widget, gpointer data) {
+	callback *c = data;
+	callback_start(c);
+	(*c->env)->CallStaticVoidMethod(c->env, c->receiver, c->id, c->handler, widget);
+	callback_end(c);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_add_destroy_handler
+ * Signature: (JLorg/java_gtk/gtk/Widget/DestroyHandler;Lorg/java_gtk/gtk/Widget;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1handler
+  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
+{
+	callback *c;
+	c = create_callback(env, handler, receiver, "destroyReceiver", "(Lorg/java_gtk/gtk/Widget$DestroyHandler;J)V");
+	connect_callback((gpointer)instance, "destroy", G_CALLBACK(destroy_handler), c);
+
 }

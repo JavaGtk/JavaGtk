@@ -19,7 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_Button.h"
-#include "include/util.h"
+#include "include/jni_util.h"
 
 /*
  * Class:     org_java_gtk_gtk_Button
@@ -66,6 +66,6 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1add_1clicked_1
 {
 	callback *c;
 	c = create_callback(env, handler, receiver, "clickedEventReceiver", "(Lorg/java_gtk/gtk/Button$ClickedEventHandler;J)Z");
-	g_signal_connect((GtkWidget *)instance, "clicked", G_CALLBACK(clicked_event_handler), c);
+	connect_callback((gpointer)instance, "clicked", G_CALLBACK(clicked_event_handler), c);
 
 }

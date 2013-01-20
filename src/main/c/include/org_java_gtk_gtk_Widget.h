@@ -17,10 +17,26 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1show_1all
 
 /*
  * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_destroy
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1destroy
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
  * Method:    gtk_widget_add_delete_event_handler
  * Signature: (JLorg/java_gtk/gtk/Widget/DeleteEventHandler;Lorg/java_gtk/gtk/Widget;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1delete_1event_1handler
+  (JNIEnv *, jclass, jlong, jobject, jobject);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_add_destroy_handler
+ * Signature: (JLorg/java_gtk/gtk/Widget/DestroyHandler;Lorg/java_gtk/gtk/Widget;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1handler
   (JNIEnv *, jclass, jlong, jobject, jobject);
 
 #ifdef __cplusplus
