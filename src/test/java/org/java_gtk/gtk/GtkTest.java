@@ -18,7 +18,22 @@
 
 package org.java_gtk.gtk;
 
+import org.junit.Before;
+
 public class GtkTest {
-
-
+	
+	protected Window mainWin;
+	
+    @Before
+    public void before() {
+		Gtk.init(new String[0]);
+		mainWin = new Window();    	
+		mainWin.showAll();
+    }
+        
+    public void processEvents() {
+    	while (Gtk.hasEventsPending()) {
+    		Gtk.mainIteration(false);
+    	}
+    }
 }

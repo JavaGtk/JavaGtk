@@ -25,6 +25,22 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1main
 
 /*
  * Class:     org_java_gtk_gtk_Gtk
+ * Method:    gtk_main_iteration_do
+ * Signature: (Z)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1main_1iteration_1do
+  (JNIEnv *, jclass, jboolean);
+
+/*
+ * Class:     org_java_gtk_gtk_Gtk
+ * Method:    gtk_events_pending
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1events_1pending
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     org_java_gtk_gtk_Gtk
  * Method:    gtk_main_quit
  * Signature: ()V
  */

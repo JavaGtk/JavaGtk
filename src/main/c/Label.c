@@ -27,14 +27,31 @@
  * Signature: (Ljava/lang/String;)J
  */
 JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1new
-  (JNIEnv *env, jclass cls, jstring label)
+  (JNIEnv *env, jclass cls, jstring text)
 {
 	const char* strLabel;
 	GtkWidget* widget;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = (*env)->GetStringUTFChars(env, text, NULL);
 	widget = gtk_label_new(strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	(*env)->ReleaseStringUTFChars(env, text, strLabel);
 
 	return (jlong)widget;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Label
+ * Method:    gtk_label_get_text
+ * Signature: (J)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1get_1text
+  (JNIEnv *env, jclass cls, jlong label)
+{
+	const char* strText;
+	jstring text;
+
+	strText = gtk_label_get_text((GtkLabel*)label);
+	text = (*env)->NewStringUTF(env, strText);
+
+	return text;
 }

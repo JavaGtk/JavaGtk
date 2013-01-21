@@ -18,6 +18,11 @@
 
 package org.java_gtk.gtk;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.java_gtk.util.ObjectCache;
+
 /**
  * 
  * @author Bill Hull
@@ -28,6 +33,22 @@ public class Container extends Widget {
 	private static native final void gtk_container_add(long container_id, long widget_id);
 	private static native final void gtk_container_set_border_width(long container_id, int border_width);
 	private static native final int gtk_container_get_border_width(long container_id);
+	private static native final long[] gtk_container_get_children (long container_id);
+
+	public enum Orientation {
+		HORIZONTAL(0),
+		VERTICAL(1);
+		
+		private Orientation(int value) {
+			this.value = value;
+		}
+		
+		private int value;
+		
+		public int getValue() {
+			return value;
+		}
+	}
 
 	protected Container(long pointer) {
 		super(pointer);
@@ -61,5 +82,21 @@ public class Container extends Widget {
 		finally {
 			lock.unlock();
 		}
+	}
+	
+	public List<Widget> getChildren() {
+		long[] ids;
+		lock.lock();
+		try {
+			 ids = gtk_container_get_children(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}
+		List<Widget> children = new ArrayList<Widget>(ids.length);
+		for (long id: ids) {
+			children.add((Widget)ObjectCache.lookup(id));
+		}
+		return children;
 	}
 }

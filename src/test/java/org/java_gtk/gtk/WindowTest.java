@@ -27,16 +27,14 @@ public class WindowTest extends GtkTest {
 
 	@Test
 	public void testNewWindow() {
-		Gtk.init(new String[0]);
-		Window mainWin = new Window();
+		processEvents();
 		Assert.assertNotNull(mainWin);
 	}
 	
 	@Test
-	public void testWindowTitle() {		
-		Gtk.init(new String[0]);
-		Window mainWin = new Window();
+	public void testWindowTitle() {
 		mainWin.setTitle(TEST_TITLE);
+		processEvents();
 		Assert.assertEquals(TEST_TITLE, mainWin.getTitle());
 	}
 

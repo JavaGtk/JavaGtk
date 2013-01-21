@@ -18,7 +18,7 @@
 
 package org.java_gtk.gtk;
 
-import org.java_gtk.ObjectCache;
+import org.java_gtk.util.ObjectCache;
 
 /**
  * 

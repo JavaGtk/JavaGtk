@@ -31,6 +31,14 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Container_gtk_1container_1set_1bor
 JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Container_gtk_1container_1get_1border_1width
   (JNIEnv *, jclass, jlong);
 
+/*
+ * Class:     org_java_gtk_gtk_Container
+ * Method:    gtk_container_get_children
+ * Signature: (J)[J
+ */
+JNIEXPORT jlongArray JNICALL Java_org_java_1gtk_gtk_Container_gtk_1container_1get_1children
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif

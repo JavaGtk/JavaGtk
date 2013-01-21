@@ -53,3 +53,25 @@ JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Container_gtk_1container_1get_1bor
 	return (jint)gtk_container_get_border_width((GtkContainer*)container);
 }
 
+/*
+ * Class:     org_java_gtk_gtk_Container
+ * Method:    gtk_container_get_children
+ * Signature: (J)[J
+ */
+JNIEXPORT jlongArray JNICALL Java_org_java_1gtk_gtk_Container_gtk_1container_1get_1children
+  (JNIEnv *env, jclass cls, jlong container)
+{
+	GList *children = gtk_container_get_children((GtkContainer*)container);
+	int size = g_list_length(children);
+	jlongArray array = (*env)->NewLongArray(env, size);
+	jlong* arr = (jlong*)(*env)->GetLongArrayElements(env, array, NULL);
+
+	for (int i = 0; i < size; i++) {
+		arr[i] = (jlong) children->data;
+		children = children->next;
+	}
+	(*env)->ReleaseLongArrayElements(env, array, arr, 0);
+
+	return array;
+}
+

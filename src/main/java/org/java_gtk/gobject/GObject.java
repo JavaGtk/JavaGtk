@@ -20,7 +20,7 @@ package org.java_gtk.gobject;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.java_gtk.ObjectCache;
+import org.java_gtk.util.ObjectCache;
 
 /**
  * 
@@ -42,7 +42,7 @@ public abstract class GObject {
 	
 	/**
 	 * Create a new GObject with the specified address as its pointer.
-	 * GObjects are cached in {@link org.java_gtk.ObjectCache ObjectCache} upon instantiation.
+	 * GObjects are cached in {@link org.java_gtk.util.ObjectCache ObjectCache} upon instantiation.
 	 * 
 	 * @param pointer
 	 */

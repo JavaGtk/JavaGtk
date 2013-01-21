@@ -1,4 +1,4 @@
-package org.java_gtk;
+package org.java_gtk.util;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -9,7 +9,7 @@ import java.util.Map.Entry;
  * <p/>
  * @author Gili Tzabari
  */
-public class NativeLibraries
+public class NativeLibrariesHelper
 {
     private final Field loadedLibraryNames;
     private final Field systemNativeLibraries;
@@ -20,7 +20,7 @@ public class NativeLibraries
 	public static void printNative() {
 		System.out.println(System.getProperty("java.library.path"));
 		try {
-			NativeLibraries n = new NativeLibraries();
+			NativeLibrariesHelper n = new NativeLibrariesHelper();
 			for (String s: n.getLoadedLibraries()) {
 				System.out.println(s);
 			}
@@ -35,7 +35,7 @@ public class NativeLibraries
      * <p/>
      * @throws NoSuchFieldException if one of ClassLoader's fields cannot be found
      */
-    public NativeLibraries() throws NoSuchFieldException
+    public NativeLibrariesHelper() throws NoSuchFieldException
     {
         this.loadedLibraryNames = ClassLoader.class.getDeclaredField("loadedLibraryNames");
         loadedLibraryNames.setAccessible(true);

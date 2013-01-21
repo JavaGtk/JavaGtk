@@ -18,41 +18,6 @@
 
 package org.java_gtk.gtk;
 
-/**
- * 
- * @author Bill Hull
- *
- */
-public class Label extends Misc {
+public class ButtonTest extends GtkTest {
 
-	private static native final long gtk_label_new(String label);
-	private static native final String gtk_label_get_text(long pointer);
-	
-	protected Label(long pointer) {
-		super(pointer);
-	}
-	
-	public Label(String label) {
-		this(newLabel(label));
-	}
-	
-	private static long newLabel(String label) {
-		lock.lock();
-		try {
-			return gtk_label_new(label);
-		}
-		finally {
-			lock.unlock();
-		}
-	}
-	
-	public String getText() {
-		lock.lock();
-		try {
-			return gtk_label_get_text(pointer);
-		}
-		finally {
-			lock.unlock();
-		}
-	}
 }

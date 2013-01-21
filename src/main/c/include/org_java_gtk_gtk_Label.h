@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1new
   (JNIEnv *, jclass, jstring);
 
+/*
+ * Class:     org_java_gtk_gtk_Label
+ * Method:    gtk_label_get_text
+ * Signature: (J)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1get_1text
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif

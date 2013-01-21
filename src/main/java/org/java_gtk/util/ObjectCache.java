@@ -16,43 +16,40 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.gtk;
+package org.java_gtk.util;
+
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
+
+import org.java_gtk.gobject.GObject;
 
 /**
  * 
  * @author Bill Hull
  *
  */
-public class Label extends Misc {
+public class ObjectCache {
 
-	private static native final long gtk_label_new(String label);
-	private static native final String gtk_label_get_text(long pointer);
+	private static final HashMap<Long, WeakReference<GObject>> objects = new HashMap<Long, WeakReference<GObject>>();
 	
-	protected Label(long pointer) {
-		super(pointer);
+	public static GObject lookup(long id) {
+		if (!objects.containsKey(id)) {
+			return null;
+		}
+		GObject val = objects.get(id).get();
+		if (val == null) {
+			objects.remove(id);
+		}
+		return val;
 	}
 	
-	public Label(String label) {
-		this(newLabel(label));
-	}
-	
-	private static long newLabel(String label) {
-		lock.lock();
-		try {
-			return gtk_label_new(label);
-		}
-		finally {
-			lock.unlock();
+	public static void cache(GObject object) {
+		if (!objects.containsKey(object.getPointer())) {
+			objects.put(object.getPointer(), new WeakReference<GObject>(object));
 		}
 	}
 	
-	public String getText() {
-		lock.lock();
-		try {
-			return gtk_label_get_text(pointer);
-		}
-		finally {
-			lock.unlock();
-		}
+	public static void remove(GObject object) {
+		objects.remove(object.getPointer());
 	}
 }

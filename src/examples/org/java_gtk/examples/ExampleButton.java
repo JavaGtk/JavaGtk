@@ -16,40 +16,39 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk;
+package org.java_gtk.examples;
 
-import java.lang.ref.WeakReference;
-import java.util.HashMap;
+import org.java_gtk.gdk.Event;
+import org.java_gtk.gtk.Button;
+import org.java_gtk.gtk.Gtk;
+import org.java_gtk.gtk.Widget;
+import org.java_gtk.gtk.Window;
 
-import org.java_gtk.gobject.GObject;
+public class ExampleButton {
 
-/**
- * 
- * @author Bill Hull
- *
- */
-public class ObjectCache {
-
-	private static final HashMap<Long, WeakReference<GObject>> objects = new HashMap<Long, WeakReference<GObject>>();
-	
-	public static GObject lookup(long id) {
-		if (!objects.containsKey(id)) {
-			return null;
-		}
-		GObject val = objects.get(id).get();
-		if (val == null) {
-			objects.remove(id);
-		}
-		return val;
+	public static void main(String[] args) {
+		Gtk.init(args);
+		Window mainWin = new Window();
+		mainWin.addDeleteHandler(new Widget.DeleteEventHandler() {
+			public boolean handle(Widget source, Event event) {
+				Gtk.mainQuit();
+				return false;
+			}
+		});
+		mainWin.setTitle("Hello World!");
+		mainWin.setBorderWidth(10);
+		
+		Button b = new Button("This is a button.\nClick me to close.");
+		b.addClickedHandler(new Button.ClickedEventHandler() {
+			public boolean handle(Button source) {
+				Gtk.mainQuit();
+				return false;
+			}
+		});
+		mainWin.add(b);
+		
+		mainWin.showAll();
+		Gtk.main();
 	}
-	
-	public static void cache(GObject object) {
-		if (!objects.containsKey(object.getPointer())) {
-			objects.put(object.getPointer(), new WeakReference<GObject>(object));
-		}
-	}
-	
-	public static void remove(GObject object) {
-		objects.remove(object.getPointer());
-	}
+
 }
