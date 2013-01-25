@@ -18,6 +18,29 @@
 
 package org.java_gtk.gtk;
 
-public class ButtonTest extends GtkTest {
+import org.junit.Assert;
+import org.junit.Test;
 
+public class ButtonTest extends GtkTest {
+	private static final String TEST_BUTTON_LABEL = "Testing button label";
+
+	@Test
+	public void testNewButton() {
+		Button b = new Button(TEST_BUTTON_LABEL);
+		mainWin.add(b);
+		processEvents();
+		Assert.assertEquals(TEST_BUTTON_LABEL, b.getLabel());
+	}
+
+	@Test
+	public void testSetButtonLabel() {
+		Button b = new Button();
+		mainWin.add(b);
+		processEvents();
+		Assert.assertNull(b.getLabel());
+		b.setLabel(TEST_BUTTON_LABEL);
+		processEvents();
+		Assert.assertEquals(TEST_BUTTON_LABEL, b.getLabel());		
+	}
+	
 }

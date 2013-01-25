@@ -45,7 +45,6 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1with_1la
 	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
 	GtkWidget* widget = gtk_button_new_with_label((gchar*)strLabel);
 	(*env)->ReleaseStringUTFChars(env, label, strLabel);
-
 	return (jlong)widget;
 }
 
@@ -67,5 +66,37 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1add_1clicked_1
 	callback *c;
 	c = create_callback(env, handler, receiver, "clickedEventReceiver", "(Lorg/java_gtk/gtk/Button$ClickedEventHandler;J)Z");
 	connect_callback((gpointer)instance, "clicked", G_CALLBACK(clicked_event_handler), c);
+}
 
+/*
+ * Class:     org_java_gtk_gtk_Button
+ * Method:    gtk_button_get_label
+ * Signature: (J)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1get_1label
+  (JNIEnv *env, jclass cls, jlong button)
+{
+	const char* strLabel;
+	jstring label;
+
+	strLabel = gtk_button_get_label((GtkButton*)button);
+	label = (*env)->NewStringUTF(env, strLabel);
+
+	return label;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Button
+ * Method:    gtk_button_set_label
+ * Signature: (JLjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1set_1label
+  (JNIEnv *env, jclass cls, jlong button, jstring label)
+{
+	const char* strLabel;
+
+	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	if (strLabel == NULL) return;
+	gtk_button_set_label((GtkButton*)button, (gchar*)strLabel);
+	(*env)->ReleaseStringUTFChars(env, label, strLabel);
 }

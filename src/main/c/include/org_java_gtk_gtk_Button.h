@@ -31,6 +31,22 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1with_1la
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1add_1clicked_1event_1handler
   (JNIEnv *, jclass, jlong, jobject, jobject);
 
+/*
+ * Class:     org_java_gtk_gtk_Button
+ * Method:    gtk_button_get_label
+ * Signature: (J)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1get_1label
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_java_gtk_gtk_Button
+ * Method:    gtk_button_set_label
+ * Signature: (JLjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1set_1label
+  (JNIEnv *, jclass, jlong, jstring);
+
 #ifdef __cplusplus
 }
 #endif
