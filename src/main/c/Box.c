@@ -36,3 +36,25 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1new
 	return (jlong)widget;
 }
 
+/*
+ * Class:     org_java_gtk_gtk_Box
+ * Method:    gtk_box_set_spacing
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1set_1spacing
+  (JNIEnv *env, jclass cls, jlong box, jint spacing)
+{
+	gtk_box_set_spacing((GtkBox*)box, (gint)spacing);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Box
+ * Method:    gtk_box_get_spacing
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1get_1spacing
+  (JNIEnv *env, jclass cls, jlong box)
+{
+	return (jint)gtk_box_get_spacing((GtkBox*)box);
+}
+

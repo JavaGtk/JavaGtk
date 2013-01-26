@@ -18,52 +18,29 @@
 
 package org.java_gtk.gtk;
 
-/**
- * 
- * @author Bill Hull
- *
- */
-public class Label extends Misc {
+import org.java_gtk.gtk.Container.Orientation;
+import org.junit.Assert;
+import org.junit.Test;
 
-	private static native final long gtk_label_new(String label);
-	private static native final String gtk_label_get_text(long labelPointer);
-	private static native final void gtk_label_set_text(long labelPointer, String label);
+public class BoxTest extends GtkTest {
+	private static final int TEST_BOX_SPACING = 10;
 	
-	protected Label(long pointer) {
-		super(pointer);
+	@Test
+	public void testNewBox() {
+		Box box = new Box(Orientation.HORIZONTAL, TEST_BOX_SPACING);
+		mainWin.add(box);
+		processEvents();
+		Assert.assertEquals(TEST_BOX_SPACING, box.getSpacing());
 	}
-	
-	public Label(String label) {
-		this(newLabel(label));
+
+	@Test
+	public void testSetSpacing() {
+		Box box = new Box(Orientation.HORIZONTAL, TEST_BOX_SPACING);
+		mainWin.add(box);
+		processEvents();
+		box.setSpacing(TEST_BOX_SPACING + 5);
+		processEvents();
+		Assert.assertEquals(TEST_BOX_SPACING + 5, box.getSpacing());
 	}
-	
-	private static long newLabel(String label) {
-		lock.lock();
-		try {
-			return gtk_label_new(label);
-		}
-		finally {
-			lock.unlock();
-		}
-	}
-	
-	public void setText(String text) {
-		lock.lock();
-		try {
-			gtk_label_set_text(this.pointer, text);
-		}
-		finally {
-			lock.unlock();
-		}
-	}
-	
-	public String getText() {
-		lock.lock();
-		try {
-			return gtk_label_get_text(pointer);
-		}
-		finally {
-			lock.unlock();
-		}
-	}
+
 }

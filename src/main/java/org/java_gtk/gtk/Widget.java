@@ -29,10 +29,10 @@ import org.java_gtk.util.ObjectCache;
  */
 public class Widget extends GObject {
 	
-	private static native final void gtk_widget_show_all(long widget_id);
-	private static native final void gtk_widget_destroy(long widget_id);
-	private static native final void gtk_widget_add_delete_event_handler(long widget_id, DeleteEventHandler handler, Widget receiver);
-	private static native final void gtk_widget_add_destroy_handler(long widget_id, DestroyHandler handler, Widget receiver);
+	private static native final void gtk_widget_show_all(long widgetPointer);
+	private static native final void gtk_widget_destroy(long widgetPointer);
+	private static native final void gtk_widget_add_delete_event_handler(long widgetPointer, DeleteEventHandler handler, Widget receiver);
+	private static native final void gtk_widget_add_destroy_handler(long widgetPointer, DestroyHandler handler, Widget receiver);
 
 	protected Widget(long pointer) {
 		super(pointer);

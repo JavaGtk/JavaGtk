@@ -29,9 +29,9 @@ public class Button extends Bin {
 
 	private static native final long gtk_button_new();
 	private static native final long gtk_button_new_with_label(String label);
-	private static native final void gtk_button_add_clicked_event_handler(long widget_id, ClickedEventHandler handler, Button receiver);
-	private static native final String gtk_button_get_label(long button_id);
-	private static native final void gtk_button_set_label(long button_id, String label);
+	private static native final void gtk_button_add_clicked_event_handler(long widgetPointer, ClickedEventHandler handler, Button receiver);
+	private static native final String gtk_button_get_label(long buttonPointer);
+	private static native final void gtk_button_set_label(long buttonPointer, String label);
 
 	protected Button(long pointer) {
 		super(pointer);

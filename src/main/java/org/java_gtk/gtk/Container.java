@@ -31,9 +31,9 @@ import org.java_gtk.util.ObjectCache;
 public class Container extends Widget {
 	
 	private static native final void gtk_container_add(long container_id, long widget_id);
-	private static native final void gtk_container_set_border_width(long container_id, int border_width);
-	private static native final int gtk_container_get_border_width(long container_id);
-	private static native final long[] gtk_container_get_children (long container_id);
+	private static native final void gtk_container_set_border_width(long containerPointer, int border_width);
+	private static native final int gtk_container_get_border_width(long containerPointer);
+	private static native final long[] gtk_container_get_children (long containerPointer);
 
 	public enum Orientation {
 		HORIZONTAL(0),

@@ -18,14 +18,13 @@
 
 package org.java_gtk.gtk;
 
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 public class LabelTest extends GtkTest {
 	
 	private static final String TEST_LABEL = "Testing label";
+	private static final String TEST_SET_LABEL = "Testing set label";
 
 	@Test
 	public void testNewLabel() {
@@ -34,4 +33,16 @@ public class LabelTest extends GtkTest {
 		processEvents();
 		Assert.assertEquals(TEST_LABEL, l.getText());
 	}
+	
+	@Test
+	public void testSetButtonLabel() {
+		Label l = new Label(TEST_LABEL);
+		mainWin.add(l);
+		processEvents();
+		Assert.assertEquals(TEST_LABEL, l.getText());
+		l.setText(TEST_SET_LABEL);
+		processEvents();
+		Assert.assertEquals(TEST_SET_LABEL, l.getText());		
+	}
+	
 }

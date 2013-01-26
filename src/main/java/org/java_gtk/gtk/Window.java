@@ -26,8 +26,8 @@ package org.java_gtk.gtk;
 public class Window extends Bin {
 
 	private static native final long gtk_window_new(int type);
-	private static native final void gtk_window_set_title(long pointer, String title);
-	private static native final String gtk_window_get_title(long pointer);
+	private static native final void gtk_window_set_title(long windowPointer, String title);
+	private static native final String gtk_window_get_title(long windowPointer);
 	
 	public enum WindowType {
 		TOPLEVEL(0),

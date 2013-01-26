@@ -55,3 +55,20 @@ JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1get_1text
 
 	return text;
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Label
+ * Method:    gtk_label_set_text
+ * Signature: (JLjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1set_1text
+  (JNIEnv *env, jclass cls, jlong label, jstring text)
+{
+	const char* strText;
+
+	strText = (*env)->GetStringUTFChars(env, text, NULL);
+	if (strText == NULL) return;
+	gtk_label_set_text((GtkLabel*)label, (gchar*)strText);
+	(*env)->ReleaseStringUTFChars(env, text, strText);
+
+}

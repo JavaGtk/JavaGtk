@@ -21,6 +21,8 @@ package org.java_gtk.gtk;
 public class Box extends Container {
 
 	private static native final long gtk_box_new(int orientation, int spacing);
+	private static native final void gtk_box_set_spacing(long boxPointer, int spacing);
+	private static native final int gtk_box_get_spacing(long boxPointer);
 
 	protected Box(long pointer) {
 		super(pointer);
@@ -39,4 +41,26 @@ public class Box extends Container {
 			lock.unlock();
 		}
 	}
+	
+	public void setSpacing(int spacing) {
+		lock.lock();
+		try {
+			gtk_box_set_spacing(this.pointer, spacing);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	public int getSpacing() {
+		lock.lock();
+		try {
+			return gtk_box_get_spacing(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	
 }

@@ -15,6 +15,22 @@ extern "C" {
 JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1new
   (JNIEnv *, jclass, jint, jint);
 
+/*
+ * Class:     org_java_gtk_gtk_Box
+ * Method:    gtk_box_set_spacing
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1set_1spacing
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     org_java_gtk_gtk_Box
+ * Method:    gtk_box_get_spacing
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1get_1spacing
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif

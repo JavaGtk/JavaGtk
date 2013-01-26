@@ -23,6 +23,14 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1new
 JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1get_1text
   (JNIEnv *, jclass, jlong);
 
+/*
+ * Class:     org_java_gtk_gtk_Label
+ * Method:    gtk_label_set_text
+ * Signature: (JLjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1set_1text
+  (JNIEnv *, jclass, jlong, jstring);
+
 #ifdef __cplusplus
 }
 #endif
