@@ -58,3 +58,25 @@ JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1get_1spacing
 	return (jint)gtk_box_get_spacing((GtkBox*)box);
 }
 
+/*
+ * Class:     org_java_gtk_gtk_Box
+ * Method:    gtk_box_pack_start
+ * Signature: (JJZZI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1pack_1start
+  (JNIEnv *env, jclass cls, jlong box, jlong widget, jboolean expand, jboolean fill, jint padding)
+{
+	gtk_box_pack_start((GtkBox*)box, (GtkWidget*)widget, (gboolean)expand, (gboolean)fill, (guint)padding);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Box
+ * Method:    gtk_box_pack_end
+ * Signature: (JJZZI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1pack_1end
+(JNIEnv *env, jclass cls, jlong box, jlong widget, jboolean expand, jboolean fill, jint padding)
+{
+	gtk_box_pack_end((GtkBox*)box, (GtkWidget*)widget, (gboolean)expand, (gboolean)fill, (guint)padding);
+
+}

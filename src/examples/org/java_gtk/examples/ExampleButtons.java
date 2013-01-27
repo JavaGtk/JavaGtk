@@ -32,7 +32,7 @@ public class ExampleButtons {
 				return false;
 			}
 		});
-		box.add(b1);
+		box.packStart(b1, true, true, 0);
 		
 		Button b2 = new Button("This is another button.\nClick me to see something special.");
 		b2.addClickedHandler(new Button.ClickedEventHandler() {
@@ -41,7 +41,7 @@ public class ExampleButtons {
 				return false;
 			}
 		});
-		box.add(b2);
+		box.packEnd(b2, true, true, 0);
 		
 		mainWin.showAll();
 		Gtk.main();

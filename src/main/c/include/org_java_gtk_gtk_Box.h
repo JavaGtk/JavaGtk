@@ -31,6 +31,22 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1set_1spacing
 JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1get_1spacing
   (JNIEnv *, jclass, jlong);
 
+/*
+ * Class:     org_java_gtk_gtk_Box
+ * Method:    gtk_box_pack_start
+ * Signature: (JJZZI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1pack_1start
+  (JNIEnv *, jclass, jlong, jlong, jboolean, jboolean, jint);
+
+/*
+ * Class:     org_java_gtk_gtk_Box
+ * Method:    gtk_box_pack_end
+ * Signature: (JJZZI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1pack_1end
+  (JNIEnv *, jclass, jlong, jlong, jboolean, jboolean, jint);
+
 #ifdef __cplusplus
 }
 #endif

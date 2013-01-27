@@ -23,6 +23,8 @@ public class Box extends Container {
 	private static native final long gtk_box_new(int orientation, int spacing);
 	private static native final void gtk_box_set_spacing(long boxPointer, int spacing);
 	private static native final int gtk_box_get_spacing(long boxPointer);
+	private static native final void gtk_box_pack_start(long boxPointer, long widgetPointer, boolean expand, boolean fill, int padding);
+	private static native final void gtk_box_pack_end(long boxPointer, long widgetPointer, boolean expand, boolean fill, int padding);
 
 	protected Box(long pointer) {
 		super(pointer);
@@ -62,5 +64,24 @@ public class Box extends Container {
 		}
 	}
 	
+	public void packStart(Widget child, boolean expand, boolean fill, int padding) {
+		lock.lock();
+		try {
+			gtk_box_pack_start(this.pointer, child.getPointer(), expand, fill, padding);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	public void packEnd(Widget child, boolean expand, boolean fill, int padding) {
+		lock.lock();
+		try {
+			gtk_box_pack_end(this.pointer, child.getPointer(), expand, fill, padding);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
 	
 }
