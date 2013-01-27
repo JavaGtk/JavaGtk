@@ -19,6 +19,7 @@
 package org.java_gtk.gtk;
 
 /**
+ * The Bin widget is a container with just one child
  * 
  * @author Bill Hull
  *

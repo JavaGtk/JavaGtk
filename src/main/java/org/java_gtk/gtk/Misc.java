@@ -19,11 +19,12 @@
 package org.java_gtk.gtk;
 
 /**
+ * Base class for widgets with alignments and padding.
  * 
  * @author Bill Hull
  *
  */
-public class Misc extends Container {
+public abstract class Misc extends Container {
 
 	protected Misc(long pointer) {
 		super(pointer);

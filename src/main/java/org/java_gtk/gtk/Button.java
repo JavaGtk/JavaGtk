@@ -21,6 +21,7 @@ package org.java_gtk.gtk;
 import org.java_gtk.util.ObjectCache;
 
 /**
+ * A widget that fires an event when clicked on.
  * 
  * @author Bill Hull
  *
@@ -37,6 +38,9 @@ public class Button extends Bin {
 		super(pointer);
 	}
 
+	/**
+	 * Constructs a Button widget.
+	 */
 	public Button() {
 		super(newButton());
 	}
@@ -51,6 +55,11 @@ public class Button extends Bin {
 		}
 	}
 	
+	/**
+	 * Constructs a Button widget with a Label child containing the given text.
+	 * 
+	 * @param label The text you want the Label to hold.
+	 */
 	public Button(String label) {
 		this(newButtonWithLabel(label));
 	}
@@ -65,6 +74,13 @@ public class Button extends Bin {
 		}
 	}
 	
+	/**
+	 * Adds the specified handler to receive clicked events from this Button.  
+	 * The clicked event is fired when the Button has been activated (pressed 
+	 * and released).
+	 * 
+	 * @param handler the handler to be added.
+	 */
 	public void addClickedHandler(ClickedEventHandler handler) {
 		lock.lock();
 		try {
@@ -75,6 +91,9 @@ public class Button extends Bin {
 		}
 	}
 
+	/**
+	 * The listener interface for receiving clicked events.
+	 */
 	public interface ClickedEventHandler {
 		boolean handle(Button source);
 	}
@@ -83,6 +102,11 @@ public class Button extends Bin {
 		return handler.handle((Button)ObjectCache.lookup(sourcePointer));
 	}
 	
+	/**
+	 * Sets the text of the label of the button to the specified string.
+	 * 
+	 * @param label The new text of the label widget.
+	 */
 	public void setLabel(String label) {
 		lock.lock();
 		try {
@@ -93,6 +117,14 @@ public class Button extends Bin {
 		}
 	}
 	
+	/**
+	 * Fetches the text from the label of the button, as set by the Button(String label) 
+	 * constructor. If the label text has not been set the return value will be 
+	 * <code>null</code>. This will be the case if you create an empty Button with 
+	 * the Button() constructor to use as a container. 
+	 * 
+	 * @return The text of the label widget.
+	 */
 	public String getLabel() {
 		lock.lock();
 		try {

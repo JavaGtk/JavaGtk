@@ -23,11 +23,12 @@ import org.java_gtk.gobject.GObject;
 import org.java_gtk.util.ObjectCache;
 
 /**
+ * Widget is the base class for all widgets in JavaGTK. It manages the widget lifecycle, states and style.
  * 
  * @author Bill Hull
  *
  */
-public class Widget extends GObject {
+public abstract class Widget extends GObject {
 	
 	private static native final void gtk_widget_show_all(long widgetPointer);
 	private static native final void gtk_widget_destroy(long widgetPointer);
@@ -36,6 +37,9 @@ public class Widget extends GObject {
 
 	protected Widget(long pointer) {
 		super(pointer);
+		
+		// this default destroy handler is used to ensure that objects are removed from the
+		// object cache when they are no longer needed
 		this.addDestroyHandler(new DestroyHandler() {
 			@Override
 			public boolean handle(Widget source) {
@@ -46,6 +50,11 @@ public class Widget extends GObject {
 		});
 	}
 	
+	/**
+	 * Recursively shows a widget, and any child widgets (if the widget is a container).
+	 * 
+	 * 
+	 */
 	public void showAll() {
 		lock.lock();
 		try {
@@ -56,6 +65,16 @@ public class Widget extends GObject {
 		}
 	}
 	
+	/**
+	 * Destroys a widget. 
+	 * <p>
+	 * When a widget is destroyed, it will break any references it holds to other objects. 
+	 * If the widget is inside a container, the widget will be removed from the container.
+	 * <p>
+	 * In most cases, only toplevel widgets (windows) require explicit destruction, 
+	 * because when you destroy a toplevel its children will be destroyed as well.
+	 * 
+	 */
 	public void destroy() {
 		lock.lock();
 		try {
@@ -66,6 +85,13 @@ public class Widget extends GObject {
 		}
 	}
 	
+	/**
+	 * Adds the specified handler to receive delete events from this Widget.  
+	 * The delete event is fired when a toplevel <code>{@link Window}</code>
+	 * is closed.
+	 * 
+	 * @param handler the handler to be added
+	 */
 	public void addDeleteHandler(DeleteEventHandler handler) {
 		lock.lock();
 		try {
@@ -76,6 +102,9 @@ public class Widget extends GObject {
 		}
 	}
 
+	/**
+	 * The listener interface for receiving delete events.
+	 */
 	public interface DeleteEventHandler {
         boolean handle(Widget source, Event event);
     }
@@ -84,6 +113,12 @@ public class Widget extends GObject {
 		return handler.handle((Widget)ObjectCache.lookup(sourcePointer), new Event(eventPointer));
 	}
 
+	/**
+	 * Adds the specified handler to receive destroy events from this Widget.  
+	 * The destroy event is fired when a widget is destroyed.
+	 * 
+	 * @param handler the handler to be added
+	 */
 	public void addDestroyHandler(DestroyHandler handler) {
 		lock.lock();
 		try {
@@ -94,6 +129,9 @@ public class Widget extends GObject {
 		}
 	}
 
+	/**
+	 * The listener interface for receiving destroy events.
+	 */
 	public interface DestroyHandler {
         boolean handle(Widget source);
     }

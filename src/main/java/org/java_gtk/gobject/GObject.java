@@ -24,12 +24,12 @@ import org.java_gtk.util.ObjectCache;
 
 /**
  * 
- * Base class for all objects in GTK.  Contains lock and pointer properties.
+ * Base class for all objects in JavaGtk.  Contains lock and pointer properties.
  * <p>
  * lock is used to ensure that methods are not called from multiple threads
  * at the same time since GTK is not thread safe (however it is thread aware).
  * <p>
- * pointer is used to maintain a reference to the underlying c object.
+ * pointer is used to maintain a reference to the underlying GTK object.
  * 
  * @author Bill Hull
  *

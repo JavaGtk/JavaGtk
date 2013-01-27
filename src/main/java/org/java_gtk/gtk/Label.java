@@ -19,6 +19,11 @@
 package org.java_gtk.gtk;
 
 /**
+ * A widget that displays a small to medium amount of text
+ * 
+ * The Label widget displays a small amount of text. As the name implies, 
+ * most labels are used to label another widget such as a Button, 
+ * a MenuItem, or a ComboBox. 
  * 
  * @author Bill Hull
  *
@@ -33,6 +38,12 @@ public class Label extends Misc {
 		super(pointer);
 	}
 	
+	/**
+	 * Constructs a new label with the specified text inside it. You can pass <code>null</code> 
+	 * to get an empty label widget.
+	 * 
+	 * @param label the text of the label.
+	 */
 	public Label(String label) {
 		this(newLabel(label));
 	}
@@ -47,6 +58,11 @@ public class Label extends Misc {
 		}
 	}
 	
+	/**
+	 * Sets the text within the Label widget. It overwrites any text that was there before.
+	 * 
+	 * @param text the new text of the label
+	 */
 	public void setText(String text) {
 		lock.lock();
 		try {
@@ -57,6 +73,11 @@ public class Label extends Misc {
 		}
 	}
 	
+	/**
+	 * Gets the text from the Label widget.
+	 * 
+	 * @return the text in the label widget
+	 */
 	public String getText() {
 		lock.lock();
 		try {

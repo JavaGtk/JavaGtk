@@ -20,6 +20,8 @@ package org.java_gtk.gtk;
 
 /**
  * 
+ * A Window is a toplevel window which can contain other widgets.
+ * 
  * @author Bill Hull
  *
  */
@@ -48,6 +50,9 @@ public class Window extends Bin {
 		super(pointer);
 	}
 	
+	/**
+	 * Constructs a new Window, which is a toplevel window that can contain other widgets
+	 */
 	public Window () {
 		this(newWindow());
 	}
@@ -62,6 +67,11 @@ public class Window extends Bin {
 		}
 	}
 
+	/**
+	 * Sets the title of the Window. The title of a window will be displayed in its title bar.
+	 * 
+	 * @param title the title of the window
+	 */
 	public void setTitle(String title) {
 		lock.lock();
 		try {
@@ -72,6 +82,11 @@ public class Window extends Bin {
 		}
 	}
 	
+	/**
+	 * Gets the title of the window.
+	 * 
+	 * @return the title of the window or <code>null<code> if none has been set explicitly
+	 */
 	public String getTitle() {
 		lock.lock();
 		try {
