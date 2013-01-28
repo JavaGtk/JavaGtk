@@ -17,6 +17,14 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1init
 
 /*
  * Class:     org_java_gtk_gtk_Gtk
+ * Method:    gtk_init_check
+ * Signature: (Ljava/lang/Object;[Ljava/lang/String;)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1init_1check
+  (JNIEnv *, jclass, jobject, jobjectArray);
+
+/*
+ * Class:     org_java_gtk_gtk_Gtk
  * Method:    gtk_main
  * Signature: ()V
  */

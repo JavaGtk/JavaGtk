@@ -103,3 +103,26 @@ void printClassName(JNIEnv *env, jobject obj) {
 	(*env)->ReleaseStringUTFChars(env, strObj, cstr);
 
 }
+
+char** convertArgs(JNIEnv *env, jobject _argc, jobjectArray _argv, int* argc) {
+	char **argv;
+	if (_argv == NULL) {
+		*argc = 0;
+	} else {
+		*argc = (*env)->GetArrayLength(env, _argv);
+	}
+	argv = (char**) g_newa(char**, (*argc)+1);
+
+	for (int i=0; i<*argc; i++) {
+		jstring string = (jstring)(*env)->GetObjectArrayElement(env, _argv, i);
+		const char* rawString = (*env)->GetStringUTFChars(env, string, 0);
+		argv[i+1] = g_strdup(rawString);
+		(*env)->ReleaseStringUTFChars(env, string, rawString);
+	}
+
+	argv[0] = "";
+	(*argc)++;
+
+	return argv;
+}
+

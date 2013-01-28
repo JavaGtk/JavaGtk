@@ -67,3 +67,49 @@ JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1get_1title
 
 	return title;
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_set_default_size
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1default_1size
+  (JNIEnv *env, jclass cls, jlong window, jint width, jint height)
+{
+	gtk_window_set_default_size((GtkWindow*)window, (gint)width, (gint)height);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_set_resizable
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1resizable
+  (JNIEnv *env, jclass cls, jlong window, jboolean resizable)
+{
+	gtk_window_set_resizable((GtkWindow*)window, (gboolean)resizable);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_get_resizable
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1get_1resizable
+  (JNIEnv *env, jclass cls, jlong window)
+{
+	gboolean resizable;
+	resizable = gtk_window_get_resizable((GtkWindow*)window);
+	return (jboolean)resizable;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_set_position
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1position
+  (JNIEnv *env, jclass cls, jlong window, jint position)
+{
+	gtk_window_set_position((GtkWindow*)window, (GtkWindowPosition)position);
+}

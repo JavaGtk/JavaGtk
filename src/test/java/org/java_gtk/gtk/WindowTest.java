@@ -37,5 +37,13 @@ public class WindowTest extends GtkTest {
 		processEvents();
 		Assert.assertEquals(TEST_TITLE, mainWin.getTitle());
 	}
+	
+	@Test
+	public void testResizable() {
+		processEvents();
+		Assert.assertTrue(mainWin.getResizable());
+		mainWin.setResizable(false);
+		Assert.assertFalse(mainWin.getResizable());
+	}
 
 }

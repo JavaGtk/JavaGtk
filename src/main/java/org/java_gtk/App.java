@@ -23,6 +23,7 @@ import org.java_gtk.gtk.Button;
 import org.java_gtk.gtk.Gtk;
 import org.java_gtk.gtk.Widget;
 import org.java_gtk.gtk.Window;
+import org.java_gtk.gtk.Window.WindowPosition;
 
 /**
  * 
@@ -33,7 +34,7 @@ public class App
 {
 	
 	public static void main( String[] args ) {
-		Gtk.init(args);
+		Gtk.initCheck(args);
 		Window mainWin = new Window();
 		mainWin.addDeleteHandler(new Widget.DeleteEventHandler() {
 			public boolean handle(Widget source, Event event) {
@@ -43,11 +44,13 @@ public class App
 		});
 		mainWin.setTitle("Hello World!");
 		mainWin.setBorderWidth(10);
+		mainWin.setResizable(false);
+		mainWin.setPosition(WindowPosition.MOUSE);
 		
 		Button b = new Button("Testing");
 		b.addClickedHandler(new Button.ClickedEventHandler() {
 			public boolean handle(Button source) {
-				source.destroy();
+				Gtk.mainQuit();
 				return false;
 			}
 		});

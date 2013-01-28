@@ -44,4 +44,6 @@ void free_callback(gpointer);
 
 void printClassName(JNIEnv *, jobject);
 
+char** convertArgs(JNIEnv *, jobject, jobjectArray, int *);
+
 #endif /* JNI_UTIL_H_ */

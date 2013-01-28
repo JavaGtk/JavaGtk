@@ -30,12 +30,34 @@ public class Window extends Bin {
 	private static native final long gtk_window_new(int type);
 	private static native final void gtk_window_set_title(long windowPointer, String title);
 	private static native final String gtk_window_get_title(long windowPointer);
+	private static native final void gtk_window_set_default_size(long windowPointer, int width, int height);
+	private static native final void gtk_window_set_resizable(long windowPointer, boolean resizable);
+	private static native final boolean gtk_window_get_resizable(long windowPointer);
+	private static native final void gtk_window_set_position(long windowPointer, int position);
 	
 	public enum WindowType {
 		TOPLEVEL(0),
 		POPUP(1);
 		
 		private WindowType(int value) {
+			this.value = value;
+		}
+		
+		private int value;
+		
+		public int getValue() {
+			return value;
+		}
+	}
+	
+	public enum WindowPosition {
+		NONE(0),
+		CENTER(1),
+		MOUSE(2),
+		CENTER_ALWAYS(3),
+		CENTER_ON_PARENT(4);
+		  
+		private WindowPosition(int value) {
 			this.value = value;
 		}
 		
@@ -96,4 +118,77 @@ public class Window extends Bin {
 			lock.unlock();
 		}
 	}
+	
+	/**
+	 * Sets whether the user can resize a window. Windows are user resizable by default. 
+	 * 
+	 * @param resizable <code>true</code> if the user can resize this window
+	 */
+	public void setResizable(boolean resizable) {
+		lock.lock();
+		try {
+			gtk_window_set_resizable(pointer, resizable);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	/**
+	 * Gets the value set of the resize
+	 * 
+	 * @return <code>true</code> if the user can resize this window
+	 */
+	public boolean getResizable() {
+		lock.lock();
+		try {
+			return gtk_window_get_resizable(pointer);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Sets the default size of a window. If the window's "natural" size 
+	 * (its size request) is larger than the default, the default will be ignored.
+	 * <p>
+	 * This function only sets the initial size, just as if the user had resized 
+	 * the window themselves. Users can still shrink the window again as they 
+	 * normally would. Setting a default size of -1 means to use the "natural" 
+	 * default size (the size request of the window).
+	 * <p>
+	 * The default size of a window only affects the first time a window is shown; 
+	 * if a window is hidden and re-shown, it will remember the size it had prior 
+	 * to hiding, rather than using the default size. 
+	 * 
+	 * @param width width in pixels, or -1 to unset the default width
+	 * @param height height in pixels, or -1 to unset the default height
+	 */
+	public void setDefaultSize(int width, int height) {
+		lock.lock();
+		try {
+			gtk_window_set_default_size(pointer, width, height);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Sets a position constraint for this window.
+	 * 
+	 * @param position a position constraint.
+	 */
+	public void setPosition(WindowPosition position) {
+		lock.lock();
+		try {
+			gtk_window_set_position(pointer, position.getValue());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	
 }

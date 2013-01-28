@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_Gtk.h"
+#include "include/jni_util.h"
 
 /*
  * Class:     org_java_gtk_gtk_Gtk
@@ -28,27 +29,47 @@
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1init
   (JNIEnv *env, jclass cls, jobject _argc, jobjectArray _argv)
 {
-	int argc;
-	char** argv;
+	int argc = 0;
+	char **argv;
 
-	if (_argv == NULL) {
-		argc = 0;
-	} else {
-		argc = (*env)->GetArrayLength(env, _argv);
-	}
-	argv = (char**) g_newa(char**, argc+1);
+	argv = convertArgs(env, _argc, _argv, &argc);
 
-	for (int i=0; i<argc; i++) {
-		jstring string = (jstring)(*env)->GetObjectArrayElement(env, _argv, i);
-		const char* rawString = (*env)->GetStringUTFChars(env, string, 0);
-		argv[i+1] = g_strdup(rawString);
-		(*env)->ReleaseStringUTFChars(env, string, rawString);
-	}
-
-	argv[0] = "";
-	argc++;
+//	if (_argv == NULL) {
+//		argc = 0;
+//	} else {
+//		argc = (*env)->GetArrayLength(env, _argv);
+//	}
+//	argv = (char**) g_newa(char**, argc+1);
+//
+//	for (int i=0; i<argc; i++) {
+//		jstring string = (jstring)(*env)->GetObjectArrayElement(env, _argv, i);
+//		const char* rawString = (*env)->GetStringUTFChars(env, string, 0);
+//		argv[i+1] = g_strdup(rawString);
+//		(*env)->ReleaseStringUTFChars(env, string, rawString);
+//	}
+//
+//	argv[0] = "";
+//	argc++;
 
 	gtk_init(&argc, &argv);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Gtk
+ * Method:    gtk_init_check
+ * Signature: (Ljava/lang/Object;[Ljava/lang/String;)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1init_1check
+  (JNIEnv *env, jclass cls, jobject _argc, jobjectArray _argv)
+{
+	int argc = 0;
+	char** argv;
+
+	argv = convertArgs(env, _argc, _argv, &argc);
+
+	gboolean check;
+	check = gtk_init_check(&argc, &argv);
+	return (jboolean)check;
 }
 
 /*

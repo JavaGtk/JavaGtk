@@ -31,6 +31,38 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1title
 JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1get_1title
   (JNIEnv *, jclass, jlong);
 
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_set_default_size
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1default_1size
+  (JNIEnv *, jclass, jlong, jint, jint);
+
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_set_resizable
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1resizable
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_get_resizable
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1get_1resizable
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_set_position
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1position
+  (JNIEnv *, jclass, jlong, jint);
+
 #ifdef __cplusplus
 }
 #endif
