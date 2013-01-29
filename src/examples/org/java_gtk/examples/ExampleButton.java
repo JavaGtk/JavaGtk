@@ -18,24 +18,17 @@
 
 package org.java_gtk.examples;
 
-import org.java_gtk.gdk.Event;
 import org.java_gtk.gtk.Button;
 import org.java_gtk.gtk.Gtk;
-import org.java_gtk.gtk.Widget;
-import org.java_gtk.gtk.Window;
 
-public class ExampleButton {
+public class ExampleButton extends ExampleBase {
 
 	public static void main(String[] args) {
-		Gtk.init(args);
-		Window mainWin = new Window();
-		mainWin.addDeleteHandler(new Widget.DeleteEventHandler() {
-			public boolean handle(Widget source, Event event) {
-				Gtk.mainQuit();
-				return false;
-			}
-		});
-		mainWin.setTitle("Button Example");
+		new ExampleButton().runExample(args, "Button Example");
+	}
+
+	@Override
+	protected void setupExample() {
 		mainWin.setBorderWidth(10);
 		
 		Button b = new Button("This is a button.\nClick me to close.");
@@ -46,9 +39,6 @@ public class ExampleButton {
 			}
 		});
 		mainWin.add(b);
-		
-		mainWin.showAll();
-		Gtk.main();
 	}
 
 }

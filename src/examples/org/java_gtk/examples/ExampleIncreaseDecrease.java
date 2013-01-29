@@ -18,38 +18,29 @@
 
 package org.java_gtk.examples;
 
-import org.java_gtk.gdk.Event;
 import org.java_gtk.gtk.Button;
 import org.java_gtk.gtk.Fixed;
-import org.java_gtk.gtk.Gtk;
 import org.java_gtk.gtk.Label;
-import org.java_gtk.gtk.Widget;
-import org.java_gtk.gtk.Window;
 import org.java_gtk.gtk.Window.WindowPosition;
 
-public class ExampleIncreaseDecrease {
+public class ExampleIncreaseDecrease extends ExampleBase {
 	
 	static int count = 0;
 
 	public static void main(String[] args) {
-		
-		Gtk.init(args);
+		new ExampleIncreaseDecrease().runExample(args, "Increase Decrease Example");
+	}
 
-		final Label label = new Label("0");
-		Window mainWin = new Window();
-		mainWin.addDeleteHandler(new Widget.DeleteEventHandler() {
-			public boolean handle(Widget source, Event event) {
-				Gtk.mainQuit();
-				return false;
-			}
-		});
-		mainWin.setTitle("Increase Decrease Example");
+	@Override
+	protected void setupExample() {
 		mainWin.setBorderWidth(10);
 		mainWin.setPosition(WindowPosition.MOUSE);
 		mainWin.setDefaultSize(250, 180);
 		
 		Fixed frame = new Fixed();
 		mainWin.add(frame);
+
+		final Label label = new Label("0");
 		
 		Button plus = new Button("+");
 		plus.setMinimumSize(80, 35);
@@ -74,8 +65,5 @@ public class ExampleIncreaseDecrease {
 		frame.add(minus, 50, 80);
 		
 		frame.add(label, 190, 58);
-		
-		mainWin.showAll();
-		Gtk.main();
 	}
 }
