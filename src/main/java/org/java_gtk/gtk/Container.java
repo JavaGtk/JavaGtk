@@ -33,7 +33,7 @@ import org.java_gtk.util.ObjectCache;
  */
 public abstract class Container extends Widget {
 	
-	private static native final void gtk_container_add(long container_id, long widget_id);
+	private static native final void gtk_container_add(long containerPointer, long widgetPointer);
 	private static native final void gtk_container_set_border_width(long containerPointer, int border_width);
 	private static native final int gtk_container_get_border_width(long containerPointer);
 	private static native final long[] gtk_container_get_children (long containerPointer);

@@ -83,3 +83,14 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1
 	connect_callback((gpointer)instance, "destroy", G_CALLBACK(destroy_handler), c);
 
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_size_request
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1size_1request
+  (JNIEnv *env, jclass cls, jlong widget, jint width, jint height)
+{
+	gtk_widget_set_size_request((GtkWidget*)widget, (gint)width, (gint)height);
+}

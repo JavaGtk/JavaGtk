@@ -39,6 +39,14 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1delete_1e
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1handler
   (JNIEnv *, jclass, jlong, jobject, jobject);
 
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_size_request
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1size_1request
+  (JNIEnv *, jclass, jlong, jint, jint);
+
 #ifdef __cplusplus
 }
 #endif

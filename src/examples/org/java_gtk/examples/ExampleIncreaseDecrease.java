@@ -20,14 +20,22 @@ package org.java_gtk.examples;
 
 import org.java_gtk.gdk.Event;
 import org.java_gtk.gtk.Button;
+import org.java_gtk.gtk.Fixed;
 import org.java_gtk.gtk.Gtk;
+import org.java_gtk.gtk.Label;
 import org.java_gtk.gtk.Widget;
 import org.java_gtk.gtk.Window;
+import org.java_gtk.gtk.Window.WindowPosition;
 
-public class ExampleButton {
+public class ExampleIncreaseDecrease {
+	
+	static int count = 0;
 
 	public static void main(String[] args) {
+		
 		Gtk.init(args);
+
+		final Label label = new Label("0");
 		Window mainWin = new Window();
 		mainWin.addDeleteHandler(new Widget.DeleteEventHandler() {
 			public boolean handle(Widget source, Event event) {
@@ -35,20 +43,39 @@ public class ExampleButton {
 				return false;
 			}
 		});
-		mainWin.setTitle("Button Example");
+		mainWin.setTitle("Increase Decrease Example");
 		mainWin.setBorderWidth(10);
+		mainWin.setPosition(WindowPosition.MOUSE);
+		mainWin.setDefaultSize(250, 180);
 		
-		Button b = new Button("This is a button.\nClick me to close.");
-		b.addClickedHandler(new Button.ClickedEventHandler() {
+		Fixed frame = new Fixed();
+		mainWin.add(frame);
+		
+		Button plus = new Button("+");
+		plus.setMinimumSize(80, 35);
+		plus.addClickedHandler(new Button.ClickedEventHandler() {
 			public boolean handle(Button source) {
-				Gtk.mainQuit();
+				count++;
+				label.setText(Integer.toString(count));
 				return false;
 			}
 		});
-		mainWin.add(b);
+		frame.add(plus, 50, 20);
+		
+		Button minus = new Button("-");
+		minus.setMinimumSize(80, 35);
+		minus.addClickedHandler(new Button.ClickedEventHandler() {
+			public boolean handle(Button source) {
+				count--;
+				label.setText(Integer.toString(count));
+				return false;
+			}
+		});
+		frame.add(minus, 50, 80);
+		
+		frame.add(label, 190, 58);
 		
 		mainWin.showAll();
 		Gtk.main();
 	}
-
 }

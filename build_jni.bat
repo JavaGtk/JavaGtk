@@ -8,4 +8,5 @@ set JAVA_HOME="C:\Program Files\Java\jdk1.6.0_25"
 	org.java_gtk.gtk.Window ^
 	org.java_gtk.gtk.Button ^
 	org.java_gtk.gtk.Label ^
-	org.java_gtk.gtk.Box
+	org.java_gtk.gtk.Box ^
+	org.java_gtk.gtk.Fixed

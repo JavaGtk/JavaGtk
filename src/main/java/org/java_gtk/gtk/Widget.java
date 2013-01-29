@@ -34,6 +34,7 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_destroy(long widgetPointer);
 	private static native final void gtk_widget_add_delete_event_handler(long widgetPointer, DeleteEventHandler handler, Widget receiver);
 	private static native final void gtk_widget_add_destroy_handler(long widgetPointer, DestroyHandler handler, Widget receiver);
+	private static native final void gtk_widget_set_size_request(long widgetPointer, int width, int height);
 
 	protected Widget(long pointer) {
 		super(pointer);
@@ -138,6 +139,27 @@ public abstract class Widget extends GObject {
 
 	static void destroyReceiver(DestroyHandler handler, long sourcePointer) {
 		handler.handle((Widget)ObjectCache.lookup(sourcePointer));
+	}
+	
+	/**
+	 * Sets the minimum size of a widget; that is, the widget's size request will 
+	 * be at least width by height. You can use this function to force a widget 
+	 * to be larger than it normally would be.
+	 * 
+	 * If the size request in a given direction is -1 (unset), then the "natural" 
+	 * size request of the widget will be used instead.
+	 * 
+	 * @param width minimum width, or -1 to unset
+	 * @param height minimum height, or -1 to unset
+	 */
+	public void setMinimumSize(int width, int height) {
+		lock.lock();
+		try {
+			gtk_widget_set_size_request(this.pointer, width, height);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 
 }
