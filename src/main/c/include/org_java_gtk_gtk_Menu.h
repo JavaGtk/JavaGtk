@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Menu_gtk_1menu_1new
   (JNIEnv *, jclass);
 
+/*
+ * Class:     org_java_gtk_gtk_Menu
+ * Method:    gtk_menu_set_accel_group
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Menu_gtk_1menu_1set_1accel_1group
+  (JNIEnv *, jclass, jlong, jlong);
+
 #ifdef __cplusplus
 }
 #endif

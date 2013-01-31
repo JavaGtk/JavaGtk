@@ -34,6 +34,7 @@ public class Window extends Bin {
 	private static native final void gtk_window_set_resizable(long windowPointer, boolean resizable);
 	private static native final boolean gtk_window_get_resizable(long windowPointer);
 	private static native final void gtk_window_set_position(long windowPointer, int position);
+	private static native final void gtk_window_add_accel_group(long windowPointer, long accelgroupPointer);
 	
 	public enum WindowType {
 		TOPLEVEL(0),
@@ -190,5 +191,19 @@ public class Window extends Bin {
 		}
 	}
 	
+	/**
+	 * Associate accelGroup with window.
+	 * 
+	 * @param accelGroup
+	 */
+	public void addAccelGroup(AccelGroup accelGroup) {
+		lock.lock();
+		try {
+			gtk_window_add_accel_group(pointer, accelGroup.getPointer());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
 	
 }

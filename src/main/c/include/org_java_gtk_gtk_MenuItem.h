@@ -25,6 +25,14 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1new_1wi
 
 /*
  * Class:     org_java_gtk_gtk_MenuItem
+ * Method:    gtk_menu_item_new_with_mnemonic
+ * Signature: (Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1new_1with_1mnemonic
+  (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     org_java_gtk_gtk_MenuItem
  * Method:    gtk_menu_item_set_label
  * Signature: (JLjava/lang/String;)V
  */

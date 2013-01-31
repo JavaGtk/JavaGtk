@@ -47,6 +47,14 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1size_1request
   (JNIEnv *, jclass, jlong, jint, jint);
 
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_accel_path
+ * Signature: (JLjava/lang/String;J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1accel_1path
+  (JNIEnv *, jclass, jlong, jstring, jlong);
+
 #ifdef __cplusplus
 }
 #endif

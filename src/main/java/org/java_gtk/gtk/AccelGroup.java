@@ -16,32 +16,41 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include <jni.h>
-#include <gtk/gtk.h>
-#include "include/org_java_gtk_gtk_Menu.h"
+package org.java_gtk.gtk;
 
-/*
- * Class:     org_java_gtk_gtk_Menu
- * Method:    gtk_menu_new
- * Signature: ()J
+import org.java_gtk.gobject.GObject;
+
+/**
+ * An AccelGroup represents a group of keyboard accelerators, typically 
+ * attached to a toplevel Window
+ * 
+ * @author Bill
+ *
  */
-JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Menu_gtk_1menu_1new
-  (JNIEnv *env, jclass cls)
-{
-	GtkWidget* widget;
+public class AccelGroup extends GObject {
 
-	widget = gtk_menu_new();
+	private static native final long gtk_accel_group_new();
 
-	return (jlong)widget;
-}
+	protected AccelGroup(long pointer) {
+		super(pointer);
+	}
 
-/*
- * Class:     org_java_gtk_gtk_Menu
- * Method:    gtk_menu_set_accel_group
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Menu_gtk_1menu_1set_1accel_1group
-  (JNIEnv *env, jclass cls, jlong menu, jlong accel_group)
-{
-	gtk_menu_set_accel_group((GtkMenu*)menu, (GtkAccelGroup*)accel_group);
+	/**
+	 * Constructs an AccelGroup.
+	 */
+	public AccelGroup() {
+		super(newAccelGroup());
+	}
+	
+	private static long newAccelGroup() {
+		lock.lock();
+		try {
+			return gtk_accel_group_new();
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+
 }

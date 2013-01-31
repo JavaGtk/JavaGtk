@@ -94,3 +94,18 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1size_1req
 {
 	gtk_widget_set_size_request((GtkWidget*)widget, (gint)width, (gint)height);
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_accel_path
+ * Signature: (JLjava/lang/String;J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1accel_1path
+  (JNIEnv *env, jclass cls, jlong widget, jstring path, jlong accel_group)
+{
+	const char* strPath;
+
+	strPath = (*env)->GetStringUTFChars(env, path, NULL);
+	gtk_widget_set_accel_path((GtkWidget*)widget, strPath, (GtkAccelGroup*)accel_group);
+	(*env)->ReleaseStringUTFChars(env, path, strPath);
+}

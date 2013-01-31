@@ -35,6 +35,7 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_add_delete_event_handler(long widgetPointer, DeleteEventHandler handler, Widget receiver);
 	private static native final void gtk_widget_add_destroy_handler(long widgetPointer, DestroyHandler handler, Widget receiver);
 	private static native final void gtk_widget_set_size_request(long widgetPointer, int width, int height);
+	private static native final void gtk_widget_set_accel_path(long widgetPointer, String path, long accelgroupPointer);
 
 	protected Widget(long pointer) {
 		super(pointer);
@@ -161,5 +162,24 @@ public abstract class Widget extends GObject {
 			lock.unlock();
 		}
 	}
-
+	
+	/**
+	 * Given an accelerator group, <code>accelGroup</code>, and an accelerator path, 
+	 * <code>path</code>, sets up an accelerator in <code>accelGroup</code> so 
+	 * whenever the key binding that is defined for <code>path</code> is pressed, 
+	 * widget will be activated. This removes any accelerators (for any accelerator 
+	 * group) installed by previous calls to setAccelPath().
+	 * 
+	 * @param path path used to look up the accelerator
+	 * @param accelGroup a AccelGroup
+	 */
+	public void setAccelPath(String path, AccelGroup accelGroup) {
+		lock.lock();
+		try {
+			gtk_widget_set_accel_path(this.pointer, path, accelGroup.getPointer());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
 }

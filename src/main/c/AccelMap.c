@@ -18,30 +18,19 @@
 
 #include <jni.h>
 #include <gtk/gtk.h>
-#include "include/org_java_gtk_gtk_Menu.h"
+#include "include/org_java_gtk_gtk_AccelMap.h"
 
 /*
- * Class:     org_java_gtk_gtk_Menu
- * Method:    gtk_menu_new
- * Signature: ()J
+ * Class:     org_java_gtk_gtk_AccelMap
+ * Method:    gtk_accel_map_add_entry
+ * Signature: (Ljava/lang/String;II)V
  */
-JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Menu_gtk_1menu_1new
-  (JNIEnv *env, jclass cls)
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_AccelMap_gtk_1accel_1map_1add_1entry
+  (JNIEnv *env, jclass cls, jstring path, jint key, jint mod_type)
 {
-	GtkWidget* widget;
+	const char* strPath;
 
-	widget = gtk_menu_new();
-
-	return (jlong)widget;
-}
-
-/*
- * Class:     org_java_gtk_gtk_Menu
- * Method:    gtk_menu_set_accel_group
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Menu_gtk_1menu_1set_1accel_1group
-  (JNIEnv *env, jclass cls, jlong menu, jlong accel_group)
-{
-	gtk_menu_set_accel_group((GtkMenu*)menu, (GtkAccelGroup*)accel_group);
+	strPath = (*env)->GetStringUTFChars(env, path, NULL);
+	gtk_accel_map_add_entry(strPath, (gint)key, (gint)mod_type);
+	(*env)->ReleaseStringUTFChars(env, path, strPath);
 }

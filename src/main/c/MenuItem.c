@@ -56,6 +56,24 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1new_1wi
 
 /*
  * Class:     org_java_gtk_gtk_MenuItem
+ * Method:    gtk_menu_item_new_with_mnemonic
+ * Signature: (Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1new_1with_1mnemonic
+  (JNIEnv *env, jclass cls, jstring label)
+{
+	const char* strLabel;
+	GtkWidget* widget;
+
+	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	widget = gtk_menu_item_new_with_mnemonic(strLabel);
+	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+
+	return (jlong)widget;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_MenuItem
  * Method:    gtk_menu_item_set_label
  * Signature: (JLjava/lang/String;)V
  */

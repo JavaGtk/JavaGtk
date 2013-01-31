@@ -20,14 +20,14 @@ package org.java_gtk.gtk;
 
 /**
  * A container box
- * 
+ * <p>
  * The Box widget organizes child widgets into a rectangular area.
- * 
+ * <p>
  * The rectangular area of a Box is organized into either a single 
  * row or a single column of child widgets depending upon the orientation. 
  * Thus, all children of a Box are allocated one dimension in common, 
  * which is the height of a row, or the width of a column.
- * 
+ * <p>
  * Box uses a notion of packing. Packing refers to adding widgets with 
  * reference to a particular position in a Container. For a Box, there are 
  * two reference positions: the start and the end of the box. For a vertical 

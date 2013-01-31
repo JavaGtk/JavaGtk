@@ -18,30 +18,20 @@
 
 #include <jni.h>
 #include <gtk/gtk.h>
-#include "include/org_java_gtk_gtk_Menu.h"
+#include "include/org_java_gtk_gtk_SeparatorMenuItem.h"
 
 /*
- * Class:     org_java_gtk_gtk_Menu
- * Method:    gtk_menu_new
+ * Class:     org_java_gtk_gtk_SeparatorMenuItem
+ * Method:    gtk_separator_menu_item_new
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Menu_gtk_1menu_1new
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_SeparatorMenuItem_gtk_1separator_1menu_1item_1new
   (JNIEnv *env, jclass cls)
 {
 	GtkWidget* widget;
 
-	widget = gtk_menu_new();
+	widget = gtk_separator_menu_item_new();
 
 	return (jlong)widget;
 }
 
-/*
- * Class:     org_java_gtk_gtk_Menu
- * Method:    gtk_menu_set_accel_group
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Menu_gtk_1menu_1set_1accel_1group
-  (JNIEnv *env, jclass cls, jlong menu, jlong accel_group)
-{
-	gtk_menu_set_accel_group((GtkMenu*)menu, (GtkAccelGroup*)accel_group);
-}

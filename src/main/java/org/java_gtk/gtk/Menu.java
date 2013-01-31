@@ -29,6 +29,7 @@ package org.java_gtk.gtk;
 public class Menu extends MenuShell {
 
 	private static native final long gtk_menu_new();
+	private static native final void gtk_menu_set_accel_group(long menuPointer, long accelgroupPointer);
 	
 	protected Menu(long pointer) {
 		super(pointer);
@@ -45,6 +46,24 @@ public class Menu extends MenuShell {
 		lock.lock();
 		try {
 			return gtk_menu_new();
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	/**
+	 * Set the AccelGroup which holds global accelerators for the menu. This 
+	 * accelerator group needs to also be added to all windows that this menu 
+	 * is being used in with Window.addAccelGroup(), in order for those windows 
+	 * to support all the accelerators contained in this group.
+	 * 
+	 * @param accelGroup the AccelGroup to be associated with the menu.
+	 */
+	public void setAccelGroup(AccelGroup accelGroup) {
+		lock.lock();
+		try {
+			gtk_menu_set_accel_group(this.pointer, accelGroup.getPointer());
 		}
 		finally {
 			lock.unlock();

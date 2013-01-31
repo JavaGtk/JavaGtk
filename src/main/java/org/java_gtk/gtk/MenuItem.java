@@ -32,18 +32,19 @@ public class MenuItem extends Bin {
 
 	private static native final long gtk_menu_item_new();
 	private static native final long gtk_menu_item_new_with_label(String label);
+	private static native final long gtk_menu_item_new_with_mnemonic(String label);
 	private static native final void gtk_menu_item_set_label(long menuitemPointer, String label);
 	private static native final String gtk_menu_item_get_label(long menuitemPointer);
 	private static native final void gtk_menu_item_set_submenu(long menuitemPointer, long widgetPointer);
 	private static native final long gtk_menu_item_get_submenu(long menuitemPointer);
 	private static native final void gtk_menu_item_add_activated_event_handler(long widgetPointer, ActivatedEventHandler handler, MenuItem receiver);
-
+	
 	protected MenuItem(long pointer) {
 		super(pointer);
 	}
 	
 	/**
-	 * Constructs a MenuItem widget.
+	 * Constructs a MenuItem widget with an empty label.
 	 */
 	public MenuItem() {
 		super(newMenuItem());
@@ -60,24 +61,39 @@ public class MenuItem extends Bin {
 	}
 
 	/**
-	 * Creates a new MenuItem whose child is a Label
+	 * Constructs a new MenuItem whose child is a Label
 	 * 
 	 * @param label the text of the label.
 	 */
 	public MenuItem(String label) {
-		this(newMenuItem(label));
+		this(label, false);
 	}
 	
-	private static long newMenuItem(String label) {
+	/**
+	 * Constructs a new MenuItem whose child is a Label
+	 * 
+	 * @param label the text of the label, optionally with an underscore in front of the 
+	 * mnemonic character
+	 * @param hasMnenomic if <code>true</code> then the label will be created with mnenonics, 
+	 * so underscores in label indicate the mnemonic for the menu item.
+	 */
+	public MenuItem(String label, boolean hasMnemonic) {
+		this(newMenuItem(label, hasMnemonic));
+	}
+	
+	private static long newMenuItem(String label, boolean hasMnemonic) {
 		lock.lock();
 		try {
-			return gtk_menu_item_new_with_label(label);
+			if (hasMnemonic)
+				return gtk_menu_item_new_with_mnemonic(label);
+			else
+				return gtk_menu_item_new_with_label(label);
 		}
 		finally {
 			lock.unlock();
 		}
 	}
-
+	
 	/**
 	 * Sets or replaces the menu item's submenu, or removes it when a <code>null</code> 
 	 * submenu is passed.

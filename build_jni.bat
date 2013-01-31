@@ -13,4 +13,8 @@ set JAVA_HOME="C:\Program Files\Java\jdk1.6.0_25"
 	org.java_gtk.gtk.MenuShell ^
 	org.java_gtk.gtk.MenuBar ^
 	org.java_gtk.gtk.Menu ^
-	org.java_gtk.gtk.MenuItem
+	org.java_gtk.gtk.MenuItem ^
+	org.java_gtk.gtk.ImageMenuItem ^
+	org.java_gtk.gtk.SeparatorMenuItem ^
+	org.java_gtk.gtk.AccelGroup ^
+	org.java_gtk.gtk.AccelMap

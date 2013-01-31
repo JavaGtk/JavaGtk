@@ -113,3 +113,14 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1position
 {
 	gtk_window_set_position((GtkWindow*)window, (GtkWindowPosition)position);
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_add_accel_group
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1add_1accel_1group
+  (JNIEnv *env, jclass cls, jlong window, jlong accel_grp)
+{
+	gtk_window_add_accel_group((GtkWindow*)window, (GtkAccelGroup*)accel_grp);
+}

@@ -18,30 +18,19 @@
 
 #include <jni.h>
 #include <gtk/gtk.h>
-#include "include/org_java_gtk_gtk_Menu.h"
+#include "include/org_java_gtk_gtk_AccelGroup.h"
 
 /*
- * Class:     org_java_gtk_gtk_Menu
- * Method:    gtk_menu_new
+ * Class:     org_java_gtk_gtk_AccelGroup
+ * Method:    gtk_accel_group_new
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Menu_gtk_1menu_1new
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_AccelGroup_gtk_1accel_1group_1new
   (JNIEnv *env, jclass cls)
 {
-	GtkWidget* widget;
+	GtkAccelGroup* widget;
 
-	widget = gtk_menu_new();
+	widget = gtk_accel_group_new();
 
 	return (jlong)widget;
-}
-
-/*
- * Class:     org_java_gtk_gtk_Menu
- * Method:    gtk_menu_set_accel_group
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Menu_gtk_1menu_1set_1accel_1group
-  (JNIEnv *env, jclass cls, jlong menu, jlong accel_group)
-{
-	gtk_menu_set_accel_group((GtkMenu*)menu, (GtkAccelGroup*)accel_group);
 }

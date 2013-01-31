@@ -63,6 +63,14 @@ JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1get_1resiz
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1position
   (JNIEnv *, jclass, jlong, jint);
 
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_add_accel_group
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1add_1accel_1group
+  (JNIEnv *, jclass, jlong, jlong);
+
 #ifdef __cplusplus
 }
 #endif
