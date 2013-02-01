@@ -29,7 +29,7 @@ public class ImageMenuItem extends MenuItem {
 	private static native final long gtk_image_menu_item_new();
 	private static native final long gtk_image_menu_item_new_with_label(String label);
 	private static native final long gtk_image_menu_item_new_with_mnemonic(String label);
-	private static native final long gtk_image_menu_item_new_from_stock(String label, long accelGroupPointer);
+	private static native final long gtk_image_menu_item_new_from_stock(String stock_id, long accelGroupPointer);
 	
 	protected ImageMenuItem(long pointer) {
 		super(pointer);

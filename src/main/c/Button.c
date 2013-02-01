@@ -48,7 +48,7 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1with_1la
 	return (jlong)widget;
 }
 
-void clicked_event_handler(GtkWidget *widget, gpointer data) {
+void button_clicked_event_handler(GtkWidget *widget, gpointer data) {
 	callback *c = data;
 	callback_start(c);
 	(*c->env)->CallStaticBooleanMethod(c->env, c->receiver, c->id, c->handler, widget);
@@ -65,7 +65,7 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1add_1clicked_1
 {
 	callback *c;
 	c = create_callback(env, handler, receiver, "clickedEventReceiver", "(Lorg/java_gtk/gtk/Button$ClickedEventHandler;J)Z");
-	connect_callback((gpointer)instance, "clicked", G_CALLBACK(clicked_event_handler), c);
+	connect_callback((gpointer)instance, "clicked", G_CALLBACK(button_clicked_event_handler), c);
 }
 
 /*

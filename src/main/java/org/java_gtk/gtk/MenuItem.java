@@ -179,7 +179,7 @@ public class MenuItem extends Bin {
 	}
 
 	/**
-	 * The listener interface for receiving clicked events.
+	 * The listener interface for receiving activated events.
 	 */
 	public interface ActivatedEventHandler {
 		boolean handle(MenuItem source);

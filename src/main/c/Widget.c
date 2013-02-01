@@ -63,7 +63,7 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1delete_1e
 	connect_callback((gpointer)instance, "delete-event", G_CALLBACK(delete_event_handler), c);
 }
 
-void destroy_handler(GtkWidget *widget, gpointer data) {
+void widget_destroy_handler(GtkWidget *widget, gpointer data) {
 	callback *c = data;
 	callback_start(c);
 	(*c->env)->CallStaticVoidMethod(c->env, c->receiver, c->id, c->handler, widget);
@@ -80,7 +80,7 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1
 {
 	callback *c;
 	c = create_callback(env, handler, receiver, "destroyReceiver", "(Lorg/java_gtk/gtk/Widget$DestroyHandler;J)V");
-	connect_callback((gpointer)instance, "destroy", G_CALLBACK(destroy_handler), c);
+	connect_callback((gpointer)instance, "destroy", G_CALLBACK(widget_destroy_handler), c);
 
 }
 
