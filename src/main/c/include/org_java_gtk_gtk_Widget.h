@@ -55,6 +55,22 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1size_1req
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1accel_1path
   (JNIEnv *, jclass, jlong, jstring, jlong);
 
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_show
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1show
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_hide
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1hide
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif

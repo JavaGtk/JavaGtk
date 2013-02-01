@@ -36,6 +36,8 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_add_destroy_handler(long widgetPointer, DestroyHandler handler, Widget receiver);
 	private static native final void gtk_widget_set_size_request(long widgetPointer, int width, int height);
 	private static native final void gtk_widget_set_accel_path(long widgetPointer, String path, long accelgroupPointer);
+	private static native final void gtk_widget_show(long widgetPointer);
+	private static native final void gtk_widget_hide(long widgetPointer);	
 
 	protected Widget(long pointer) {
 		super(pointer);
@@ -177,6 +179,26 @@ public abstract class Widget extends GObject {
 		lock.lock();
 		try {
 			gtk_widget_set_accel_path(this.pointer, path, accelGroup.getPointer());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	public void show() {
+		lock.lock();
+		try {
+			gtk_widget_show(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}		
+	}
+	
+	public void hide() {
+		lock.lock();
+		try {
+			gtk_widget_hide(this.pointer);
 		}
 		finally {
 			lock.unlock();

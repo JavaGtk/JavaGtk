@@ -109,3 +109,25 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1accel_1pa
 	gtk_widget_set_accel_path((GtkWidget*)widget, strPath, (GtkAccelGroup*)accel_group);
 	(*env)->ReleaseStringUTFChars(env, path, strPath);
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_show
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1show
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	gtk_widget_show((GtkWidget*)widget);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_hide
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1hide
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	gtk_widget_hide((GtkWidget*)widget);
+}
