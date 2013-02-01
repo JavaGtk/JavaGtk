@@ -131,3 +131,60 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1hide
 {
 	gtk_widget_hide((GtkWidget*)widget);
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_name
+ * Signature: (J)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1name
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	const char* strName;
+	jstring name;
+
+	strName = gtk_widget_get_name((GtkWidget*)widget);
+	name = (*env)->NewStringUTF(env, strName);
+
+	return name;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_name
+ * Signature: (JLjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1name
+  (JNIEnv *env, jclass cls, jlong widget, jstring name)
+{
+	const char* strName;
+
+	strName = (*env)->GetStringUTFChars(env, name, NULL);
+	if (strName == NULL) return;
+	gtk_widget_set_name((GtkWidget*)widget, (gchar*)strName);
+	(*env)->ReleaseStringUTFChars(env, name, strName);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_sensitive
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1sensitive
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	gboolean sensitive;
+	sensitive = gtk_widget_get_sensitive((GtkWidget*)widget);
+	return (jboolean)sensitive;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_sensitive
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1sensitive
+  (JNIEnv *env, jclass cls, jlong widget, jboolean sensitive)
+{
+	gtk_widget_set_sensitive((GtkWidget*)widget, (gboolean)sensitive);
+}

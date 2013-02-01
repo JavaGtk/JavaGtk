@@ -71,6 +71,38 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1show
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1hide
   (JNIEnv *, jclass, jlong);
 
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_name
+ * Signature: (J)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1name
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_name
+ * Signature: (JLjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1name
+  (JNIEnv *, jclass, jlong, jstring);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_sensitive
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1sensitive
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_sensitive
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1sensitive
+  (JNIEnv *, jclass, jlong, jboolean);
+
 #ifdef __cplusplus
 }
 #endif

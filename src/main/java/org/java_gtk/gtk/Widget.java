@@ -37,7 +37,11 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_set_size_request(long widgetPointer, int width, int height);
 	private static native final void gtk_widget_set_accel_path(long widgetPointer, String path, long accelgroupPointer);
 	private static native final void gtk_widget_show(long widgetPointer);
-	private static native final void gtk_widget_hide(long widgetPointer);	
+	private static native final void gtk_widget_hide(long widgetPointer);
+	private static native final String gtk_widget_get_name(long widgetPointer);
+	private static native final void gtk_widget_set_name(long widgetPointer, String name);
+	private static native final boolean gtk_widget_get_sensitive(long widgetPointer);
+	private static native final void gtk_widget_set_sensitive(long widgetPointer, boolean sensitive);
 
 	protected Widget(long pointer) {
 		super(pointer);
@@ -68,7 +72,7 @@ public abstract class Widget extends GObject {
 			lock.unlock();
 		}
 	}
-	
+
 	/**
 	 * Destroys a widget. 
 	 * <p>
@@ -185,6 +189,9 @@ public abstract class Widget extends GObject {
 		}
 	}
 	
+	/**
+	 * Flags a widget to be displayed. Any widget that isn't shown will not appear on the screen.
+	 */
 	public void show() {
 		lock.lock();
 		try {
@@ -195,6 +202,9 @@ public abstract class Widget extends GObject {
 		}		
 	}
 	
+	/**
+	 * Causes the widget to be hidden (invisible to the user). 
+	 */
 	public void hide() {
 		lock.lock();
 		try {
@@ -204,4 +214,68 @@ public abstract class Widget extends GObject {
 			lock.unlock();
 		}
 	}
+	
+	/**
+	 * Retrieves the name of a widget.
+	 * 
+	 * @return name of the widget
+	 */
+	public String getName() {
+		lock.lock();
+		try {
+			return gtk_widget_get_name(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}		
+	}
+	
+	/**
+	 * Widgets can be named, which allows you to refer to them from a CSS file. You can 
+	 * apply a style to widgets with a particular name in the CSS file.
+	 * 
+	 * @param name name for the widget
+	 */
+	public void setName(String name) {
+		lock.lock();
+		try {
+			gtk_widget_set_name(this.pointer, name);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	/**
+	 * Retrieves the enabled state of a widget.
+	 * 
+	 * @return enabled state of the widget.
+	 */
+	public boolean isEnable() {
+		lock.lock();
+		try {
+			return gtk_widget_get_sensitive(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}		
+	}
+	
+	/**
+	 * Sets the enabled state of a widget. A widget is enabled if the user can 
+	 * interact with it. Disabled widgets are "grayed out" and the user can't 
+	 * interact with them.
+	 * 
+	 * @param enabled enabled state of the widget.
+	 */
+	public void setEnabled(boolean enabled) {
+		lock.lock();
+		try {
+			gtk_widget_set_sensitive(this.pointer, enabled);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
 }
