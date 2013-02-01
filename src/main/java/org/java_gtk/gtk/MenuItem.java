@@ -74,7 +74,7 @@ public class MenuItem extends Bin {
 	 * 
 	 * @param label the text of the label, optionally with an underscore in front of the 
 	 * mnemonic character
-	 * @param hasMnenomic if <code>true</code> then the label will be created with mnenonics, 
+	 * @param hasMnenomic if <code>true</code> then the label will be created with mnemonics, 
 	 * so underscores in label indicate the mnemonic for the menu item.
 	 */
 	public MenuItem(String label, boolean hasMnemonic) {
