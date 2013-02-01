@@ -20,4 +20,8 @@ set JAVA_HOME="C:\Program Files\Java\jdk1.6.0_25"
 	org.java_gtk.gtk.AccelGroup ^
 	org.java_gtk.gtk.AccelMap ^
 	org.java_gtk.gtk.StatusBar ^
+	org.java_gtk.gtk.Toolbar ^
+	org.java_gtk.gtk.ToolItem ^
+	org.java_gtk.gtk.ToolButton ^
+	org.java_gtk.gtk.SeparatorToolItem ^
 	
