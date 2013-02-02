@@ -47,6 +47,22 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1pack_1start
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1pack_1end
   (JNIEnv *, jclass, jlong, jlong, jboolean, jboolean, jint);
 
+/*
+ * Class:     org_java_gtk_gtk_Box
+ * Method:    gtk_box_set_homogeneous
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1set_1homogeneous
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     org_java_gtk_gtk_Box
+ * Method:    gtk_box_get_homogeneous
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1get_1homogeneous
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif

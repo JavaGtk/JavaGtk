@@ -1,0 +1,58 @@
+/* 
+ * Copyright (c) 2012 - 2013, JavaGTK and Bill Hull
+ *
+ * Permission to use, copy, modify, and/or distribute this software
+ * for any purpose with or without fee is hereby granted, provided 
+ * that the above copyright notice and this permission notice appear 
+ * in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL 
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED 
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE 
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA 
+ * OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER 
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR 
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+
+#include <jni.h>
+#include <gtk/gtk.h>
+#include "include/org_java_gtk_gtk_Alignment.h"
+
+/*
+ * Class:     org_java_gtk_gtk_Alignment
+ * Method:    gtk_alignment_new
+ * Signature: (FFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Alignment_gtk_1alignment_1new
+  (JNIEnv *env, jclass cls, jfloat xalign, jfloat yalign, jfloat xscale, jfloat yscale)
+{
+	GtkWidget* widget;
+
+	widget = gtk_alignment_new((gfloat)xalign, (gfloat)yalign, (gfloat)xscale, (gfloat)yscale);
+
+	return (jlong)widget;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Alignment
+ * Method:    gtk_alignment_set
+ * Signature: (JFFFF)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Alignment_gtk_1alignment_1set
+  (JNIEnv *env, jclass cls, jlong alignment, jfloat xalign, jfloat yalign, jfloat xscale, jfloat yscale)
+{
+	gtk_alignment_set((GtkAlignment*)alignment, (gfloat)xalign, (gfloat)yalign, (gfloat)xscale, (gfloat)yscale);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Alignment
+ * Method:    gtk_alignment_set_padding
+ * Signature: (JIIII)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Alignment_gtk_1alignment_1set_1padding
+  (JNIEnv *env, jclass cls, jlong alignment, jint top, jint bottom, jint left, jint right)
+{
+	gtk_alignment_set_padding((GtkAlignment*)alignment, (guint)top, (guint)bottom, (guint)left, (guint)right);
+}

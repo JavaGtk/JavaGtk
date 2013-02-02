@@ -80,3 +80,25 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1pack_1end
 	gtk_box_pack_end((GtkBox*)box, (GtkWidget*)widget, (gboolean)expand, (gboolean)fill, (guint)padding);
 
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Box
+ * Method:    gtk_box_set_homogeneous
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1set_1homogeneous
+  (JNIEnv *env, jclass cls, jlong box, jboolean homogeneous)
+{
+	gtk_box_set_homogeneous((GtkBox*)box, (gboolean)homogeneous);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Box
+ * Method:    gtk_box_get_homogeneous
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Box_gtk_1box_1get_1homogeneous
+  (JNIEnv *env, jclass cls, jlong box)
+{
+	return (jboolean)gtk_box_get_homogeneous((GtkBox*)box);
+}

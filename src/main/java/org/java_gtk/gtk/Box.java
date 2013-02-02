@@ -45,6 +45,8 @@ public class Box extends Container {
 	private static native final int gtk_box_get_spacing(long boxPointer);
 	private static native final void gtk_box_pack_start(long boxPointer, long widgetPointer, boolean expand, boolean fill, int padding);
 	private static native final void gtk_box_pack_end(long boxPointer, long widgetPointer, boolean expand, boolean fill, int padding);
+	private static native final void gtk_box_set_homogeneous(long boxPointer, boolean homogeneous);
+	private static native final boolean gtk_box_get_homogeneous(long boxPointer);
 
 	protected Box(long pointer) {
 		super(pointer);
@@ -153,4 +155,24 @@ public class Box extends Container {
 		}
 	}
 	
+	public void setHomogeneous(boolean homogeneous) {
+		lock.lock();
+		try {
+			gtk_box_set_homogeneous(this.pointer, homogeneous);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	public boolean isHomogeneous() {
+		lock.lock();
+		try {
+			return gtk_box_get_homogeneous(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}
+		
+	}
 }
