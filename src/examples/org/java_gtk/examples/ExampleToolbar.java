@@ -31,12 +31,11 @@ import org.java_gtk.gtk.Toolbar.ToolbarStyle;
 public class ExampleToolbar extends ExampleBase {
 
 	public static void main(String[] args) {
-		new ExampleToolbar().runExample(args, "Toolbar Example");
+		new ExampleToolbar().runExample(args, "Toolbar Example", 250, 200, 0);
 	}
 
 	@Override
 	protected void setupExample() {
-		mainWin.setDefaultSize(250, 200);
 		
 		Box box = new Box(Orientation.VERTICAL, 0);
 		mainWin.add(box);

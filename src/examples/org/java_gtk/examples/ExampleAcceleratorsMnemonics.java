@@ -36,12 +36,11 @@ import org.java_gtk.gtk.StockItems;
 public class ExampleAcceleratorsMnemonics extends ExampleBase {
 
 	public static void main(String[] args) {
-		new ExampleAcceleratorsMnemonics().runExample(args, "Accelerators & Mnemonics Example");
+		new ExampleAcceleratorsMnemonics().runExample(args, "Accelerators & Mnemonics Example", 250, 200, 0);
 	}
 
 	@Override
 	protected void setupExample() {
-		mainWin.setDefaultSize(250, 200);
 		
 		Box box = new Box(Orientation.VERTICAL, 10);
 		mainWin.add(box);

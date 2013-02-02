@@ -28,12 +28,11 @@ import org.java_gtk.gtk.MenuItem;
 public class ExampleMenu extends ExampleBase {
 	
 	public static void main(String[] args) {
-		new ExampleMenu().runExample(args, "Menu Example");
+		new ExampleMenu().runExample(args, "Menu Example", 250, 200, 0);
 	}
 
 	@Override
 	protected void setupExample() {
-		mainWin.setDefaultSize(250, 200);
 		
 		Box box = new Box(Orientation.VERTICAL, 10);
 		mainWin.add(box);

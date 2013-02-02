@@ -24,12 +24,11 @@ import org.java_gtk.gtk.Gtk;
 public class ExampleButton extends ExampleBase {
 
 	public static void main(String[] args) {
-		new ExampleButton().runExample(args, "Button Example");
+		new ExampleButton().runExample(args, "Button Example", 250, 100, 10);
 	}
 
 	@Override
 	protected void setupExample() {
-		mainWin.setBorderWidth(10);
 		
 		Button b = new Button("This is a button.\nClick me to close.");
 		b.addClickedHandler(new Button.ClickedEventHandler() {

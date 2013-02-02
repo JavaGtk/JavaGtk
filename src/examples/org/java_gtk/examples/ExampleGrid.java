@@ -24,13 +24,11 @@ import org.java_gtk.gtk.Grid;
 public class ExampleGrid extends ExampleBase {
 
 	public static void main(String[] args) {
-		new ExampleGrid().runExample(args, "Grid Example");
+		new ExampleGrid().runExample(args, "Grid Example", 250, 180, 5);
 	}
 
 	@Override
 	protected void setupExample() {
-		mainWin.setDefaultSize(250, 180);
-		mainWin.setBorderWidth(5);
 		
 		String[][] gridValues = {
 				{"7", "8", "9", "/"}, 

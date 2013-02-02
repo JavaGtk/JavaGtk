@@ -27,7 +27,7 @@ public abstract class ExampleBase {
 	
 	protected Window mainWin;
 	
-	protected void runExample(String[] args, String title) {
+	protected void runExample(String[] args, String title, int width, int height, int border) {
 		
 		Gtk.init(args);
 		mainWin = new Window();
@@ -38,6 +38,8 @@ public abstract class ExampleBase {
 			}
 		});
 		mainWin.setTitle(title);
+		mainWin.setDefaultSize(width, height);
+		mainWin.setBorderWidth(border);
 		
 		setupExample();
 		

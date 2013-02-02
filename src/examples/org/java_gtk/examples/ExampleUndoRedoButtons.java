@@ -31,12 +31,11 @@ import org.java_gtk.gtk.Toolbar.ToolbarStyle;
 public class ExampleUndoRedoButtons extends ExampleBase {
 
 	public static void main(String[] args) {
-		new ExampleUndoRedoButtons().runExample(args, "Undo Redo Buttons Example");
+		new ExampleUndoRedoButtons().runExample(args, "Undo Redo Buttons Example", 250, 200, 0);
 	}
 
 	@Override
 	protected void setupExample() {
-		mainWin.setDefaultSize(250, 200);
 		
 		Box box = new Box(Orientation.VERTICAL, 0);
 		mainWin.add(box);
@@ -83,7 +82,8 @@ public class ExampleUndoRedoButtons extends ExampleBase {
 
 	}
 	
-	static int count = 2;
+	private static int count = 2;
+	
 	private void handleUndoRedo(ToolButton source, ToolButton item) {
 		String name = source.getName();
 		if (name.equals("undo"))

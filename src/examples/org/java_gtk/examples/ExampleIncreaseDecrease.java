@@ -21,21 +21,17 @@ package org.java_gtk.examples;
 import org.java_gtk.gtk.Button;
 import org.java_gtk.gtk.Fixed;
 import org.java_gtk.gtk.Label;
-import org.java_gtk.gtk.Window.WindowPosition;
 
 public class ExampleIncreaseDecrease extends ExampleBase {
 	
 	static int count = 0;
 
 	public static void main(String[] args) {
-		new ExampleIncreaseDecrease().runExample(args, "Increase Decrease Example");
+		new ExampleIncreaseDecrease().runExample(args, "Increase Decrease Example", 250, 180, 10);
 	}
 
 	@Override
 	protected void setupExample() {
-		mainWin.setBorderWidth(10);
-		mainWin.setPosition(WindowPosition.MOUSE);
-		mainWin.setDefaultSize(250, 180);
 		
 		Fixed frame = new Fixed();
 		mainWin.add(frame);

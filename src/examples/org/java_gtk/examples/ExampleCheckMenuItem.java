@@ -30,12 +30,11 @@ import org.java_gtk.gtk.StatusBar;
 public class ExampleCheckMenuItem extends ExampleBase {
 
 	public static void main(String[] args) {
-		new ExampleCheckMenuItem().runExample(args, "Check Menu Item Example");
+		new ExampleCheckMenuItem().runExample(args, "Check Menu Item Example", 250, 200, 10);
 	}
 
 	@Override
 	protected void setupExample() {
-		mainWin.setDefaultSize(250, 200);
 		
 		Box box = new Box(Orientation.VERTICAL, 10);
 		mainWin.add(box);

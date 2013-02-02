@@ -26,12 +26,11 @@ import org.java_gtk.gtk.Gtk;
 public class ExampleButtons extends ExampleBase {
 	
 	public static void main(String[] args) {
-		new ExampleButtons().runExample(args, "Buttons Example");
+		new ExampleButtons().runExample(args, "Buttons Example", 350, 100, 10);
 	}
 
 	@Override
 	protected void setupExample() {
-		mainWin.setBorderWidth(10);
 		
 		Box box = new Box(Orientation.HORIZONTAL, 10);
 		mainWin.add(box);
