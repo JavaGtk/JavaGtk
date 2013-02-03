@@ -15,10 +15,10 @@ public class ExampleAlignment extends ExampleBase {
 	protected void setupExample() {
 		
 		Box vbox = new Box(Orientation.VERTICAL, 5);
-		vbox.setHomogeneous(true);
+		vbox.setHomogeneous(false);
 		
 		Alignment valign = new Alignment(1, 1, 0, 0);
-		vbox.add(valign);
+		vbox.packStart(valign, true, true, 0);
 		mainWin.add(vbox);
 		
 		Box hbox = new Box(Orientation.HORIZONTAL, 3);
@@ -33,7 +33,6 @@ public class ExampleAlignment extends ExampleBase {
 		
 		Alignment halign = new Alignment(1, 0, 0, 0);
 		halign.add(hbox);
-		
 		valign.add(halign);
 	}
 

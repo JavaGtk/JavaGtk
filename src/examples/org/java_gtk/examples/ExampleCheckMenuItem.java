@@ -20,7 +20,6 @@ package org.java_gtk.examples;
 
 import org.java_gtk.gtk.Box;
 import org.java_gtk.gtk.CheckMenuItem;
-import org.java_gtk.gtk.Gtk;
 import org.java_gtk.gtk.Menu;
 import org.java_gtk.gtk.MenuBar;
 import org.java_gtk.gtk.Container.Orientation;
