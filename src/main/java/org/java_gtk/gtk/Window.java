@@ -18,6 +18,8 @@
 
 package org.java_gtk.gtk;
 
+import org.java_gtk.gdk.Pixbuf;
+
 /**
  * 
  * A Window is a toplevel window which can contain other widgets.
@@ -35,6 +37,7 @@ public class Window extends Bin {
 	private static native final boolean gtk_window_get_resizable(long windowPointer);
 	private static native final void gtk_window_set_position(long windowPointer, int position);
 	private static native final void gtk_window_add_accel_group(long windowPointer, long accelgroupPointer);
+	private static native final void gtk_window_set_icon(long windowPointer, long pixbufPointer);
 	
 	public enum WindowType {
 		TOPLEVEL(0),
@@ -200,6 +203,21 @@ public class Window extends Bin {
 		lock.lock();
 		try {
 			gtk_window_add_accel_group(pointer, accelGroup.getPointer());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	/**
+	 * Sets the icon representing a Window
+	 * 
+	 * @param icon icon image or <code>null</code>
+	 */
+	public void setIcon(Pixbuf icon) {
+		lock.lock();
+		try {
+			gtk_window_set_icon(pointer, icon.getPointer());
 		}
 		finally {
 			lock.unlock();

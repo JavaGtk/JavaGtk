@@ -124,3 +124,15 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1add_1accel_1gr
 {
 	gtk_window_add_accel_group((GtkWindow*)window, (GtkAccelGroup*)accel_grp);
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_set_icon
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1icon
+  (JNIEnv *env, jclass cls, jlong window, jlong icon)
+{
+	gtk_window_set_icon((GtkWindow*)window, (GdkPixbuf*)icon);
+}
+
