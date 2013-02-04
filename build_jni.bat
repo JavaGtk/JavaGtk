@@ -27,3 +27,4 @@ set JAVA_HOME="C:\Program Files\Java\jdk1.6.0_25"
 	org.java_gtk.gtk.Grid ^
 	org.java_gtk.gtk.Alignment ^
 	org.java_gtk.gdk.Pixbuf ^
+	org.java_gtk.gtk.TextView ^

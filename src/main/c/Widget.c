@@ -188,3 +188,179 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1sensitive
 {
 	gtk_widget_set_sensitive((GtkWidget*)widget, (gboolean)sensitive);
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_halign
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1halign
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	return (jint)gtk_widget_get_halign((GtkWidget*)widget);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_halign
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1halign
+  (JNIEnv *env, jclass cls, jlong widget, jint align)
+{
+	gtk_widget_set_halign((GtkWidget*)widget, (GtkAlign)align);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_valign
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1valign
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	return (jint)gtk_widget_get_valign((GtkWidget*)widget);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_valign
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1valign
+  (JNIEnv *env, jclass cls, jlong widget, jint align)
+{
+	gtk_widget_set_valign((GtkWidget*)widget, (GtkAlign)align);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_margin_left
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1margin_1left
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	return (jint)gtk_widget_get_margin_left((GtkWidget*)widget);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_margin_left
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1margin_1left
+  (JNIEnv *env, jclass cls, jlong widget, jint margin)
+{
+	gtk_widget_set_margin_left((GtkWidget*)widget, (gint)margin);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_margin_right
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1margin_1right
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	return (jint)gtk_widget_get_margin_right((GtkWidget*)widget);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_margin_right
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1margin_1right
+  (JNIEnv *env, jclass cls, jlong widget, jint margin)
+{
+	gtk_widget_set_margin_right((GtkWidget*)widget, (gint)margin);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_margin_top
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1margin_1top
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	return (jint)gtk_widget_get_margin_top((GtkWidget*)widget);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_margin_top
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1margin_1top
+  (JNIEnv *env, jclass cls, jlong widget, jint margin)
+{
+	gtk_widget_set_margin_top((GtkWidget*)widget, (gint)margin);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_margin_bottom
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1margin_1bottom
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	return (jint)gtk_widget_get_margin_bottom((GtkWidget*)widget);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_margin_bottom
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1margin_1bottom
+  (JNIEnv *env, jclass cls, jlong widget, jint margin)
+{
+	gtk_widget_set_margin_bottom((GtkWidget*)widget, (gint)margin);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_hexpand
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1hexpand
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	return (jboolean)gtk_widget_get_hexpand((GtkWidget*)widget);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_hexpand
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1hexpand
+  (JNIEnv *env, jclass cls, jlong widget, jboolean expand)
+{
+	gtk_widget_set_hexpand((GtkWidget*)widget, (gboolean)expand);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_vexpand
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1vexpand
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	return (jboolean)gtk_widget_get_vexpand((GtkWidget*)widget);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_vexpand
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1vexpand
+  (JNIEnv *env, jclass cls, jlong widget, jboolean expand)
+{
+	gtk_widget_set_vexpand((GtkWidget*)widget, (gboolean)expand);
+}

@@ -18,7 +18,6 @@
 
 package org.java_gtk.gdk;
 
-import org.java_gtk.glib.GError;
 import org.java_gtk.glib.GFileError;
 import org.java_gtk.gobject.GObject;
 

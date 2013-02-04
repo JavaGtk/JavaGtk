@@ -58,6 +58,18 @@ public class Grid extends Container {
 		}
 	}
 	
+	/**
+	 * Adds a widget to the grid.
+	 * <p>
+	 * The position of child is determined by left and top. The number 
+	 * of 'cells' that child will occupy is determined by width and height. 
+	 *
+	 * @param widget the widget to add
+	 * @param left the column number to attach the left side of child to
+	 * @param top the row number to attach the top side of child to
+	 * @param width the number of columns that child will span
+	 * @param height the number of rows that child will span
+	 */
 	public void attach(Widget widget, int left, int top, int width, int height) {
 		lock.lock();
 		try {
@@ -68,6 +80,11 @@ public class Grid extends Container {
 		}
 	}
 
+	/**
+	 * Sets the amount of space between rows
+	 * 
+	 * @param spacing the amount of space to insert between rows
+	 */
 	public void setRowSpacing(int spacing) {
 		lock.lock();
 		try {
@@ -78,6 +95,11 @@ public class Grid extends Container {
 		}
 	}
 
+	/**
+	 * Returns the amount of space between the rows
+	 * 
+	 * @return the row spacing
+	 */
 	public int getRowSpacing() {
 		lock.lock();
 		try {
@@ -88,6 +110,11 @@ public class Grid extends Container {
 		}
 	}
 
+	/**
+	 * Sets the amount of space between columns
+	 * 
+	 * @param spacing the amount of space to insert between columns
+	 */
 	public void setColumnSpacing(int spacing) {
 		lock.lock();
 		try {
@@ -98,6 +125,11 @@ public class Grid extends Container {
 		}
 	}
 
+	/**
+	 * Returns the amount of space between the columns
+	 * 
+	 * @return the column spacing
+	 */
 	public int getColumnSpacing() {
 		lock.lock();
 		try {
@@ -108,6 +140,11 @@ public class Grid extends Container {
 		}
 	}
 
+	/**
+	 * Sets whether all rows of grid will have the same width. 
+	 * 
+	 * @param homogeneous {@code true} to make rows homogeneous
+	 */
 	public void setRowHomogeneous(boolean homogeneous) {
 		lock.lock();
 		try {
@@ -118,6 +155,11 @@ public class Grid extends Container {
 		}
 	}
 
+	/**
+	 * Returns whether all rows of grid have the same width.
+	 * 
+	 * @return whether all rows of grid have the same width.
+	 */
 	public boolean isRowHomogeneous() {
 		lock.lock();
 		try {
@@ -128,6 +170,11 @@ public class Grid extends Container {
 		}
 	}
 
+	/**
+	 * Sets whether all columns of grid will have the same width.
+	 * 
+	 * @param homogeneous {@code true} to make columns homogeneous
+	 */
 	public void setColumnHomogeneous(boolean homogeneous) {
 		lock.lock();
 		try {
@@ -138,6 +185,11 @@ public class Grid extends Container {
 		}
 	}
 
+	/**
+	 * Returns whether all columns of grid have the same width.
+	 * 
+	 * @return whether all columns of grid have the same width.
+	 */
 	public boolean isColumnHomogeneous() {
 		lock.lock();
 		try {

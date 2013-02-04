@@ -18,6 +18,8 @@
 
 package org.java_gtk.gtk;
 
+import java.util.TreeMap;
+
 import org.java_gtk.gdk.Event;
 import org.java_gtk.gobject.GObject;
 import org.java_gtk.util.ObjectCache;
@@ -42,7 +44,53 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_set_name(long widgetPointer, String name);
 	private static native final boolean gtk_widget_get_sensitive(long widgetPointer);
 	private static native final void gtk_widget_set_sensitive(long widgetPointer, boolean sensitive);
+	private static native final int gtk_widget_get_halign(long widgetPointer);
+	private static native final void gtk_widget_set_halign(long widgetPointer, int align);
+	private static native final int gtk_widget_get_valign(long widgetPointer);
+	private static native final void gtk_widget_set_valign(long widgetPointer, int align);
+	private static native final int gtk_widget_get_margin_left(long widgetPointer);
+	private static native final void gtk_widget_set_margin_left(long widgetPointer, int margin);
+	private static native final int gtk_widget_get_margin_right(long widgetPointer);
+	private static native final void gtk_widget_set_margin_right(long widgetPointer, int margin);
+	private static native final int gtk_widget_get_margin_top(long widgetPointer);
+	private static native final void gtk_widget_set_margin_top(long widgetPointer, int margin);
+	private static native final int gtk_widget_get_margin_bottom(long widgetPointer);
+	private static native final void gtk_widget_set_margin_bottom(long widgetPointer, int margin);
+	private static native final boolean gtk_widget_get_hexpand(long widgetPointer);
+	private static native final void gtk_widget_set_hexpand(long widgetPointer, boolean expand);
+	private static native final boolean gtk_widget_get_vexpand(long widgetPointer);
+	private static native final void gtk_widget_set_vexpand(long widgetPointer, boolean expand);
 
+	public enum Align {
+		FILL(0),
+		START(1),
+		END(2),
+		CENTER(3);
+		
+		private Align(int value) {
+			this.value = value;
+		}
+		
+		private int value;
+		
+		public int getValue() {
+			return value;
+		}
+		
+		private static TreeMap<Integer, Align> map;
+		
+		static {
+			map = new TreeMap<Integer, Align>();
+			for (Align align: Align.values()) {
+				map.put(new Integer(align.value), align);
+			}
+		}
+		
+		public static Align lookup(int value) {
+			return map.get(new Integer(value));
+		}
+	}
+	
 	protected Widget(long pointer) {
 		super(pointer);
 		
@@ -258,7 +306,7 @@ public abstract class Widget extends GObject {
 		}
 		finally {
 			lock.unlock();
-		}		
+		}
 	}
 	
 	/**
@@ -278,4 +326,252 @@ public abstract class Widget extends GObject {
 		}
 	}
 	
+	/**
+	 * Gets the horizontal alignment.
+	 * 
+	 * @return the horizontal alignment
+	 */
+	public Align getHalign() {
+		lock.lock();
+		try {
+			return Align.lookup(gtk_widget_get_halign(this.pointer));
+		}
+		finally {
+			lock.unlock();
+		}		
+	}
+	
+	/**
+	 * Sets the horizontal alignment.
+	 * 
+	 * @param align the horizontal alignment
+	 */
+	public void setHalign(Align align) {
+		lock.lock();
+		try {
+			gtk_widget_set_halign(this.pointer, align.getValue());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Gets the vertical alignment.
+	 * 
+	 * @return the vertical alignment
+	 */
+	public Align getValign() {
+		lock.lock();
+		try {
+			return Align.lookup(gtk_widget_get_valign(this.pointer));
+		}
+		finally {
+			lock.unlock();
+		}		
+	}
+	
+	/**
+	 * Sets the vertical alignment.
+	 * 
+	 * @param align the vertical alignment
+	 */
+	public void setValign(Align align) {
+		lock.lock();
+		try {
+			gtk_widget_set_valign(this.pointer, align.getValue());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	/**
+	 * Gets the left margin.
+	 * 
+	 * @return The left margin
+	 */
+	public int getMarginLeft() {
+		lock.lock();
+		try {
+			return gtk_widget_get_margin_left(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}		
+	}
+	
+	/**
+	 * Sets the left margin.
+	 * 
+	 * @param margin the left margin
+	 */
+	public void setMarginLeft(int margin) {
+		lock.lock();
+		try {
+			gtk_widget_set_margin_left(this.pointer, margin);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Gets the right margin.
+	 * 
+	 * @return The right margin
+	 */
+	public int getMarginRight() {
+		lock.lock();
+		try {
+			return gtk_widget_get_margin_right(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}		
+	}
+	
+	/**
+	 * Sets the right margin.
+	 * 
+	 * @param margin the right margin
+	 */
+	public void setMarginRight(int margin) {
+		lock.lock();
+		try {
+			gtk_widget_set_margin_right(this.pointer, margin);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Gets the top margin.
+	 * 
+	 * @return The top margin
+	 */
+	public int getMarginTop() {
+		lock.lock();
+		try {
+			return gtk_widget_get_margin_top(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}		
+	}
+	
+	/**
+	 * Sets the top margin.
+	 * 
+	 * @param margin the top margin
+	 */
+	public void setMarginTop(int margin) {
+		lock.lock();
+		try {
+			gtk_widget_set_margin_top(this.pointer, margin);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Gets the bottom margin.
+	 * 
+	 * @return The bottom margin
+	 */
+	public int getMarginBottom() {
+		lock.lock();
+		try {
+			return gtk_widget_get_margin_bottom(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}		
+	}
+	
+	/**
+	 * Sets the bottom margin.
+	 * 
+	 * @param margin the bottom margin
+	 */
+	public void setMarginBottom(int margin) {
+		lock.lock();
+		try {
+			gtk_widget_set_margin_bottom(this.pointer, margin);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Gets whether the widget would like any available extra horizontal space. 
+	 * When a user resizes a Window, widgets with expand=TRUE generally receive 
+	 * the extra space.
+	 * 
+	 * @return whether hexpand flag is set
+	 */
+	public boolean getHexpand() {
+		lock.lock();
+		try {
+			return gtk_widget_get_hexpand(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}		
+	}
+	
+	/**
+	 * Sets whether the widget would like any available extra horizontal space. 
+	 * When a user resizes a Window, widgets with expand=TRUE generally receive 
+	 * the extra space.
+	 * 
+	 * @param expand whether to expand
+	 */
+	public void setHexpand(boolean expand) {
+		lock.lock();
+		try {
+			gtk_widget_set_hexpand(this.pointer, expand);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Gets whether the widget would like any available extra vertical space. 
+	 * When a user resizes a Window, widgets with expand=TRUE generally receive 
+	 * the extra space.
+	 * 
+	 * @return whether vexpand flag is set
+	 */
+	public boolean getVexpand() {
+		lock.lock();
+		try {
+			return gtk_widget_get_vexpand(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}		
+	}
+	
+	/**
+	 * Sets whether the widget would like any available extra vertical space. 
+	 * When a user resizes a Window, widgets with expand=TRUE generally receive 
+	 * the extra space.
+	 * 
+	 * @param expand whether to expand
+	 */
+	public void setVexpand(boolean expand) {
+		lock.lock();
+		try {
+			gtk_widget_set_vexpand(this.pointer, expand);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
 }
