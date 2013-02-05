@@ -1,28 +1,30 @@
 #Bundle Contents
 
 ##gtk+3.7.6-binaries-win64-20130125
-atk-2.7.4
+Platform: windows 64-bit
 
-cairo-1.12.10
+*atk-2.7.4
 
-gdk-pixbuf-2.27.0
+*cairo-1.12.10
 
-gettext-0.18.2
+*gdk-pixbuf-2.27.0
 
-glib-2.35.4
+*gettext-0.18.2
 
-gtk+-3.7.6
+*glib-2.35.4
 
-libffi-3.0.11
+*gtk+-3.7.6
 
-libiconv-1.14
+*libffi-3.0.11
 
-libpng-1.5.13
+*libiconv-1.14
 
-pango-1.32.6
+*libpng-1.5.13
 
-pixman-0.28.2
+*pango-1.32.6
 
-win-iconv-0.0.4
+*pixman-0.28.2
 
-zlib-1.2.7
+*win-iconv-0.0.4
+
+*zlib-1.2.7
