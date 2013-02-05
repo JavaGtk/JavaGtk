@@ -18,9 +18,13 @@
 
 package org.java_gtk.gtk;
 
+import java.util.EnumSet;
 import java.util.TreeMap;
 
 import org.java_gtk.gdk.Event;
+import org.java_gtk.gdk.EventConfigure;
+import org.java_gtk.gdk.EventMaskHelper;
+import org.java_gtk.gdk.EventMasks;
 import org.java_gtk.gobject.GObject;
 import org.java_gtk.util.ObjectCache;
 
@@ -35,6 +39,7 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_show_all(long widgetPointer);
 	private static native final void gtk_widget_destroy(long widgetPointer);
 	private static native final void gtk_widget_add_delete_event_handler(long widgetPointer, DeleteEventHandler handler, Widget receiver);
+	private static native final void gtk_widget_add_configure_event_handler(long widgetPointer, ConfigureEventHandler handler, Widget receiver);
 	private static native final void gtk_widget_add_destroy_handler(long widgetPointer, DestroyHandler handler, Widget receiver);
 	private static native final void gtk_widget_set_size_request(long widgetPointer, int width, int height);
 	private static native final void gtk_widget_set_accel_path(long widgetPointer, String path, long accelgroupPointer);
@@ -60,6 +65,8 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_set_hexpand(long widgetPointer, boolean expand);
 	private static native final boolean gtk_widget_get_vexpand(long widgetPointer);
 	private static native final void gtk_widget_set_vexpand(long widgetPointer, boolean expand);
+	private static native final int gtk_widget_get_events(long widgetPointer);
+	private static native final void gtk_widget_set_events(long widgetPointer, int events);
 
 	public enum Align {
 		FILL(0),
@@ -196,6 +203,34 @@ public abstract class Widget extends GObject {
 		handler.handle((Widget)ObjectCache.lookup(sourcePointer));
 	}
 	
+	/**
+	 * Adds the specified handler to receive delete events from this Widget.  
+	 * The delete event is fired when a toplevel <code>{@link Window}</code>
+	 * is closed.
+	 * 
+	 * @param handler the handler to be added
+	 */
+	public void addConfigureHandler(ConfigureEventHandler handler) {
+		lock.lock();
+		try {
+			gtk_widget_add_configure_event_handler(this.pointer, handler, this);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * The listener interface for receiving delete events.
+	 */
+	public interface ConfigureEventHandler {
+        boolean handle(Widget source, EventConfigure event);
+    }
+	
+	static boolean configureEventReceiver(ConfigureEventHandler handler, long sourcePointer, long eventPointer) {
+		return handler.handle((Widget)ObjectCache.lookup(sourcePointer), new EventConfigure(eventPointer));
+	}
+
 	/**
 	 * Sets the minimum size of a widget; that is, the widget's size request will 
 	 * be at least width by height. You can use this function to force a widget 
@@ -574,4 +609,26 @@ public abstract class Widget extends GObject {
 		}
 	}
 
+	public EnumSet<EventMasks> getEvents() {
+		int value = 0;
+		lock.lock();
+		try {
+			value = gtk_widget_get_events(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}
+		return EventMaskHelper.getMask(value);
+	}
+	
+	public void setEvents(EnumSet<EventMasks> mask) {
+		int value = EventMaskHelper.getValue(mask);
+		lock.lock();
+		try {
+			gtk_widget_set_events(this.pointer, value);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
 }

@@ -43,7 +43,7 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1destroy
 	gtk_widget_destroy((GtkWidget*)widget);
 }
 
-void delete_event_handler(GtkWidget *widget, GdkEvent *event, gpointer data) {
+void widget_event_handler(GtkWidget *widget, GdkEvent *event, gpointer data) {
 	callback *c = data;
 	callback_start(c);
 	(*c->env)->CallStaticBooleanMethod(c->env, c->receiver, c->id, c->handler, widget, event);
@@ -60,7 +60,7 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1delete_1e
 {
 	callback *c;
 	c = create_callback(env, handler, receiver, "deleteEventReceiver", "(Lorg/java_gtk/gtk/Widget$DeleteEventHandler;JJ)Z");
-	connect_callback((gpointer)instance, "delete-event", G_CALLBACK(delete_event_handler), c);
+	connect_callback((gpointer)instance, "delete-event", G_CALLBACK(widget_event_handler), c);
 }
 
 void widget_destroy_handler(GtkWidget *widget, gpointer data) {
@@ -81,7 +81,19 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1
 	callback *c;
 	c = create_callback(env, handler, receiver, "destroyReceiver", "(Lorg/java_gtk/gtk/Widget$DestroyHandler;J)V");
 	connect_callback((gpointer)instance, "destroy", G_CALLBACK(widget_destroy_handler), c);
+}
 
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_add_configure_event_handler
+ * Signature: (JLorg/java_gtk/gtk/Widget/ConfigureEventHandler;Lorg/java_gtk/gtk/Widget;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1configure_1event_1handler
+  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
+{
+	callback *c;
+	c = create_callback(env, handler, receiver, "configureEventReceiver", "(Lorg/java_gtk/gtk/Widget$ConfigureEventHandler;JJ)Z");
+	connect_callback((gpointer)instance, "configure-event", G_CALLBACK(widget_event_handler), c);
 }
 
 /*
@@ -363,4 +375,26 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1vexpand
   (JNIEnv *env, jclass cls, jlong widget, jboolean expand)
 {
 	gtk_widget_set_vexpand((GtkWidget*)widget, (gboolean)expand);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_events
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1events
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	return (jint)gtk_widget_get_events((GtkWidget*)widget);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_events
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1events
+  (JNIEnv *env, jclass cls, jlong widget, jint events)
+{
+	gtk_widget_set_events((GtkWidget*)widget, (gint)events);
 }

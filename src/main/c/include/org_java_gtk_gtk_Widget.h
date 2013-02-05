@@ -33,6 +33,14 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1delete_1e
 
 /*
  * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_add_configure_event_handler
+ * Signature: (JLorg/java_gtk/gtk/Widget/ConfigureEventHandler;Lorg/java_gtk/gtk/Widget;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1configure_1event_1handler
+  (JNIEnv *, jclass, jlong, jobject, jobject);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
  * Method:    gtk_widget_add_destroy_handler
  * Signature: (JLorg/java_gtk/gtk/Widget/DestroyHandler;Lorg/java_gtk/gtk/Widget;)V
  */
@@ -230,6 +238,22 @@ JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1vexpa
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1vexpand
   (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_get_events
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1get_1events
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_set_events
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1events
+  (JNIEnv *, jclass, jlong, jint);
 
 #ifdef __cplusplus
 }
