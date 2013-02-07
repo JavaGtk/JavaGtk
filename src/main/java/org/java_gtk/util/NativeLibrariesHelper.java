@@ -4,10 +4,14 @@ import java.lang.reflect.Field;
 import java.util.*;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Helper functions for native libraries.
  * <p/>
  * @author Gili Tzabari
+ * @author Bill Hull
  */
 public class NativeLibrariesHelper
 {
@@ -17,17 +21,18 @@ public class NativeLibrariesHelper
     private final Field nativeLibraryFromClass;
     private final Field nativeLibraryName;
 
+    private static final Logger logger = LoggerFactory.getLogger(NativeLibrariesHelper.class);
+    
 	public static void printNative() {
-		System.out.println(System.getProperty("java.library.path"));
+		logger.info(System.getProperty("java.library.path"));
 		try {
 			NativeLibrariesHelper n = new NativeLibrariesHelper();
 			for (String s: n.getLoadedLibraries()) {
-				System.out.println(s);
+				logger.info(s);
 			}
 		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
+			logger.error("Error: ", e);
 		}
-		
 	}
 
 	/**

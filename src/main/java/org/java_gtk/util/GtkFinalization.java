@@ -25,6 +25,8 @@ import java.util.List;
 
 import org.java_gtk.gobject.GObject;
 import org.java_gtk.gtk.Gtk;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Handles object finalization using PhantomReference.
@@ -35,7 +37,9 @@ import org.java_gtk.gtk.Gtk;
 public class GtkFinalization {
 	
 	private static final List<PhantomReference<GObject>> phantomReferences = new LinkedList<PhantomReference<GObject>>();
-	private static final ReferenceQueue<GObject> queue = new ReferenceQueue<GObject>();	
+	private static final ReferenceQueue<GObject> queue = new ReferenceQueue<GObject>();
+	
+	private static final Logger logger = LoggerFactory.getLogger(GtkFinalization.class);
 
 	/**
 	 * Holds a reference to the object pointer that can be used after the 
@@ -74,11 +78,11 @@ public class GtkFinalization {
 				while (true) {
 					try {
 						GtkFinalizer ref = (GtkFinalizer)queue.remove();
-						System.out.println("Finalizing: " + ref.pointer);
+						logger.debug("Finalizing: {}", ref.pointer);
 						ref.cleanup();
 						phantomReferences.remove(ref);
 					} catch (Exception ex) {
-						System.out.println("Finalization error:" + ex.getMessage());
+						logger.error("Finalization error");
 					}
 				}
 			}

@@ -7,7 +7,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class NativeLibraries {
+	
+	private static Logger logger = LoggerFactory.getLogger(NativeLibraries.class);
 	
 	public static void loadLibraries() {
 		Properties props = new Properties();
@@ -30,7 +35,7 @@ public class NativeLibraries {
 				if (property != null && !property.isEmpty())
 					gtkLibraries = Arrays.asList(property.split(","));
 			} catch (IOException e) {
-
+				logger.error("Error finding library path: ", e);
 			}
 		}
 		if (gtkLibraries != null && !gtkLibraries.isEmpty() && gtkLibPath != null && !gtkLibPath.isEmpty())
