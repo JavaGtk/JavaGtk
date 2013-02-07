@@ -103,14 +103,14 @@ public abstract class Widget extends GObject {
 		
 		// this default destroy handler is used to ensure that objects are removed from the
 		// object cache when they are no longer needed
-		this.addDestroyHandler(new DestroyHandler() {
-			@Override
-			public boolean handle(Widget source) {
-				source.cleanup();
-				return true;
-			}
-			
-		});
+//		this.addDestroyHandler(new DestroyHandler() {
+//			@Override
+//			public boolean handle(Widget source) {
+//				source.cleanup();
+//				return true;
+//			}
+//			
+//		});
 	}
 	
 	/**

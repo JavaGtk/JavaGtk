@@ -55,6 +55,14 @@ JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1events_1pending
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1main_1quit
   (JNIEnv *, jclass);
 
+/*
+ * Class:     org_java_gtk_gtk_Gtk
+ * Method:    g_object_cleanup
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_g_1object_1cleanup
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif

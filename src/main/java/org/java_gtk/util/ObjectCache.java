@@ -52,4 +52,8 @@ public class ObjectCache {
 	public static void remove(GObject object) {
 		objects.remove(object.getPointer());
 	}
+	
+	public static void remove(long pointer) {
+		objects.remove(pointer);
+	}
 }

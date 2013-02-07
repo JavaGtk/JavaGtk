@@ -19,7 +19,9 @@
 package org.java_gtk.gtk;
 
 import org.java_gtk.gobject.GObject;
+import org.java_gtk.util.GtkFinalization;
 import org.java_gtk.util.NativeLibraries;
+import org.java_gtk.util.ObjectCache;
 
 /**
  * Utility methods for library initialization, main event loop and events.
@@ -35,7 +37,8 @@ public class Gtk extends GObject {
 	private static native final boolean gtk_main_iteration_do(boolean blocking);
 	private static native final boolean gtk_events_pending();
 	private static native final void gtk_main_quit();
-	    
+    private static native final void g_object_cleanup(long objectPointer);
+    	
 	static {
 		NativeLibraries.loadLibraries();
 	}
@@ -59,6 +62,7 @@ public class Gtk extends GObject {
 		lock.lock();
 		try {
 			gtk_init(argv.length, argv);
+			GtkFinalization.setupFinalizer();
 		}
 		finally {
 			lock.unlock();
@@ -137,5 +141,22 @@ public class Gtk extends GObject {
 			lock.unlock();
 		}
 	}
+	
+	/**
+	 * Perform cleanup on a finalized object.
+	 * 
+	 * @param pointer object pointer
+	 */
+	public static void cleanup(long pointer) {
+		ObjectCache.remove(pointer);
+		lock.lock();
+		try {
+			g_object_cleanup(pointer);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
 
 }

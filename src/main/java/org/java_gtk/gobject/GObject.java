@@ -20,6 +20,7 @@ package org.java_gtk.gobject;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.java_gtk.util.GtkFinalization;
 import org.java_gtk.util.ObjectCache;
 
 /**
@@ -36,7 +37,7 @@ import org.java_gtk.util.ObjectCache;
  */
 public abstract class GObject {
 
-	protected final long pointer;
+    protected final long pointer;
 	
 	protected static final ReentrantLock lock = new ReentrantLock(true);
 	
@@ -48,25 +49,31 @@ public abstract class GObject {
 	 */
 	protected GObject(long pointer) {
 		this.pointer = pointer;
-		if (pointer != 0)
+		if (pointer != 0) {
 			ObjectCache.cache(this);
+			GtkFinalization.addFinalizer(this);
+		}
 	}
 	
 	public long getPointer() {
 		return pointer;
 	}
 	
-	public void cleanup() {
-		ObjectCache.remove(this);
-	}
+//	public void cleanup() {
+//		ObjectCache.remove(this);
+//	}
 	
 	/**
 	 * Ensure that this GObject is removed from the cache when garbage collected.
 	 * You should not solely rely on this method.  Instead you should attempt to 
 	 * call the {@link #cleanup() cleanup} method when the object is no longer needed.
 	 */
-    protected void finalize() throws Throwable {
-    	ObjectCache.remove(this);
-        super.finalize();
-    }
+//    protected void finalize() throws Throwable {
+//    	try {
+//    		ObjectCache.remove(this);
+//    	}
+//   	finally {
+//    		super.finalize();
+//    	}
+//    }
 }

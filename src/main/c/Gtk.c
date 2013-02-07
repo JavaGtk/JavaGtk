@@ -103,3 +103,16 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1main_1quit
 {
 	gtk_main_quit();
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Gtk
+ * Method:    g_object_cleanup
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_g_1object_1cleanup
+  (JNIEnv *env, jclass cls, jlong object)
+{
+	if (g_object_is_floating((gpointer)object))
+		g_object_ref_sink((gpointer)object);
+	g_object_unref((gpointer)object);
+}
