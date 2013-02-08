@@ -98,6 +98,19 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1configure
 
 /*
  * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_add_enter_event_handler
+ * Signature: (JLorg/java_gtk/gtk/Widget/EnterEventHandler;Lorg/java_gtk/gtk/Widget;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1enter_1event_1handler
+  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
+{
+	callback *c;
+	c = create_callback(env, handler, receiver, "enterEventReceiver", "(Lorg/java_gtk/gtk/Widget$EnterEventHandler;JJ)Z");
+	connect_callback((gpointer)instance, "enter-notify-event", G_CALLBACK(widget_event_handler), c);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
  * Method:    gtk_widget_set_size_request
  * Signature: (JII)V
  */
@@ -397,4 +410,15 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1events
   (JNIEnv *env, jclass cls, jlong widget, jint events)
 {
 	gtk_widget_set_events((GtkWidget*)widget, (gint)events);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_override_background_color
+ * Signature: (JIJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1override_1background_1color
+  (JNIEnv *env, jclass cls, jlong widget, jint state, jlong color)
+{
+	gtk_widget_override_background_color((GtkWidget*)widget, (GtkStateFlags)state, (GdkRGBA*)color);
 }

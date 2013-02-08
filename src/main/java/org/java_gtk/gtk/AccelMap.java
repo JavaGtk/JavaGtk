@@ -23,6 +23,13 @@ import java.util.EnumSet;
 import org.java_gtk.gdk.ModifierType;
 import org.java_gtk.gobject.GObject;
 
+/**
+ * Accelerator maps are used to define runtime configurable accelerators.
+ * All accelerators are stored inside one global AccelMap.
+ * 
+ * @author Bill
+ *
+ */
 public class AccelMap extends GObject {
 
 	private static native final void gtk_accel_map_add_entry(String path, int key, int modType);

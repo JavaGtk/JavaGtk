@@ -23,8 +23,9 @@ import java.util.TreeMap;
 
 import org.java_gtk.gdk.Event;
 import org.java_gtk.gdk.EventConfigure;
-import org.java_gtk.gdk.EventMaskHelper;
+import org.java_gtk.gdk.EventCrossing;
 import org.java_gtk.gdk.EventMasks;
+import org.java_gtk.gdk.RGBA;
 import org.java_gtk.gobject.GObject;
 import org.java_gtk.util.ObjectCache;
 
@@ -41,6 +42,7 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_add_delete_event_handler(long widgetPointer, DeleteEventHandler handler, Widget receiver);
 	private static native final void gtk_widget_add_configure_event_handler(long widgetPointer, ConfigureEventHandler handler, Widget receiver);
 	private static native final void gtk_widget_add_destroy_handler(long widgetPointer, DestroyHandler handler, Widget receiver);
+	private static native final void gtk_widget_add_enter_event_handler(long widgetPointer, EnterEventHandler handler, Widget receiver);
 	private static native final void gtk_widget_set_size_request(long widgetPointer, int width, int height);
 	private static native final void gtk_widget_set_accel_path(long widgetPointer, String path, long accelgroupPointer);
 	private static native final void gtk_widget_show(long widgetPointer);
@@ -67,6 +69,7 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_set_vexpand(long widgetPointer, boolean expand);
 	private static native final int gtk_widget_get_events(long widgetPointer);
 	private static native final void gtk_widget_set_events(long widgetPointer, int events);
+	private static native final void gtk_widget_override_background_color(long widgetPointer, int state, long colorPointer);
 
 	public enum Align {
 		FILL(0),
@@ -229,6 +232,40 @@ public abstract class Widget extends GObject {
 	
 	static boolean configureEventReceiver(ConfigureEventHandler handler, long sourcePointer, long eventPointer) {
 		return handler.handle((Widget)ObjectCache.lookup(sourcePointer), new EventConfigure(eventPointer));
+	}
+
+	/**
+	 * Adds the specified handler to receive enter events from this Widget.  
+	 * The enter event is fired when the pointer enters the widget's window.
+	 * 
+	 * @param handler the handler to be added
+	 */
+	public void addEnterHandler(EnterEventHandler handler) {
+		lock.lock();
+		try {
+			gtk_widget_add_enter_event_handler(this.pointer, handler, this);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * The listener interface for receiving enter events.
+	 */
+	public interface EnterEventHandler {
+		/**
+		 * 
+		 * @param source the object which received the event
+		 * @param event the {@code EventCrossing} which fired the event
+		 * @return {@code true} to stop other handlers from being invoked 
+		 *         for the event. {@code false} to propagate the event further.
+		 */
+        boolean handle(Widget source, EventCrossing event);
+    }
+	
+	static boolean enterEventReceiver(EnterEventHandler handler, long sourcePointer, long eventPointer) {
+		return handler.handle((Widget)ObjectCache.lookup(sourcePointer), new EventCrossing(eventPointer));
 	}
 
 	/**
@@ -609,6 +646,12 @@ public abstract class Widget extends GObject {
 		}
 	}
 
+	/**
+	 * Returns the event mask for the widget (an EnumSet containing flags from 
+	 * the EventMasks enumeration). These are the events that the widget will receive.
+	 *  
+	 * @return events for the widget
+	 */
 	public EnumSet<EventMasks> getEvents() {
 		int value = 0;
 		lock.lock();
@@ -618,14 +661,39 @@ public abstract class Widget extends GObject {
 		finally {
 			lock.unlock();
 		}
-		return EventMaskHelper.getMask(value);
+		return EventMasks.getMask(value);
 	}
 	
+	/**
+	 * Sets the event mask for a widget. The event mask determines which events 
+	 * a widget will receive. Different widgets have different default event masks, 
+	 * and by changing the event mask you may disrupt a widget's functionality. 
+	 * This function must be called while a widget is unrealized.
+	 * 
+	 * @param mask event mask
+	 */
 	public void setEvents(EnumSet<EventMasks> mask) {
-		int value = EventMaskHelper.getValue(mask);
+		int value = EventMasks.getValue(mask);
 		lock.lock();
 		try {
 			gtk_widget_set_events(this.pointer, value);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	/**
+	 * Sets the background color for the widget.
+	 * 
+	 * @param state the states for which to set the background color
+	 * @param color
+	 */
+	public void setBackgroundColor(EnumSet<StateFlags> state, RGBA color) {
+		int value = StateFlags.getValue(state);
+		lock.lock();
+		try {
+			gtk_widget_override_background_color(this.pointer, value, color.getPointer());
 		}
 		finally {
 			lock.unlock();

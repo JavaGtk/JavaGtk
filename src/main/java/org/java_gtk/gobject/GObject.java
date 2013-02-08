@@ -58,22 +58,5 @@ public abstract class GObject {
 	public long getPointer() {
 		return pointer;
 	}
-	
-//	public void cleanup() {
-//		ObjectCache.remove(this);
-//	}
-	
-	/**
-	 * Ensure that this GObject is removed from the cache when garbage collected.
-	 * You should not solely rely on this method.  Instead you should attempt to 
-	 * call the {@link #cleanup() cleanup} method when the object is no longer needed.
-	 */
-//    protected void finalize() throws Throwable {
-//    	try {
-//    		ObjectCache.remove(this);
-//    	}
-//   	finally {
-//    		super.finalize();
-//    	}
-//    }
+
 }

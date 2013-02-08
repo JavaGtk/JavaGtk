@@ -16,27 +16,24 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.gdk;
+#include <jni.h>
+#include <gtk/gtk.h>
+#include "include/org_java_gtk_gdk_RGBA.h"
 
-import java.util.EnumSet;
+/*
+ * Class:     org_java_gtk_gdk_RGBA
+ * Method:    gdk_rgba_new
+ * Signature: (DDDD)J
+ */
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gdk_RGBA_gdk_1rgba_1new
+  (JNIEnv *env, jclass cls, jdouble red, jdouble green, jdouble blue, jdouble alpha)
+{
+	GdkRGBA color = {
+			.red = (gdouble)red,
+			.green = (gdouble)green,
+			.blue = (gdouble)blue,
+			.alpha = (gdouble)alpha
+	};
 
-public class EventMaskHelper {
-
-	public static int getValue(EnumSet<EventMasks> mask) {
-		int value = 0;
-		for (EventMasks masks: mask) {
-			value |= masks.getValue();
-		}
-		return value;
-	}
-	
-	public static EnumSet<EventMasks> getMask(int value) {
-		EnumSet<EventMasks> mask = EnumSet.noneOf(EventMasks.class);
-		for (EventMasks masks: EventMasks.values()) {
-			if ((value & masks.getValue()) > 0)
-				mask.add(masks);
-		}
-		return mask;
-	}
-	
+	return (jlong)gdk_rgba_copy(&color);
 }

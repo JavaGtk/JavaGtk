@@ -18,6 +18,14 @@
 
 package org.java_gtk.gdk;
 
+import java.util.EnumSet;
+
+/**
+ * A set of bit-flags to indicate which events a window is to receive.
+ * 
+ * @author Bill
+ *
+ */
 public enum EventMasks {
 	EXPOSURE_MASK            (1 << 1),
 	POINTER_MOTION_MASK      (1 << 2),
@@ -53,4 +61,22 @@ public enum EventMasks {
 	public int getValue() {
 		return value;
 	}
+	
+	public static int getValue(EnumSet<EventMasks> masks) {
+		int value = 0;
+		for (EventMasks mask: masks) {
+			value |= mask.getValue();
+		}
+		return value;
+	}
+	
+	public static EnumSet<EventMasks> getMask(int value) {
+		EnumSet<EventMasks> mask = EnumSet.noneOf(EventMasks.class);
+		for (EventMasks masks: EventMasks.values()) {
+			if ((value & masks.getValue()) > 0)
+				mask.add(masks);
+		}
+		return mask;
+	}
+
 }
