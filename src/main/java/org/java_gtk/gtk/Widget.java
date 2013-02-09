@@ -41,9 +41,13 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_show_all(long widgetPointer);
 	private static native final void gtk_widget_destroy(long widgetPointer);
 	private static native final void gtk_widget_add_delete_event_handler(long widgetPointer, DeleteEventHandler handler, Widget receiver);
+	private static native final void gtk_widget_remove_delete_event_handler(long widgetPointer, long handler_id);
 	private static native final void gtk_widget_add_configure_event_handler(long widgetPointer, ConfigureEventHandler handler, Widget receiver);
+	private static native final void gtk_widget_remove_configure_event_handler(long widgetPointer, long handler_id);
 	private static native final void gtk_widget_add_destroy_handler(long widgetPointer, DestroyHandler handler, Widget receiver);
+	private static native final void gtk_widget_remove_destroy_handler(long widgetPointer, long handler_id);
 	private static native final void gtk_widget_add_enter_event_handler(long widgetPointer, EnterEventHandler handler, Widget receiver);
+	private static native final void gtk_widget_remove_enter_event_handler(long widgetPointer, long handler_id);
 	private static native final void gtk_widget_set_size_request(long widgetPointer, int width, int height);
 	private static native final void gtk_widget_set_accel_path(long widgetPointer, String path, long accelgroupPointer);
 	private static native final void gtk_widget_show(long widgetPointer);
@@ -170,6 +174,21 @@ public abstract class Widget extends GObject {
 	}
 
 	/**
+	 * Removes the specified handler for delete events from this Widget.  
+	 * 
+	 * @param handler the handler to be removed
+	 */
+	public void removeDeleteHandler(DeleteEventHandler handler) {
+		lock.lock();
+		try {
+			gtk_widget_remove_delete_event_handler(this.pointer, handler.getHandleId());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
 	 * The listener interface for receiving delete events.
 	 */
 	public static abstract class DeleteEventHandler extends Handler {
@@ -197,6 +216,21 @@ public abstract class Widget extends GObject {
 		lock.lock();
 		try {
 			gtk_widget_add_destroy_handler(this.pointer, handler, this);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Removes the specified handler for destroy events from this Widget.  
+	 * 
+	 * @param handler the handler to be removed
+	 */
+	public void removeDestroyHandler(DestroyHandler handler) {
+		lock.lock();
+		try {
+			gtk_widget_remove_destroy_handler(this.pointer, handler.getHandleId());
 		}
 		finally {
 			lock.unlock();
@@ -236,6 +270,21 @@ public abstract class Widget extends GObject {
 	}
 
 	/**
+	 * Removes the specified handler for delete events from this Widget.  
+	 * 
+	 * @param handler the handler to be removed
+	 */
+	public void removeConfigureHandler(ConfigureEventHandler handler) {
+		lock.lock();
+		try {
+			gtk_widget_remove_configure_event_handler(this.pointer, handler.getHandleId());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
 	 * The listener for receiving configure events.
 	 */
 	public static abstract class ConfigureEventHandler extends Handler {
@@ -263,6 +312,21 @@ public abstract class Widget extends GObject {
 		lock.lock();
 		try {
 			gtk_widget_add_enter_event_handler(this.pointer, handler, this);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Removes the specified handler for enter events from this Widget.  
+	 * 
+	 * @param handler the handler to be removed
+	 */
+	public void removeEnterHandler(EnterEventHandler handler) {
+		lock.lock();
+		try {
+			gtk_widget_remove_enter_event_handler(this.pointer, handler.getHandleId());
 		}
 		finally {
 			lock.unlock();

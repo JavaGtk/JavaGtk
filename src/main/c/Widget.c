@@ -65,6 +65,18 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1delete_1e
 	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
 }
 
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_remove_delete_event_handler
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1remove_1delete_1event_1handler
+  (JNIEnv *env, jclass cls, jlong instance, jlong handler_id)
+{
+	g_signal_handler_disconnect((gpointer)instance, (gulong)handler_id);
+}
+
+
 void widget_destroy_handler(GtkWidget *widget, gpointer data) {
 	callback *c = data;
 	callback_start(c);
@@ -89,6 +101,17 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1
 
 /*
  * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_remove_destroy_handler
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1remove_1destroy_1handler
+  (JNIEnv *env, jclass cls, jlong instance, jlong handler_id)
+{
+	g_signal_handler_disconnect((gpointer)instance, (gulong)handler_id);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
  * Method:    gtk_widget_add_configure_event_handler
  * Signature: (JLorg/java_gtk/gtk/Widget/ConfigureEventHandler;Lorg/java_gtk/gtk/Widget;)V
  */
@@ -104,6 +127,18 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1configure
 
 /*
  * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_remove_configure_event_handler
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1remove_1configure_1event_1handler
+  (JNIEnv *env, jclass cls, jlong instance, jlong handler_id)
+{
+	g_signal_handler_disconnect((gpointer)instance, (gulong)handler_id);
+}
+
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
  * Method:    gtk_widget_add_enter_event_handler
  * Signature: (JLorg/java_gtk/gtk/Widget/EnterEventHandler;Lorg/java_gtk/gtk/Widget;)V
  */
@@ -116,6 +151,18 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1enter_1ev
 	handle_id = connect_callback((gpointer)instance, "enter-notify-event", G_CALLBACK(widget_event_handler), c);
 	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_remove_enter_event_handler
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1remove_1enter_1event_1handler
+  (JNIEnv *env, jclass cls, jlong instance, jlong handler_id)
+{
+	g_signal_handler_disconnect((gpointer)instance, (gulong)handler_id);
+}
+
 
 /*
  * Class:     org_java_gtk_gtk_Widget

@@ -151,3 +151,15 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1add_1act
 	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
 }
 
+/*
+ * Class:     org_java_gtk_gtk_MenuItem
+ * Method:    gtk_menu_item_remove_activated_event_handler
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1remove_1activated_1event_1handler
+  (JNIEnv *env, jclass cls, jlong instance, jlong handler_id)
+{
+	g_signal_handler_disconnect((gpointer)instance, (gulong)handler_id);
+}
+
+

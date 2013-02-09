@@ -33,11 +33,27 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1delete_1e
 
 /*
  * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_remove_delete_event_handler
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1remove_1delete_1event_1handler
+  (JNIEnv *, jclass, jlong, jlong);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
  * Method:    gtk_widget_add_configure_event_handler
  * Signature: (JLorg/java_gtk/gtk/Widget/ConfigureEventHandler;Lorg/java_gtk/gtk/Widget;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1configure_1event_1handler
   (JNIEnv *, jclass, jlong, jobject, jobject);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_remove_configure_event_handler
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1remove_1configure_1event_1handler
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     org_java_gtk_gtk_Widget
@@ -49,11 +65,27 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1
 
 /*
  * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_remove_destroy_handler
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1remove_1destroy_1handler
+  (JNIEnv *, jclass, jlong, jlong);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
  * Method:    gtk_widget_add_enter_event_handler
  * Signature: (JLorg/java_gtk/gtk/Widget/EnterEventHandler;Lorg/java_gtk/gtk/Widget;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1enter_1event_1handler
   (JNIEnv *, jclass, jlong, jobject, jobject);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_remove_enter_event_handler
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1remove_1enter_1event_1handler
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     org_java_gtk_gtk_Widget
