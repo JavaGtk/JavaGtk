@@ -90,7 +90,7 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_CheckMenuItem_gtk_1check_1menu_1it
 JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_CheckMenuItem_gtk_1check_1menu_1item_1get_1active
   (JNIEnv *env, jclass cls, jlong check_menu_item)
 {
-	gboolean resizable;
-	resizable = gtk_check_menu_item_get_active((GtkCheckMenuItem*)check_menu_item);
-	return (jboolean)resizable;
+	gboolean active;
+	active = gtk_check_menu_item_get_active((GtkCheckMenuItem*)check_menu_item);
+	return (jboolean)active;
 }

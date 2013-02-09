@@ -53,8 +53,14 @@ callback* create_callback(JNIEnv *env, jobject handler, jobject receiver, const 
 	return c;
 }
 
-void connect_callback(gpointer instance, const gchar *signal, GCallback handler, callback* c) {
-	g_signal_connect_data(instance, signal, handler, c, (GClosureNotify)free_callback, 0);
+gulong connect_callback(gpointer instance, const gchar *signal, GCallback handler, callback* c) {
+	return g_signal_connect_data(instance, signal, handler, c, (GClosureNotify)free_callback, 0);
+}
+
+void update_handle(JNIEnv *env, jobject handler, const char *name, const char *sig, int handle) {
+	jclass handler_cls = (*env)->GetObjectClass(env, handler);
+	jmethodID id = (*env)->GetMethodID(env, handler_cls, name, sig);
+	(*env)->CallVoidMethod(env, handler, id, handle);
 }
 
 void callback_start(callback *c) {

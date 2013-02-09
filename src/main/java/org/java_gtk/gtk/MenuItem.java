@@ -18,6 +18,7 @@
 
 package org.java_gtk.gtk;
 
+import org.java_gtk.gobject.Handler;
 import org.java_gtk.util.ObjectCache;
 
 /**
@@ -179,14 +180,18 @@ public class MenuItem extends Bin {
 	}
 
 	/**
-	 * The listener interface for receiving activated events.
+	 * The listener for receiving activated events.
 	 */
-	public interface ActivatedEventHandler {
-		boolean handle(MenuItem source);
+	public static abstract class ActivatedEventHandler extends Handler {
+		/**
+		 * 
+		 * @param source the object which received the event
+		 */
+		public abstract void handle(MenuItem source);
 	}
 	
-	static boolean activatedEventReceiver(ActivatedEventHandler handler, long sourcePointer) {
-		return handler.handle((MenuItem)ObjectCache.lookup(sourcePointer));
+	static void activatedEventReceiver(ActivatedEventHandler handler, long sourcePointer) {
+		handler.handle((MenuItem)ObjectCache.lookup(sourcePointer));
 	}
 
 }

@@ -34,7 +34,9 @@ typedef struct callback_tag {
 
 callback* create_callback(JNIEnv *, jobject, jobject, const char *, const char *);
 
-void connect_callback(gpointer, const gchar *, GCallback, callback *);
+gulong connect_callback(gpointer, const gchar *, GCallback, callback *);
+
+void update_handle(JNIEnv *, jobject, const char *, const char *, int);
 
 void callback_start(callback*);
 

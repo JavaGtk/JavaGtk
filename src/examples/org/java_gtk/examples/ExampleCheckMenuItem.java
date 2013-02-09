@@ -54,12 +54,11 @@ public class ExampleCheckMenuItem extends ExampleBase {
 		box.packEnd(statusbar, false, true, 1);
 		
 		tog_stat.addActivatedHandler(new MenuItem.ActivatedEventHandler () {
-			public boolean handle(MenuItem source) {
+			public void handle(MenuItem source) {
 				if (((CheckMenuItem)source).isActive())
 					statusbar.show();
 				else 
 					statusbar.hide();
-				return false;
 			}
 		});
 		

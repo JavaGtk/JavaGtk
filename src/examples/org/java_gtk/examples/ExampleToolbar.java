@@ -62,9 +62,8 @@ public class ExampleToolbar extends ExampleBase {
 		box.packStart(toolbar, false, false, 5);
 		
 		quit.addClickedHandler(new ClickedEventHandler() {
-			public boolean handle(ToolButton source) {
+			public void handle(ToolButton source) {
 				Gtk.mainQuit();
-				return false;
 			}			
 		});
 	}

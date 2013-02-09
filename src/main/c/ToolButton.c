@@ -60,7 +60,7 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_ToolButton_gtk_1tool_1button_1new
 void tool_button_clicked_event_handler(GtkWidget *widget, gpointer data) {
 	callback *c = data;
 	callback_start(c);
-	(*c->env)->CallStaticBooleanMethod(c->env, c->receiver, c->id, c->handler, widget);
+	(*c->env)->CallStaticVoidMethod(c->env, c->receiver, c->id, c->handler, widget);
 	callback_end(c);
 }
 
@@ -73,7 +73,8 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_ToolButton_gtk_1tool_1button_1add_
   (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
 {
 	callback *c;
-	c = create_callback(env, handler, receiver, "clickedEventReceiver", "(Lorg/java_gtk/gtk/ToolButton$ClickedEventHandler;J)Z");
-	connect_callback((gpointer)instance, "clicked", G_CALLBACK(tool_button_clicked_event_handler), c);
-
+	long handle_id;
+	c = create_callback(env, handler, receiver, "clickedEventReceiver", "(Lorg/java_gtk/gtk/ToolButton$ClickedEventHandler;J)V");
+	handle_id = connect_callback((gpointer)instance, "clicked", G_CALLBACK(tool_button_clicked_event_handler), c);
+	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
 }

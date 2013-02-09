@@ -18,6 +18,7 @@
 
 package org.java_gtk.gtk;
 
+import org.java_gtk.gobject.Handler;
 import org.java_gtk.util.ObjectCache;
 
 /**
@@ -30,6 +31,8 @@ public class Button extends Bin {
 
 	private static native final long gtk_button_new();
 	private static native final long gtk_button_new_with_label(String label);
+	private static native final long gtk_button_new_with_mnemonic(String label);
+	private static native final long gtk_button_new_from_stock(String stock_id);
 	private static native final void gtk_button_add_clicked_event_handler(long widgetPointer, ClickedEventHandler handler, Button receiver);
 	private static native final String gtk_button_get_label(long buttonPointer);
 	private static native final void gtk_button_set_label(long buttonPointer, String label);
@@ -56,24 +59,58 @@ public class Button extends Bin {
 	}
 	
 	/**
-	 * Constructs a Button widget with a Label child containing the given text.
+	 * Constructs a new Button whose child is a Label
 	 * 
-	 * @param label The text you want the Label to hold.
+	 * @param label the text of the label.
 	 */
 	public Button(String label) {
-		this(newButtonWithLabel(label));
+		this(label, false);
 	}
 	
-	private static long newButtonWithLabel(String label) {
+	/**
+	 * Constructs a new Button whose child is a Label
+	 * 
+	 * @param label the text of the label, optionally with an underscore in front of the 
+	 * mnemonic character
+	 * @param hasMnenomic if <code>true</code> then the label will be created with mnemonics, 
+	 * so underscores in label indicate the mnemonic for the button.
+	 */
+	public Button(String label, boolean hasMnemonic) {
+		this(newButton(label, hasMnemonic));
+	}
+	
+	private static long newButton(String label, boolean hasMnemonic) {
 		lock.lock();
 		try {
-			return gtk_button_new_with_label(label);
+			if (hasMnemonic)
+				return gtk_button_new_with_mnemonic(label);
+			else
+				return gtk_button_new_with_label(label);
 		}
 		finally {
 			lock.unlock();
 		}
 	}
 	
+	/**
+	 * Constructs a new Button containing the image and text from a stock item.
+	 * 
+	 * @param stockItem the stock item.
+	 */
+	public Button(StockItems stockItem) {
+		super(newButtonFromStock(stockItem));
+	}
+	
+	private static long newButtonFromStock(StockItems stockItem) {
+		lock.lock();
+		try {
+			return gtk_button_new_from_stock(stockItem.getValue());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
 	/**
 	 * Adds the specified handler to receive clicked events from this Button.  
 	 * The clicked event is fired when the Button has been activated (pressed 
@@ -92,14 +129,18 @@ public class Button extends Bin {
 	}
 
 	/**
-	 * The listener interface for receiving clicked events.
+	 * The listener for receiving clicked events.
 	 */
-	public interface ClickedEventHandler {
-		boolean handle(Button source);
+	public static abstract class ClickedEventHandler extends Handler {
+		/**
+		 * 
+		 * @param source the object which received the event
+		 */
+		public abstract void handle(Button source);
 	}
 	
-	static boolean clickedEventReceiver(ClickedEventHandler handler, long sourcePointer) {
-		return handler.handle((Button)ObjectCache.lookup(sourcePointer));
+	static void clickedEventReceiver(ClickedEventHandler handler, long sourcePointer) {
+		handler.handle((Button)ObjectCache.lookup(sourcePointer));
 	}
 	
 	/**

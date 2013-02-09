@@ -37,18 +37,16 @@ public class ExampleButtons extends ExampleBase {
 		
 		Button b1 = new Button("This is a button.\nClick me to close.");
 		b1.addClickedHandler(new Button.ClickedEventHandler() {
-			public boolean handle(Button source) {
+			public void handle(Button source) {
 				Gtk.mainQuit();
-				return false;
 			}
 		});
 		box.packStart(b1, true, true, 0);
 		
 		Button b2 = new Button("This is another button.\nClick me to see something special.");
 		b2.addClickedHandler(new Button.ClickedEventHandler() {
-			public boolean handle(Button source) {
+			public void handle(Button source) {
 				source.setLabel("You clicked me!!\nThat was special.");
-				return false;
 			}
 		});
 		box.packEnd(b2, true, true, 0);

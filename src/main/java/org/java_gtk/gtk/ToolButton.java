@@ -18,6 +18,7 @@
 
 package org.java_gtk.gtk;
 
+import org.java_gtk.gobject.Handler;
 import org.java_gtk.util.ObjectCache;
 
 /**
@@ -93,14 +94,18 @@ public class ToolButton extends ToolItem {
 	}
 
 	/**
-	 * The listener interface for receiving clicked events.
+	 * The listener for receiving clicked events.
 	 */
-	public interface ClickedEventHandler {
-		boolean handle(ToolButton source);
+	public static abstract class ClickedEventHandler extends Handler {
+		/**
+		 * 
+		 * @param source the object which received the event
+		 */
+		public abstract void handle(ToolButton source);
 	}
 	
-	static boolean clickedEventReceiver(ClickedEventHandler handler, long sourcePointer) {
-		return handler.handle((ToolButton)ObjectCache.lookup(sourcePointer));
+	static void clickedEventReceiver(ClickedEventHandler handler, long sourcePointer) {
+		handler.handle((ToolButton)ObjectCache.lookup(sourcePointer));
 	}
 
 }

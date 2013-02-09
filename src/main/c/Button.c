@@ -48,10 +48,45 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1with_1la
 	return (jlong)widget;
 }
 
+/*
+ * Class:     org_java_gtk_gtk_Button
+ * Method:    gtk_button_new_with_mnemonic
+ * Signature: (Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1with_1mnemonic
+  (JNIEnv *env, jclass cls, jstring label)
+{
+	const char* strLabel;
+
+	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	GtkWidget* widget = gtk_button_new_with_mnemonic((gchar*)strLabel);
+	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	return (jlong)widget;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Button
+ * Method:    gtk_button_new_from_stock
+ * Signature: (Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1from_1stock
+  (JNIEnv *env, jclass cls, jstring stock_id)
+{
+	const char* strStockId;
+	GtkWidget* widget;
+
+	strStockId = (*env)->GetStringUTFChars(env, stock_id, NULL);
+	widget = gtk_button_new_from_stock(strStockId);
+	(*env)->ReleaseStringUTFChars(env, stock_id, strStockId);
+
+	return (jlong)widget;
+}
+
+
 void button_clicked_event_handler(GtkWidget *widget, gpointer data) {
 	callback *c = data;
 	callback_start(c);
-	(*c->env)->CallStaticBooleanMethod(c->env, c->receiver, c->id, c->handler, widget);
+	(*c->env)->CallStaticVoidMethod(c->env, c->receiver, c->id, c->handler, widget);
 	callback_end(c);
 }
 
@@ -64,8 +99,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1add_1clicked_1
   (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
 {
 	callback *c;
-	c = create_callback(env, handler, receiver, "clickedEventReceiver", "(Lorg/java_gtk/gtk/Button$ClickedEventHandler;J)Z");
-	connect_callback((gpointer)instance, "clicked", G_CALLBACK(button_clicked_event_handler), c);
+	long handle_id;
+	c = create_callback(env, handler, receiver, "clickedEventReceiver", "(Lorg/java_gtk/gtk/Button$ClickedEventHandler;J)V");
+	handle_id = (long)connect_callback((gpointer)instance, "clicked", G_CALLBACK(button_clicked_event_handler), c);
+	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
 }
 
 /*

@@ -49,9 +49,8 @@ public class App
 		
 		Button b = new Button("Testing");
 		b.addClickedHandler(new Button.ClickedEventHandler() {
-			public boolean handle(Button source) {
+			public void handle(Button source) {
 				Gtk.mainQuit();
-				return false;
 			}
 		});
 		mainWin.add(b);

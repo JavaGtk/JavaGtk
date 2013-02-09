@@ -132,7 +132,7 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1get_1su
 void menu_item_activated_event_handler(GtkWidget *widget, gpointer data) {
 	callback *c = data;
 	callback_start(c);
-	(*c->env)->CallStaticBooleanMethod(c->env, c->receiver, c->id, c->handler, widget);
+	(*c->env)->CallStaticVoidMethod(c->env, c->receiver, c->id, c->handler, widget);
 	callback_end(c);
 }
 
@@ -145,7 +145,9 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1add_1act
   (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
 {
 	callback *c;
-	c = create_callback(env, handler, receiver, "activatedEventReceiver", "(Lorg/java_gtk/gtk/MenuItem$ActivatedEventHandler;J)Z");
-	connect_callback((gpointer)instance, "activate", G_CALLBACK(menu_item_activated_event_handler), c);
+	long handle_id;
+	c = create_callback(env, handler, receiver, "activatedEventReceiver", "(Lorg/java_gtk/gtk/MenuItem$ActivatedEventHandler;J)V");
+	handle_id = connect_callback((gpointer)instance, "activate", G_CALLBACK(menu_item_activated_event_handler), c);
+	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
 }
 

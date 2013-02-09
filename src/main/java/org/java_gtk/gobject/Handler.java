@@ -16,29 +16,22 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.examples;
+package org.java_gtk.gobject;
 
-import org.java_gtk.gtk.Button;
-import org.java_gtk.gtk.Gtk;
+/**
+ * Base class for all event handlers
+ * 
+ * @author Bill
+ *
+ */
+public abstract class Handler {
+	private long handleId = 0;
 
-public class ExampleButton extends ExampleBase {
-
-	public static void main(String[] args) {
-		new ExampleButton().runExample(args, "Button Example", 250, 100, 10);
+	public void setHandleId(long handleId) {
+		this.handleId = handleId;
 	}
-
-	@Override
-	protected void setupExample() {
-		
-		Button b = new Button("This is a button.\nClick me to close.");
-		Button.ClickedEventHandler h = new Button.ClickedEventHandler() {
-			public void handle(Button source) {
-				Gtk.mainQuit();
-			}
-		};
-		
-		b.addClickedHandler(h);
-		mainWin.add(b);
+	
+	public long getHandleId() {
+		return handleId;
 	}
-
 }

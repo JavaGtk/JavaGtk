@@ -59,8 +59,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1delete_1e
   (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
 {
 	callback *c;
+	long handle_id;
 	c = create_callback(env, handler, receiver, "deleteEventReceiver", "(Lorg/java_gtk/gtk/Widget$DeleteEventHandler;JJ)Z");
-	connect_callback((gpointer)instance, "delete-event", G_CALLBACK(widget_event_handler), c);
+	handle_id = connect_callback((gpointer)instance, "delete-event", G_CALLBACK(widget_event_handler), c);
+	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
 }
 
 void widget_destroy_handler(GtkWidget *widget, gpointer data) {
@@ -79,8 +81,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1
   (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
 {
 	callback *c;
+	long handle_id;
 	c = create_callback(env, handler, receiver, "destroyReceiver", "(Lorg/java_gtk/gtk/Widget$DestroyHandler;J)V");
-	connect_callback((gpointer)instance, "destroy", G_CALLBACK(widget_destroy_handler), c);
+	handle_id = connect_callback((gpointer)instance, "destroy", G_CALLBACK(widget_destroy_handler), c);
+	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
 }
 
 /*
@@ -92,8 +96,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1configure
   (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
 {
 	callback *c;
+	long handle_id;
 	c = create_callback(env, handler, receiver, "configureEventReceiver", "(Lorg/java_gtk/gtk/Widget$ConfigureEventHandler;JJ)Z");
-	connect_callback((gpointer)instance, "configure-event", G_CALLBACK(widget_event_handler), c);
+	handle_id = connect_callback((gpointer)instance, "configure-event", G_CALLBACK(widget_event_handler), c);
+	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
 }
 
 /*
@@ -105,8 +111,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1enter_1ev
   (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
 {
 	callback *c;
+	long handle_id;
 	c = create_callback(env, handler, receiver, "enterEventReceiver", "(Lorg/java_gtk/gtk/Widget$EnterEventHandler;JJ)Z");
-	connect_callback((gpointer)instance, "enter-notify-event", G_CALLBACK(widget_event_handler), c);
+	handle_id = connect_callback((gpointer)instance, "enter-notify-event", G_CALLBACK(widget_event_handler), c);
+	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
 }
 
 /*

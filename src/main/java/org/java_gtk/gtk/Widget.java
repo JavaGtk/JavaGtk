@@ -27,6 +27,7 @@ import org.java_gtk.gdk.EventCrossing;
 import org.java_gtk.gdk.EventMasks;
 import org.java_gtk.gdk.RGBA;
 import org.java_gtk.gobject.GObject;
+import org.java_gtk.gobject.Handler;
 import org.java_gtk.util.ObjectCache;
 
 /**
@@ -171,8 +172,15 @@ public abstract class Widget extends GObject {
 	/**
 	 * The listener interface for receiving delete events.
 	 */
-	public interface DeleteEventHandler {
-        boolean handle(Widget source, Event event);
+	public static abstract class DeleteEventHandler extends Handler {
+		/**
+		 * 
+		 * @param source the object which received the event
+		 * @param event the {@code Event} which fired the event
+		 * @return {@code true} to stop other handlers from being invoked 
+		 *         for the event. {@code false} to propagate the event further.
+		 */
+		public abstract boolean handle(Widget source, Event event);
     }
 	
 	static boolean deleteEventReceiver(DeleteEventHandler handler, long sourcePointer, long eventPointer) {
@@ -198,8 +206,12 @@ public abstract class Widget extends GObject {
 	/**
 	 * The listener interface for receiving destroy events.
 	 */
-	public interface DestroyHandler {
-        boolean handle(Widget source);
+	public static abstract class DestroyHandler extends Handler {
+		/**
+		 * 
+		 * @param source the object which received the event
+		 */
+		public abstract void handle(Widget source);
     }
 
 	static void destroyReceiver(DestroyHandler handler, long sourcePointer) {
@@ -224,10 +236,17 @@ public abstract class Widget extends GObject {
 	}
 
 	/**
-	 * The listener interface for receiving delete events.
+	 * The listener for receiving configure events.
 	 */
-	public interface ConfigureEventHandler {
-        boolean handle(Widget source, EventConfigure event);
+	public static abstract class ConfigureEventHandler extends Handler {
+		/**
+		 * 
+		 * @param source the object which received the event
+		 * @param event the {@code EventConfigure} which fired the event
+		 * @return {@code true} to stop other handlers from being invoked 
+		 *         for the event. {@code false} to propagate the event further.
+		 */
+		public abstract boolean handle(Widget source, EventConfigure event);
     }
 	
 	static boolean configureEventReceiver(ConfigureEventHandler handler, long sourcePointer, long eventPointer) {
@@ -251,9 +270,9 @@ public abstract class Widget extends GObject {
 	}
 
 	/**
-	 * The listener interface for receiving enter events.
+	 * The listener for receiving enter events.
 	 */
-	public interface EnterEventHandler {
+	public static abstract class EnterEventHandler extends Handler {
 		/**
 		 * 
 		 * @param source the object which received the event
@@ -261,9 +280,9 @@ public abstract class Widget extends GObject {
 		 * @return {@code true} to stop other handlers from being invoked 
 		 *         for the event. {@code false} to propagate the event further.
 		 */
-        boolean handle(Widget source, EventCrossing event);
+		public abstract boolean handle(Widget source, EventCrossing event);
     }
-	
+
 	static boolean enterEventReceiver(EnterEventHandler handler, long sourcePointer, long eventPointer) {
 		return handler.handle((Widget)ObjectCache.lookup(sourcePointer), new EventCrossing(eventPointer));
 	}

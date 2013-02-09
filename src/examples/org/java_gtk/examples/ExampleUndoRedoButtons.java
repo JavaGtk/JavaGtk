@@ -60,23 +60,20 @@ public class ExampleUndoRedoButtons extends ExampleBase {
 		box.packStart(toolbar, false, false, 5);
 		
 		undo.addClickedHandler(new ClickedEventHandler() {
-			public boolean handle(ToolButton source) {
+			public void handle(ToolButton source) {
 				handleUndoRedo(source, redo);
-				return false;
 			}
 		});
 		
 		redo.addClickedHandler(new ClickedEventHandler() {
-			public boolean handle(ToolButton source) {
+			public void handle(ToolButton source) {
 				handleUndoRedo(source, undo);
-				return false;
 			}
 		});
 
 		quit.addClickedHandler(new ClickedEventHandler() {
-			public boolean handle(ToolButton source) {
+			public void handle(ToolButton source) {
 				Gtk.mainQuit();
-				return false;
 			}
 		});
 

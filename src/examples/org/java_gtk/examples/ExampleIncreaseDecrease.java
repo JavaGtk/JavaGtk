@@ -41,10 +41,9 @@ public class ExampleIncreaseDecrease extends ExampleBase {
 		Button plus = new Button("+");
 		plus.setMinimumSize(80, 35);
 		plus.addClickedHandler(new Button.ClickedEventHandler() {
-			public boolean handle(Button source) {
+			public void handle(Button source) {
 				count++;
 				label.setText(Integer.toString(count));
-				return false;
 			}
 		});
 		frame.add(plus, 50, 20);
@@ -52,10 +51,9 @@ public class ExampleIncreaseDecrease extends ExampleBase {
 		Button minus = new Button("-");
 		minus.setMinimumSize(80, 35);
 		minus.addClickedHandler(new Button.ClickedEventHandler() {
-			public boolean handle(Button source) {
+			public void handle(Button source) {
 				count--;
 				label.setText(Integer.toString(count));
-				return false;
 			}
 		});
 		frame.add(minus, 50, 80);

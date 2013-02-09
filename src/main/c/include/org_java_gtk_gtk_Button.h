@@ -25,6 +25,22 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1with_1la
 
 /*
  * Class:     org_java_gtk_gtk_Button
+ * Method:    gtk_button_new_with_mnemonic
+ * Signature: (Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1with_1mnemonic
+  (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     org_java_gtk_gtk_Button
+ * Method:    gtk_button_new_from_stock
+ * Signature: (Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1from_1stock
+  (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     org_java_gtk_gtk_Button
  * Method:    gtk_button_add_clicked_event_handler
  * Signature: (JLorg/java_gtk/gtk/Button/ClickedEventHandler;Lorg/java_gtk/gtk/Button;)V
  */

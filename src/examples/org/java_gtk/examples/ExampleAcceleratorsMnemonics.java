@@ -69,9 +69,8 @@ public class ExampleAcceleratorsMnemonics extends ExampleBase {
 		box.packStart(menuBar, false, false, 3);
 		
 		quit.addActivatedHandler(new MenuItem.ActivatedEventHandler () {
-			public boolean handle(MenuItem source) {
+			public void handle(MenuItem source) {
 				Gtk.mainQuit();
-				return false;
 			}	
 		});
 		
