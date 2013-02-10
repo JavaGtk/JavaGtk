@@ -78,14 +78,3 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_ToolButton_gtk_1tool_1button_1add_
 	handle_id = connect_callback((gpointer)instance, "clicked", G_CALLBACK(tool_button_clicked_event_handler), c);
 	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
 }
-
-/*
- * Class:     org_java_gtk_gtk_ToolButton
- * Method:    gtk_tool_button_remove_clicked_event_handler
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_ToolButton_gtk_1tool_1button_1remove_1clicked_1event_1handler
-  (JNIEnv *env, jclass cls, jlong instance, jlong handler_id)
-{
-	g_signal_handler_disconnect((gpointer)instance, (gulong)handler_id);
-}

@@ -107,17 +107,6 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1add_1clicked_1
 
 /*
  * Class:     org_java_gtk_gtk_Button
- * Method:    gtk_button_remove_clicked_event_handler
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1remove_1clicked_1event_1handler
-  (JNIEnv *env, jclass cls, jlong instance, jlong handler_id)
-{
-	g_signal_handler_disconnect((gpointer)instance, (gulong)handler_id);
-}
-
-/*
- * Class:     org_java_gtk_gtk_Button
  * Method:    gtk_button_get_label
  * Signature: (J)Ljava/lang/String;
  */

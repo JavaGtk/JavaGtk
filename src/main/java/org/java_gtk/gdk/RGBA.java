@@ -22,7 +22,7 @@ import org.java_gtk.gobject.GObject;
 
 /**
  * RGBA is used to represent a (possibly translucent) color, 
- * in a way that is compatible with cairos notion of color.
+ * in a way that is compatible with cairo's notion of color.
  *  
  * @author Bill
  *

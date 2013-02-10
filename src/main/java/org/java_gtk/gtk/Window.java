@@ -38,6 +38,8 @@ public class Window extends Bin {
 	private static native final void gtk_window_set_position(long windowPointer, int position);
 	private static native final void gtk_window_add_accel_group(long windowPointer, long accelgroupPointer);
 	private static native final void gtk_window_set_icon(long windowPointer, long pixbufPointer);
+	private static native final void gtk_window_set_decorated(long windowPointer, boolean decorated);
+	private static native final void gtk_window_begin_move_drag(long windowPointer, int button, int x, int y, long timestamp);
 	
 	public enum WindowType {
 		TOPLEVEL(0),
@@ -224,4 +226,36 @@ public class Window extends Bin {
 		}
 	}
 	
+	/**
+	 * Controls visibility of window title bar, resize controls, etc.
+	 * 
+	 * @param decorated {@code true} to decorate the window
+	 */
+	public void setDecorated(boolean decorated) {
+		lock.lock();
+		try {
+			gtk_window_set_decorated(pointer, decorated);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	/**
+	 * Starts moving a window.
+	 * 
+	 * @param button mouse button that initiated the drag
+	 * @param x X position where the user clicked to initiate the drag, in root window coordinates
+	 * @param y Y position where the user clicked to initiate the drag
+	 * @param timestamp timestamp from the click event that initiated the drag
+	 */
+	public void beginMoveDrag(int button, int x, int y, long timestamp) {
+		lock.lock();
+		try {
+			gtk_window_begin_move_drag(pointer, button, x, y, timestamp);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
 }

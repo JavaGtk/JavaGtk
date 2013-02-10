@@ -16,32 +16,17 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.gdk;
+#include <jni.h>
+#include <gtk/gtk.h>
+#include "include/org_java_gtk_gdk_Event.h"
 
-import org.java_gtk.gobject.GObject;
-
-/**
- * Base class for all events.
- * 
- * @author Bill Hull
- *
+/*
+ * Class:     org_java_gtk_gdk_Event
+ * Method:    gtk_event_get_type
+ * Signature: (J)I
  */
-public class Event extends GObject {
-
-	private static native final int gtk_event_get_type(long eventPointer);
-
-	public Event(long pointer) {
-		super(pointer);
-	}
-	
-	public EventType getEventType() {
-		lock.lock();
-		try {
-			return EventType.lookup(gtk_event_get_type(pointer));
-		}
-		finally {
-			lock.unlock();
-		}		
-	}
-
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gdk_Event_gtk_1event_1get_1type
+  (JNIEnv *env, jclass cls, jlong event)
+{
+	return (jint)((GdkEvent*)event)->type;
 }

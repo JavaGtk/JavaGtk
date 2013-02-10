@@ -22,6 +22,7 @@ import java.util.EnumSet;
 import java.util.TreeMap;
 
 import org.java_gtk.gdk.Event;
+import org.java_gtk.gdk.EventButton;
 import org.java_gtk.gdk.EventConfigure;
 import org.java_gtk.gdk.EventCrossing;
 import org.java_gtk.gdk.EventMasks;
@@ -41,13 +42,10 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_show_all(long widgetPointer);
 	private static native final void gtk_widget_destroy(long widgetPointer);
 	private static native final void gtk_widget_add_delete_event_handler(long widgetPointer, DeleteEventHandler handler, Widget receiver);
-	private static native final void gtk_widget_remove_delete_event_handler(long widgetPointer, long handler_id);
 	private static native final void gtk_widget_add_configure_event_handler(long widgetPointer, ConfigureEventHandler handler, Widget receiver);
-	private static native final void gtk_widget_remove_configure_event_handler(long widgetPointer, long handler_id);
 	private static native final void gtk_widget_add_destroy_handler(long widgetPointer, DestroyHandler handler, Widget receiver);
-	private static native final void gtk_widget_remove_destroy_handler(long widgetPointer, long handler_id);
 	private static native final void gtk_widget_add_enter_event_handler(long widgetPointer, EnterEventHandler handler, Widget receiver);
-	private static native final void gtk_widget_remove_enter_event_handler(long widgetPointer, long handler_id);
+	private static native final void gtk_widget_add_button_press_event_handler(long widgetPointer, ButtonPressEventHandler handler, Widget receiver);
 	private static native final void gtk_widget_set_size_request(long widgetPointer, int width, int height);
 	private static native final void gtk_widget_set_accel_path(long widgetPointer, String path, long accelgroupPointer);
 	private static native final void gtk_widget_show(long widgetPointer);
@@ -74,13 +72,20 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_set_vexpand(long widgetPointer, boolean expand);
 	private static native final int gtk_widget_get_events(long widgetPointer);
 	private static native final void gtk_widget_set_events(long widgetPointer, int events);
+	private static native final void gtk_widget_add_events(long widgetPointer, int events);
 	private static native final void gtk_widget_override_background_color(long widgetPointer, int state, long colorPointer);
 
+	/**
+	 * Controls how a widget deals with extra space in a single (x or y) dimension. 
+	 * 
+	 * @author Bill
+	 *
+	 */
 	public enum Align {
-		FILL(0),
-		START(1),
-		END(2),
-		CENTER(3);
+		FILL(0),   // stretch to fill all space if possible, center if no meaningful way to stretch
+		START(1),  // snap to left or top side, leaving space on right or bottom
+		END(2),    // snap to right or bottom side, leaving space on left or top 
+		CENTER(3); // center natural width of widget inside the allocation 
 		
 		private Align(int value) {
 			this.value = value;
@@ -92,6 +97,7 @@ public abstract class Widget extends GObject {
 			return value;
 		}
 		
+		// cache values in a map for lookups
 		private static TreeMap<Integer, Align> map;
 		
 		static {
@@ -108,17 +114,6 @@ public abstract class Widget extends GObject {
 	
 	protected Widget(long pointer) {
 		super(pointer);
-		
-		// this default destroy handler is used to ensure that objects are removed from the
-		// object cache when they are no longer needed
-//		this.addDestroyHandler(new DestroyHandler() {
-//			@Override
-//			public boolean handle(Widget source) {
-//				source.cleanup();
-//				return true;
-//			}
-//			
-//		});
 	}
 	
 	/**
@@ -179,13 +174,7 @@ public abstract class Widget extends GObject {
 	 * @param handler the handler to be removed
 	 */
 	public void removeDeleteHandler(DeleteEventHandler handler) {
-		lock.lock();
-		try {
-			gtk_widget_remove_delete_event_handler(this.pointer, handler.getHandleId());
-		}
-		finally {
-			lock.unlock();
-		}
+		Gtk.removeHandler(pointer, handler.getHandleId());
 	}
 
 	/**
@@ -228,13 +217,7 @@ public abstract class Widget extends GObject {
 	 * @param handler the handler to be removed
 	 */
 	public void removeDestroyHandler(DestroyHandler handler) {
-		lock.lock();
-		try {
-			gtk_widget_remove_destroy_handler(this.pointer, handler.getHandleId());
-		}
-		finally {
-			lock.unlock();
-		}
+		Gtk.removeHandler(pointer, handler.getHandleId());
 	}
 
 	/**
@@ -275,13 +258,7 @@ public abstract class Widget extends GObject {
 	 * @param handler the handler to be removed
 	 */
 	public void removeConfigureHandler(ConfigureEventHandler handler) {
-		lock.lock();
-		try {
-			gtk_widget_remove_configure_event_handler(this.pointer, handler.getHandleId());
-		}
-		finally {
-			lock.unlock();
-		}
+		Gtk.removeHandler(pointer, handler.getHandleId());
 	}
 
 	/**
@@ -324,13 +301,7 @@ public abstract class Widget extends GObject {
 	 * @param handler the handler to be removed
 	 */
 	public void removeEnterHandler(EnterEventHandler handler) {
-		lock.lock();
-		try {
-			gtk_widget_remove_enter_event_handler(this.pointer, handler.getHandleId());
-		}
-		finally {
-			lock.unlock();
-		}
+		Gtk.removeHandler(pointer, handler.getHandleId());
 	}
 
 	/**
@@ -349,6 +320,49 @@ public abstract class Widget extends GObject {
 
 	static boolean enterEventReceiver(EnterEventHandler handler, long sourcePointer, long eventPointer) {
 		return handler.handle((Widget)ObjectCache.lookup(sourcePointer), new EventCrossing(eventPointer));
+	}
+
+	/**
+	 * Adds the specified handler to receive button press events from this Widget.  
+	 * The enter event is fired when a button (typically from a mouse) is pressed
+	 * 
+	 * @param handler the handler to be added
+	 */
+	public void addButtonPressHandler(ButtonPressEventHandler handler) {
+		lock.lock();
+		try {
+			gtk_widget_add_button_press_event_handler(this.pointer, handler, this);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Removes the specified handler for button press events from this Widget.  
+	 * 
+	 * @param handler the handler to be removed
+	 */
+	public void removeButtonPressHandler(ButtonPressEventHandler handler) {
+		Gtk.removeHandler(pointer, handler.getHandleId());
+	}
+
+	/**
+	 * The listener for receiving button press events.
+	 */
+	public static abstract class ButtonPressEventHandler extends Handler {
+		/**
+		 * 
+		 * @param source the object which received the event
+		 * @param event the {@code EventButton} which fired the event
+		 * @return {@code true} to stop other handlers from being invoked 
+		 *         for the event. {@code false} to propagate the event further.
+		 */
+		public abstract boolean handle(Widget source, EventButton event);
+    }
+
+	static boolean buttonpressEventReceiver(ButtonPressEventHandler handler, long sourcePointer, long eventPointer) {
+		return handler.handle((Widget)ObjectCache.lookup(sourcePointer), new EventButton(eventPointer));
 	}
 
 	/**
@@ -766,6 +780,22 @@ public abstract class Widget extends GObject {
 		}
 	}
 	
+	/**
+	 * Adds the events in the {@code EnumSet mask} to the event mask for widget
+	 * 
+	 * @param mask event mask
+	 */
+	public void addEvents(EnumSet<EventMasks> mask) {
+		int value = EventMasks.getValue(mask);
+		lock.lock();
+		try {
+			gtk_widget_add_events(this.pointer, value);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
 	/**
 	 * Sets the background color for the widget.
 	 * 

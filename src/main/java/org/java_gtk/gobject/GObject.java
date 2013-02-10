@@ -37,7 +37,7 @@ import org.java_gtk.util.ObjectCache;
  */
 public abstract class GObject {
 
-    protected final long pointer;
+	protected final long pointer;
 	
 	protected static final ReentrantLock lock = new ReentrantLock(true);
 	
@@ -45,16 +45,29 @@ public abstract class GObject {
 	 * Create a new GObject with the specified address as its pointer.
 	 * GObjects are cached in {@link org.java_gtk.util.ObjectCache ObjectCache} upon instantiation.
 	 * 
-	 * @param pointer
+	 * @param pointer address of c object
 	 */
 	protected GObject(long pointer) {
+		this(pointer, false);
+	}
+	
+	/**
+	 * Create a new GObject with the specified address as its pointer.
+	 * If the {@code isTransient} parameter is {@code false} the the
+	 * GObject is cached in {@link org.java_gtk.util.ObjectCache ObjectCache} 
+	 * upon instantiation.
+	 * 
+	 * @param pointer address of c object
+	 * @param isTransient {@code true} if object will not be cached
+	 */
+	protected GObject(long pointer, boolean isTransient) {
 		this.pointer = pointer;
-		if (pointer != 0) {
+		if (pointer != 0 && !isTransient) {
 			ObjectCache.cache(this);
 			GtkFinalization.addFinalizer(this);
 		}
 	}
-	
+
 	public long getPointer() {
 		return pointer;
 	}

@@ -63,6 +63,14 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1main_1quit
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_g_1object_1cleanup
   (JNIEnv *, jclass, jlong);
 
+/*
+ * Class:     org_java_gtk_gtk_Gtk
+ * Method:    g_signal_handler_disconnect
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_g_1signal_1handler_1disconnect
+  (JNIEnv *, jclass, jlong, jlong);
+
 #ifdef __cplusplus
 }
 #endif

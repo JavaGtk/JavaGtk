@@ -39,7 +39,6 @@ public class MenuItem extends Bin {
 	private static native final void gtk_menu_item_set_submenu(long menuitemPointer, long widgetPointer);
 	private static native final long gtk_menu_item_get_submenu(long menuitemPointer);
 	private static native final void gtk_menu_item_add_activated_event_handler(long widgetPointer, ActivatedEventHandler handler, MenuItem receiver);
-	private static native final void gtk_menu_item_remove_activated_event_handler(long widgetPointer, long handler_id);
 	
 	protected MenuItem(long pointer) {
 		super(pointer);
@@ -186,13 +185,7 @@ public class MenuItem extends Bin {
 	 * @param handler the handler to be removed.
 	 */
 	public void removeActivatedHandler(ActivatedEventHandler handler) {
-		lock.lock();
-		try {
-			gtk_menu_item_remove_activated_event_handler(this.pointer, handler.getHandleId());
-		}
-		finally {
-			lock.unlock();
-		}
+		Gtk.removeHandler(pointer, handler.getHandleId());
 	}
 
 	/**

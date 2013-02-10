@@ -79,6 +79,22 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1add_1accel_1gr
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1icon
   (JNIEnv *, jclass, jlong, jlong);
 
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_set_decorated
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1decorated
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_begin_move_drag
+ * Signature: (JIIIJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1begin_1move_1drag
+  (JNIEnv *, jclass, jlong, jint, jint, jint, jlong);
+
 #ifdef __cplusplus
 }
 #endif

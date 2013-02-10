@@ -38,7 +38,8 @@ public class Gtk extends GObject {
 	private static native final boolean gtk_events_pending();
 	private static native final void gtk_main_quit();
     private static native final void g_object_cleanup(long objectPointer);
-    	
+	private static native final void g_signal_handler_disconnect(long objectPointer, long handler_id);
+   	
 	static {
 		NativeLibraries.loadLibraries();
 	}
@@ -158,5 +159,20 @@ public class Gtk extends GObject {
 		}
 	}
 
-
+	/**
+	 * Disconnects a handler from an instance so it will not be called during 
+	 * any future or currently ongoing firings of the signal it has been connected to.
+	 * 
+	 * @param pointer pointer to the instance to remove the event handler from.
+	 * @param handlerId Handler id of the handler to be disconnected.
+	 */
+	public static void removeHandler(long pointer, long handlerId) {
+		lock.lock();
+		try {
+			g_signal_handler_disconnect(pointer, handlerId);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
 }

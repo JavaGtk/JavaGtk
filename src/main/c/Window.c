@@ -136,3 +136,24 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1icon
 	gtk_window_set_icon((GtkWindow*)window, (GdkPixbuf*)icon);
 }
 
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_set_decorated
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1decorated
+  (JNIEnv *env, jclass cls, jlong window, jboolean decorated)
+{
+	gtk_window_set_decorated((GtkWindow*)window, (gboolean)decorated);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Window
+ * Method:    gtk_window_begin_move_drag
+ * Signature: (JIIIJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1begin_1move_1drag
+  (JNIEnv *env, jclass cls, jlong window, jint button, jint x, jint y, jlong timestamp)
+{
+	gtk_window_begin_move_drag((GtkWindow*)window, (gint)button, (gint)x, (gint)y, (guint32)timestamp);
+}

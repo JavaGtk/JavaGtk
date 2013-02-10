@@ -116,3 +116,14 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_g_1object_1cleanup
 		g_object_ref_sink((gpointer)object);
 	g_object_unref((gpointer)object);
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Gtk
+ * Method:    g_signal_handler_disconnect
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_g_1signal_1handler_1disconnect
+  (JNIEnv *env, jclass cls, jlong instance, jlong handler_id)
+{
+	g_signal_handler_disconnect((gpointer)instance, (gulong)handler_id);
+}
