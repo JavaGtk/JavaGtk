@@ -16,19 +16,38 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.gobject;
-
-import org.java_gtk.NativeObject;
+package org.java_gtk.gtk;
 
 /**
- *  
- * @author Bill Hull
+ * The DrawingArea widget is used for creating custom user interface elements. 
+ * It's essentially a blank widget; you can draw on it.
+ * 
+ * @author Bill
  *
  */
-public abstract class GObject extends NativeObject {
+public class DrawingArea extends Widget {
 
-	protected GObject(long pointer) {
+	private static native final long gtk_drawing_area_new();
+	
+	protected DrawingArea(long pointer) {
 		super(pointer);
+	}
+
+	/**
+	 * Constructs a new DrawingArea
+	 */
+	public DrawingArea () {
+		this(newDrawingArea());
+	}
+		
+	private static long newDrawingArea() {
+		lock.lock();
+		try {
+			return gtk_drawing_area_new();
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 
 }

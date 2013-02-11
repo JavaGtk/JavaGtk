@@ -21,6 +21,7 @@ package org.java_gtk.gtk;
 import java.util.EnumSet;
 import java.util.TreeMap;
 
+import org.java_gtk.cairo.CairoContext;
 import org.java_gtk.gdk.Event;
 import org.java_gtk.gdk.EventButton;
 import org.java_gtk.gdk.EventConfigure;
@@ -46,6 +47,7 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_add_destroy_handler(long widgetPointer, DestroyHandler handler, Widget receiver);
 	private static native final void gtk_widget_add_enter_event_handler(long widgetPointer, EnterEventHandler handler, Widget receiver);
 	private static native final void gtk_widget_add_button_press_event_handler(long widgetPointer, ButtonPressEventHandler handler, Widget receiver);
+	private static native final void gtk_widget_add_draw_handler(long widgetPointer, DrawHandler handler, Widget receiver);
 	private static native final void gtk_widget_set_size_request(long widgetPointer, int width, int height);
 	private static native final void gtk_widget_set_accel_path(long widgetPointer, String path, long accelgroupPointer);
 	private static native final void gtk_widget_show(long widgetPointer);
@@ -363,6 +365,49 @@ public abstract class Widget extends GObject {
 
 	static boolean buttonpressEventReceiver(ButtonPressEventHandler handler, long sourcePointer, long eventPointer) {
 		return handler.handle((Widget)ObjectCache.lookup(sourcePointer), new EventButton(eventPointer));
+	}
+
+	/**
+	 * Adds the specified handler to receive draw signals from this Widget.  
+	 * This draw signal is fired when a widget is supposed to render itself.
+	 * 
+	 * @param handler the handler to be added
+	 */
+	public void addDrawHandler(DrawHandler handler) {
+		lock.lock();
+		try {
+			gtk_widget_add_draw_handler(this.pointer, handler, this);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Removes the specified handler for button press events from this Widget.  
+	 * 
+	 * @param handler the handler to be removed
+	 */
+	public void removeDrawHandler(DrawHandler handler) {
+		Gtk.removeHandler(pointer, handler.getHandleId());
+	}
+
+	/**
+	 * The listener for receiving draw signals.
+	 */
+	public static abstract class DrawHandler extends Handler {
+		/**
+		 * 
+		 * @param source the object which received the event
+		 * @param context the cairo context to draw to
+		 * @return {@code true} to stop other handlers from being invoked 
+		 *         for the signal. {@code false} to propagate the signal further.
+		 */
+		public abstract boolean handle(Widget source, CairoContext context);
+    }
+
+	static boolean drawReceiver(DrawHandler handler, long sourcePointer, long contextPointer) {
+		return handler.handle((Widget)ObjectCache.lookup(sourcePointer), new CairoContext(contextPointer));
 	}
 
 	/**

@@ -23,6 +23,7 @@ import java.lang.ref.ReferenceQueue;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.java_gtk.NativeObject;
 import org.java_gtk.gobject.GObject;
 import org.java_gtk.gtk.Gtk;
 import org.slf4j.Logger;
@@ -34,12 +35,12 @@ import org.slf4j.LoggerFactory;
  * @author Bill
  *
  */
-public class GtkFinalization {
+public class Finalization {
 	
-	private static final List<PhantomReference<GObject>> phantomReferences = new LinkedList<PhantomReference<GObject>>();
-	private static final ReferenceQueue<GObject> queue = new ReferenceQueue<GObject>();
+	private static final List<PhantomReference<NativeObject>> phantomReferences = new LinkedList<PhantomReference<NativeObject>>();
+	private static final ReferenceQueue<NativeObject> queue = new ReferenceQueue<NativeObject>();
 	
-	private static final Logger logger = LoggerFactory.getLogger(GtkFinalization.class);
+	private static final Logger logger = LoggerFactory.getLogger(Finalization.class);
 
 	/**
 	 * Holds a reference to the object pointer that can be used after the 
@@ -48,11 +49,11 @@ public class GtkFinalization {
 	 * @author Bill
 	 *
 	 */
-	static class GtkFinalizer extends PhantomReference<GObject> {
+	static class Finalizer extends PhantomReference<NativeObject> {
 
 		private long pointer;
 		
-		public GtkFinalizer(GObject referent) {
+		public Finalizer(NativeObject referent) {
 			super(referent, queue);
 			this.pointer = referent.getPointer();
 		}
@@ -63,8 +64,8 @@ public class GtkFinalization {
 		
 	}
 
-	public static void addFinalizer(GObject object) {
-		phantomReferences.add(new GtkFinalizer(object));
+	public static void addFinalizer(NativeObject object) {
+		phantomReferences.add(new Finalizer(object));
 	}
 	
 	/**
@@ -77,7 +78,7 @@ public class GtkFinalization {
 			public void run() {
 				while (true) {
 					try {
-						GtkFinalizer ref = (GtkFinalizer)queue.remove();
+						Finalizer ref = (Finalizer)queue.remove();
 						logger.debug("Finalizing: {}", ref.pointer);
 						ref.cleanup();
 						phantomReferences.remove(ref);

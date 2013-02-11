@@ -19,7 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_Widget.h"
-#include "include/jni_util.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_gtk_Widget

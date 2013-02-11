@@ -19,7 +19,7 @@
 package org.java_gtk.gtk;
 
 import org.java_gtk.gobject.GObject;
-import org.java_gtk.util.GtkFinalization;
+import org.java_gtk.util.Finalization;
 import org.java_gtk.util.NativeLibraries;
 import org.java_gtk.util.ObjectCache;
 
@@ -63,7 +63,7 @@ public class Gtk extends GObject {
 		lock.lock();
 		try {
 			gtk_init(argv.length, argv);
-			GtkFinalization.setupFinalizer();
+			Finalization.setupFinalizer();
 		}
 		finally {
 			lock.unlock();

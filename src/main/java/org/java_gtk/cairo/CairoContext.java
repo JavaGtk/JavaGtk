@@ -16,18 +16,13 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.gobject;
+package org.java_gtk.cairo;
 
 import org.java_gtk.NativeObject;
 
-/**
- *  
- * @author Bill Hull
- *
- */
-public abstract class GObject extends NativeObject {
+public class CairoContext extends NativeObject {
 
-	protected GObject(long pointer) {
+	public CairoContext(long pointer) {
 		super(pointer);
 	}
 

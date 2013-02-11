@@ -21,6 +21,7 @@ package org.java_gtk.util;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
+import org.java_gtk.NativeObject;
 import org.java_gtk.gobject.GObject;
 
 /**
@@ -30,26 +31,26 @@ import org.java_gtk.gobject.GObject;
  */
 public class ObjectCache {
 
-	private static final HashMap<Long, WeakReference<GObject>> objects = new HashMap<Long, WeakReference<GObject>>();
+	private static final HashMap<Long, WeakReference<NativeObject>> objects = new HashMap<Long, WeakReference<NativeObject>>();
 	
-	public static GObject lookup(long id) {
+	public static NativeObject lookup(long id) {
 		if (!objects.containsKey(id)) {
 			return null;
 		}
-		GObject val = objects.get(id).get();
+		NativeObject val = objects.get(id).get();
 		if (val == null) {
 			objects.remove(id);
 		}
 		return val;
 	}
 	
-	public static void cache(GObject object) {
+	public static void cache(NativeObject object) {
 		if (!objects.containsKey(object.getPointer())) {
-			objects.put(object.getPointer(), new WeakReference<GObject>(object));
+			objects.put(object.getPointer(), new WeakReference<NativeObject>(object));
 		}
 	}
 	
-	public static void remove(GObject object) {
+	public static void remove(NativeObject object) {
 		objects.remove(object.getPointer());
 	}
 	
