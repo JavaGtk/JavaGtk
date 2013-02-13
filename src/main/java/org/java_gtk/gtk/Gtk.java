@@ -39,7 +39,7 @@ public class Gtk extends GObject {
 	private static native final void gtk_main_quit();
     private static native final void g_object_cleanup(long objectPointer);
 	private static native final void g_signal_handler_disconnect(long objectPointer, long handler_id);
-   	
+	
 	static {
 		NativeLibraries.loadLibraries();
 	}

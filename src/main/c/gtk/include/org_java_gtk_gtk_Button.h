@@ -42,10 +42,10 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1from_1st
 /*
  * Class:     org_java_gtk_gtk_Button
  * Method:    gtk_button_add_clicked_event_handler
- * Signature: (JLorg/java_gtk/gtk/Button/ClickedEventHandler;Lorg/java_gtk/gtk/Button;)V
+ * Signature: (JLorg/java_gtk/gtk/Button/ClickedEventHandler;Ljava/lang/Class;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1add_1clicked_1event_1handler
-  (JNIEnv *, jclass, jlong, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jobject, jclass);
 
 /*
  * Class:     org_java_gtk_gtk_Button

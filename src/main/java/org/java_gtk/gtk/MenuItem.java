@@ -38,7 +38,7 @@ public class MenuItem extends Bin {
 	private static native final String gtk_menu_item_get_label(long menuitemPointer);
 	private static native final void gtk_menu_item_set_submenu(long menuitemPointer, long widgetPointer);
 	private static native final long gtk_menu_item_get_submenu(long menuitemPointer);
-	private static native final void gtk_menu_item_add_activated_event_handler(long widgetPointer, ActivatedEventHandler handler, MenuItem receiver);
+	private static native final void gtk_menu_item_add_activated_event_handler(long widgetPointer, ActivatedEventHandler handler, Class<MenuItem> receiverClass);
 	
 	protected MenuItem(long pointer) {
 		super(pointer);
@@ -172,7 +172,7 @@ public class MenuItem extends Bin {
 	public void addActivatedHandler(ActivatedEventHandler handler) {
 		lock.lock();
 		try {
-			gtk_menu_item_add_activated_event_handler(this.pointer, handler, this);
+			gtk_menu_item_add_activated_event_handler(this.pointer, handler, MenuItem.class);
 		}
 		finally {
 			lock.unlock();

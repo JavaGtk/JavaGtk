@@ -18,6 +18,7 @@
 
 #include <jni.h>
 #include <gtk/gtk.h>
+#include <cairo.h>
 #include "include/org_java_gtk_gtk_Widget.h"
 #include <jni_util.h>
 
@@ -43,11 +44,13 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1destroy
 	gtk_widget_destroy((GtkWidget*)widget);
 }
 
-void widget_event_handler(GtkWidget *widget, GdkEvent *event, gpointer data) {
+gboolean widget_event_handler(GtkWidget *widget, GdkEvent *event, gpointer data) {
+	jboolean result;
 	callback *c = data;
 	callback_start(c);
-	(*c->env)->CallStaticBooleanMethod(c->env, c->receiver, c->id, c->handler, widget, event);
+	result = (*c->env)->CallStaticBooleanMethod(c->env, c->receiver, c->id, c->handler, widget, event);
 	callback_end(c);
+	return (gboolean)result;
 }
 
 /*
@@ -56,7 +59,7 @@ void widget_event_handler(GtkWidget *widget, GdkEvent *event, gpointer data) {
  * Signature: (JLorg/java_gtk/gtk/Widget/DeleteEventHandler;Lorg/java_gtk/gtk/Widget;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1delete_1event_1handler
-  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
+  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jclass receiver)
 {
 	callback *c;
 	long handle_id;
@@ -78,7 +81,7 @@ void widget_destroy_handler(GtkWidget *widget, gpointer data) {
  * Signature: (JLorg/java_gtk/gtk/Widget/DestroyHandler;Lorg/java_gtk/gtk/Widget;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1handler
-  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
+  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jclass receiver)
 {
 	callback *c;
 	long handle_id;
@@ -93,7 +96,7 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1
  * Signature: (JLorg/java_gtk/gtk/Widget/ConfigureEventHandler;Lorg/java_gtk/gtk/Widget;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1configure_1event_1handler
-  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
+  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jclass receiver)
 {
 	callback *c;
 	long handle_id;
@@ -108,7 +111,7 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1configure
  * Signature: (JLorg/java_gtk/gtk/Widget/EnterEventHandler;Lorg/java_gtk/gtk/Widget;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1enter_1event_1handler
-  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
+  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jclass receiver)
 {
 	callback *c;
 	long handle_id;
@@ -123,12 +126,36 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1enter_1ev
  * Signature: (JLorg/java_gtk/gtk/Widget/EnterEventHandler;Lorg/java_gtk/gtk/Widget;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1button_1press_1event_1handler
-  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
+  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jclass receiver)
 {
 	callback *c;
 	long handle_id;
 	c = create_callback(env, handler, receiver, "buttonpressEventReceiver", "(Lorg/java_gtk/gtk/Widget$ButtonPressEventHandler;JJ)Z");
 	handle_id = connect_callback((gpointer)instance, "button-press-event", G_CALLBACK(widget_event_handler), c);
+	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
+}
+
+gboolean widget_draw_handler(GtkWidget *widget, cairo_t *cr, gpointer data) {
+	jboolean result;
+	callback *c = data;
+	callback_start(c);
+	result = (*c->env)->CallStaticBooleanMethod(c->env, c->receiver, c->id, c->handler, widget, cr);
+	callback_end(c);
+	return (gboolean)result;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_add_draw_handler
+ * Signature: (JLorg/java_gtk/gtk/Widget/DrawHandler;Lorg/java_gtk/gtk/Widget;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1draw_1handler
+  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jclass receiver)
+{
+	callback *c;
+	long handle_id;
+	c = create_callback(env, handler, receiver, "drawReceiver", "(Lorg/java_gtk/gtk/Widget$DrawHandler;JJ)Z");
+	handle_id = connect_callback((gpointer)instance, "draw", G_CALLBACK(widget_draw_handler), c);
 	update_handle(env, handler, "setHandleId", "(J)V", handle_id);
 }
 
@@ -455,4 +482,15 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1override_1back
   (JNIEnv *env, jclass cls, jlong widget, jint state, jlong color)
 {
 	gtk_widget_override_background_color((GtkWidget*)widget, (GtkStateFlags)state, (GdkRGBA*)color);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_queue_draw
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1queue_1draw
+  (JNIEnv *env, jclass cls, jlong widget)
+{
+	gtk_widget_queue_draw((GtkWidget*)widget);
 }

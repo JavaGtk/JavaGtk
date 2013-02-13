@@ -142,7 +142,7 @@ void menu_item_activated_event_handler(GtkWidget *widget, gpointer data) {
  * Signature: (JLorg/java_gtk/gtk/MenuItem/ActivatedEventHandler;Lorg/java_gtk/gtk/MenuItem;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1add_1activated_1event_1handler
-  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
+  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jclass receiver)
 {
 	callback *c;
 	long handle_id;

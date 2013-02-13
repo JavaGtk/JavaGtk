@@ -33,7 +33,7 @@ public class Button extends Bin {
 	private static native final long gtk_button_new_with_label(String label);
 	private static native final long gtk_button_new_with_mnemonic(String label);
 	private static native final long gtk_button_new_from_stock(String stock_id);
-	private static native final void gtk_button_add_clicked_event_handler(long widgetPointer, ClickedEventHandler handler, Button receiver);
+	private static native final void gtk_button_add_clicked_event_handler(long widgetPointer, ClickedEventHandler handler, Class<Button> receiverClass);
 	private static native final String gtk_button_get_label(long buttonPointer);
 	private static native final void gtk_button_set_label(long buttonPointer, String label);
 
@@ -121,7 +121,7 @@ public class Button extends Bin {
 	public void addClickedHandler(ClickedEventHandler handler) {
 		lock.lock();
 		try {
-			gtk_button_add_clicked_event_handler(this.pointer, handler, this);
+			gtk_button_add_clicked_event_handler(this.pointer, handler, Button.class);
 		}
 		finally {
 			lock.unlock();

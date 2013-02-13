@@ -31,7 +31,7 @@ public class ToolButton extends ToolItem {
 	
 	private static native final long gtk_tool_button_new(long widgetPointer, String label);
 	private static native final long gtk_tool_button_new_from_stock(String stock_id);
-	private static native final void gtk_tool_button_add_clicked_event_handler(long widgetPointer, ClickedEventHandler handler, ToolButton receiver);
+	private static native final void gtk_tool_button_add_clicked_event_handler(long widgetPointer, ClickedEventHandler handler, Class<ToolButton> receiverClass);
 
 	protected ToolButton(long pointer) {
 		super(pointer);
@@ -86,7 +86,7 @@ public class ToolButton extends ToolItem {
 	public void addClickedHandler(ClickedEventHandler handler) {
 		lock.lock();
 		try {
-			gtk_tool_button_add_clicked_event_handler(this.pointer, handler, this);
+			gtk_tool_button_add_clicked_event_handler(this.pointer, handler, ToolButton.class);
 		}
 		finally {
 			lock.unlock();

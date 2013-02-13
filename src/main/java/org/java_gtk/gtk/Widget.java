@@ -42,12 +42,12 @@ public abstract class Widget extends GObject {
 	
 	private static native final void gtk_widget_show_all(long widgetPointer);
 	private static native final void gtk_widget_destroy(long widgetPointer);
-	private static native final void gtk_widget_add_delete_event_handler(long widgetPointer, DeleteEventHandler handler, Widget receiver);
-	private static native final void gtk_widget_add_configure_event_handler(long widgetPointer, ConfigureEventHandler handler, Widget receiver);
-	private static native final void gtk_widget_add_destroy_handler(long widgetPointer, DestroyHandler handler, Widget receiver);
-	private static native final void gtk_widget_add_enter_event_handler(long widgetPointer, EnterEventHandler handler, Widget receiver);
-	private static native final void gtk_widget_add_button_press_event_handler(long widgetPointer, ButtonPressEventHandler handler, Widget receiver);
-	private static native final void gtk_widget_add_draw_handler(long widgetPointer, DrawHandler handler, Widget receiver);
+	private static native final void gtk_widget_add_delete_event_handler(long widgetPointer, DeleteEventHandler handler, Class<Widget> receiverClass);
+	private static native final void gtk_widget_add_configure_event_handler(long widgetPointer, ConfigureEventHandler handler, Class<Widget> receiverClass);
+	private static native final void gtk_widget_add_destroy_handler(long widgetPointer, DestroyHandler handler, Class<Widget> receiverClass);
+	private static native final void gtk_widget_add_enter_event_handler(long widgetPointer, EnterEventHandler handler, Class<Widget> receiverClass);
+	private static native final void gtk_widget_add_button_press_event_handler(long widgetPointer, ButtonPressEventHandler handler, Class<Widget> receiverClass);
+	private static native final void gtk_widget_add_draw_handler(long widgetPointer, DrawHandler handler, Class<Widget> receiverClass);
 	private static native final void gtk_widget_set_size_request(long widgetPointer, int width, int height);
 	private static native final void gtk_widget_set_accel_path(long widgetPointer, String path, long accelgroupPointer);
 	private static native final void gtk_widget_show(long widgetPointer);
@@ -76,7 +76,7 @@ public abstract class Widget extends GObject {
 	private static native final void gtk_widget_set_events(long widgetPointer, int events);
 	private static native final void gtk_widget_add_events(long widgetPointer, int events);
 	private static native final void gtk_widget_override_background_color(long widgetPointer, int state, long colorPointer);
-
+	private static native final void gtk_widget_queue_draw(long widgetPointer);
 	/**
 	 * Controls how a widget deals with extra space in a single (x or y) dimension. 
 	 * 
@@ -163,7 +163,7 @@ public abstract class Widget extends GObject {
 	public void addDeleteHandler(DeleteEventHandler handler) {
 		lock.lock();
 		try {
-			gtk_widget_add_delete_event_handler(this.pointer, handler, this);
+			gtk_widget_add_delete_event_handler(this.pointer, handler, Widget.class);
 		}
 		finally {
 			lock.unlock();
@@ -206,7 +206,7 @@ public abstract class Widget extends GObject {
 	public void addDestroyHandler(DestroyHandler handler) {
 		lock.lock();
 		try {
-			gtk_widget_add_destroy_handler(this.pointer, handler, this);
+			gtk_widget_add_destroy_handler(this.pointer, handler, Widget.class);
 		}
 		finally {
 			lock.unlock();
@@ -247,7 +247,7 @@ public abstract class Widget extends GObject {
 	public void addConfigureHandler(ConfigureEventHandler handler) {
 		lock.lock();
 		try {
-			gtk_widget_add_configure_event_handler(this.pointer, handler, this);
+			gtk_widget_add_configure_event_handler(this.pointer, handler, Widget.class);
 		}
 		finally {
 			lock.unlock();
@@ -290,7 +290,7 @@ public abstract class Widget extends GObject {
 	public void addEnterHandler(EnterEventHandler handler) {
 		lock.lock();
 		try {
-			gtk_widget_add_enter_event_handler(this.pointer, handler, this);
+			gtk_widget_add_enter_event_handler(this.pointer, handler, Widget.class);
 		}
 		finally {
 			lock.unlock();
@@ -333,7 +333,7 @@ public abstract class Widget extends GObject {
 	public void addButtonPressHandler(ButtonPressEventHandler handler) {
 		lock.lock();
 		try {
-			gtk_widget_add_button_press_event_handler(this.pointer, handler, this);
+			gtk_widget_add_button_press_event_handler(this.pointer, handler, Widget.class);
 		}
 		finally {
 			lock.unlock();
@@ -376,7 +376,7 @@ public abstract class Widget extends GObject {
 	public void addDrawHandler(DrawHandler handler) {
 		lock.lock();
 		try {
-			gtk_widget_add_draw_handler(this.pointer, handler, this);
+			gtk_widget_add_draw_handler(this.pointer, handler, Widget.class);
 		}
 		finally {
 			lock.unlock();
@@ -852,6 +852,19 @@ public abstract class Widget extends GObject {
 		lock.lock();
 		try {
 			gtk_widget_override_background_color(this.pointer, value, color.getPointer());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	/**
+	 * Schedule a redraw of the entire widget.
+	 */
+	public void queueDraw() {
+		lock.lock();
+		try {
+			gtk_widget_queue_draw(this.pointer);
 		}
 		finally {
 			lock.unlock();

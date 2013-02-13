@@ -18,41 +18,15 @@
 
 #include <jni.h>
 #include <gtk/gtk.h>
-#include "include/org_java_gtk_gtk_Toolbar.h"
+#include "include/org_java_gtk_gtk_DrawingArea.h"
 
 /*
- * Class:     org_java_gtk_gtk_Toolbar
- * Method:    gtk_toolbar_new
+ * Class:     org_java_gtk_gtk_DrawingArea
+ * Method:    gtk_drawing_area_new
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Toolbar_gtk_1toolbar_1new
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_DrawingArea_gtk_1drawing_1area_1new
   (JNIEnv *env, jclass cls)
 {
-	GtkWidget* widget;
-
-	widget = gtk_toolbar_new();
-
-	return (jlong)widget;
-}
-
-/*
- * Class:     org_java_gtk_gtk_Toolbar
- * Method:    gtk_toolbar_set_style
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Toolbar_gtk_1toolbar_1set_1style
-  (JNIEnv *env, jclass cls, jlong toolbar, jint style)
-{
-	gtk_toolbar_set_style((GtkToolbar*)toolbar, (GtkToolbarStyle)style);
-}
-
-/*
- * Class:     org_java_gtk_gtk_Toolbar
- * Method:    gtk_toolbar_insert
- * Signature: (JJI)V
- */
-JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Toolbar_gtk_1toolbar_1insert
-  (JNIEnv *env, jclass cls, jlong toolbar, jlong item, jint pos)
-{
-	gtk_toolbar_insert((GtkToolbar*)toolbar, (GtkToolItem*)item, (gint)pos);
+	return (jlong)gtk_drawing_area_new();
 }

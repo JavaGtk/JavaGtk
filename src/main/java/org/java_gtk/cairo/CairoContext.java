@@ -22,8 +22,31 @@ import org.java_gtk.NativeObject;
 
 public class CairoContext extends NativeObject {
 
+	private static native final void cairo_show_text(long contextPointer, String text);
+	private static native final void cairo_move_to(long contextPointer, double x, double y);
+	
 	public CairoContext(long pointer) {
 		super(pointer);
+	}
+	
+	public void showText(String text) {
+		lock.lock();
+		try {
+			cairo_show_text(this.pointer, text);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	public void moveTo(double x, double y) {
+		lock.lock();
+		try {
+			cairo_move_to(this.pointer, x, y);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 
 }

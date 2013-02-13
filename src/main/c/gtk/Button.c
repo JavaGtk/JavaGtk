@@ -96,7 +96,7 @@ void button_clicked_event_handler(GtkWidget *widget, gpointer data) {
  * Signature: (JLorg/java_gtk/gtk/Button/ClickedEventHandler;Lorg/java_gtk/gtk/Button;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1add_1clicked_1event_1handler
-  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jobject receiver)
+  (JNIEnv *env, jclass cls, jlong instance, jobject handler, jclass receiver)
 {
 	callback *c;
 	long handle_id;

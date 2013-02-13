@@ -66,10 +66,10 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1get_1su
 /*
  * Class:     org_java_gtk_gtk_MenuItem
  * Method:    gtk_menu_item_add_activated_event_handler
- * Signature: (JLorg/java_gtk/gtk/MenuItem/ActivatedEventHandler;Lorg/java_gtk/gtk/MenuItem;)V
+ * Signature: (JLorg/java_gtk/gtk/MenuItem/ActivatedEventHandler;Ljava/lang/Class;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1add_1activated_1event_1handler
-  (JNIEnv *, jclass, jlong, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jobject, jclass);
 
 #ifdef __cplusplus
 }

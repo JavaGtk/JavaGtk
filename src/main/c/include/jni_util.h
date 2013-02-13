@@ -27,12 +27,13 @@ JNIEnv *getJavaEnv();
 typedef struct callback_tag {
 	jmethodID id;
 	jobject handler;
-	jobject receiver;
+	jclass receiver;
 	bool attached;
 	JNIEnv *env;
+	gpointer data;
 } callback;
 
-callback* create_callback(JNIEnv *, jobject, jobject, const char *, const char *);
+callback* create_callback(JNIEnv *, jobject, jclass, const char *, const char *);
 
 gulong connect_callback(gpointer, const gchar *, GCallback, callback *);
 

@@ -26,42 +26,50 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1destroy
 /*
  * Class:     org_java_gtk_gtk_Widget
  * Method:    gtk_widget_add_delete_event_handler
- * Signature: (JLorg/java_gtk/gtk/Widget/DeleteEventHandler;Lorg/java_gtk/gtk/Widget;)V
+ * Signature: (JLorg/java_gtk/gtk/Widget/DeleteEventHandler;Ljava/lang/Class;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1delete_1event_1handler
-  (JNIEnv *, jclass, jlong, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jobject, jclass);
 
 /*
  * Class:     org_java_gtk_gtk_Widget
  * Method:    gtk_widget_add_configure_event_handler
- * Signature: (JLorg/java_gtk/gtk/Widget/ConfigureEventHandler;Lorg/java_gtk/gtk/Widget;)V
+ * Signature: (JLorg/java_gtk/gtk/Widget/ConfigureEventHandler;Ljava/lang/Class;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1configure_1event_1handler
-  (JNIEnv *, jclass, jlong, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jobject, jclass);
 
 /*
  * Class:     org_java_gtk_gtk_Widget
  * Method:    gtk_widget_add_destroy_handler
- * Signature: (JLorg/java_gtk/gtk/Widget/DestroyHandler;Lorg/java_gtk/gtk/Widget;)V
+ * Signature: (JLorg/java_gtk/gtk/Widget/DestroyHandler;Ljava/lang/Class;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1destroy_1handler
-  (JNIEnv *, jclass, jlong, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jobject, jclass);
 
 /*
  * Class:     org_java_gtk_gtk_Widget
  * Method:    gtk_widget_add_enter_event_handler
- * Signature: (JLorg/java_gtk/gtk/Widget/EnterEventHandler;Lorg/java_gtk/gtk/Widget;)V
+ * Signature: (JLorg/java_gtk/gtk/Widget/EnterEventHandler;Ljava/lang/Class;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1enter_1event_1handler
-  (JNIEnv *, jclass, jlong, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jobject, jclass);
 
 /*
  * Class:     org_java_gtk_gtk_Widget
  * Method:    gtk_widget_add_button_press_event_handler
- * Signature: (JLorg/java_gtk/gtk/Widget/ButtonPressEventHandler;Lorg/java_gtk/gtk/Widget;)V
+ * Signature: (JLorg/java_gtk/gtk/Widget/ButtonPressEventHandler;Ljava/lang/Class;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1button_1press_1event_1handler
-  (JNIEnv *, jclass, jlong, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jobject, jclass);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_add_draw_handler
+ * Signature: (JLorg/java_gtk/gtk/Widget/DrawHandler;Ljava/lang/Class;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1draw_1handler
+  (JNIEnv *, jclass, jlong, jobject, jclass);
 
 /*
  * Class:     org_java_gtk_gtk_Widget
@@ -286,6 +294,14 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1add_1events
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1override_1background_1color
   (JNIEnv *, jclass, jlong, jint, jlong);
+
+/*
+ * Class:     org_java_gtk_gtk_Widget
+ * Method:    gtk_widget_queue_draw
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1queue_1draw
+  (JNIEnv *, jclass, jlong);
 
 #ifdef __cplusplus
 }

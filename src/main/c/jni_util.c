@@ -44,12 +44,11 @@ JNIEnv *getJavaEnv() {
 	return env;
 }
 
-callback* create_callback(JNIEnv *env, jobject handler, jobject receiver, const char *name, const char *sig) {
+callback* create_callback(JNIEnv *env, jobject handler, jclass receiver, const char *name, const char *sig) {
 	callback *c = (callback*)malloc(sizeof(callback));
 	c->handler = (*env)->NewGlobalRef(env, handler);
-	c->receiver = (*env)->NewGlobalRef(env, receiver);
-	jclass receiver_cls = (*env)->GetObjectClass(env, c->receiver);
-	c->id = (*env)->GetStaticMethodID(env, receiver_cls, name, sig);
+	c->receiver = receiver;
+	c->id = (*env)->GetStaticMethodID(env, receiver, name, sig);
 	return c;
 }
 

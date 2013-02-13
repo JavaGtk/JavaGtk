@@ -1,7 +1,7 @@
 set JAVA_HOME="C:\Program Files\Java\jdk1.6.0_25"
 %JAVA_HOME%\bin\javah.exe ^
 	-classpath "bin" ^
-	-d "src\main\c\include" ^
+	-d "src\main\c\gtk\include" ^
 	org.java_gtk.gtk.Gtk ^
 	org.java_gtk.gtk.Widget ^
 	org.java_gtk.gtk.Container ^
@@ -28,9 +28,24 @@ set JAVA_HOME="C:\Program Files\Java\jdk1.6.0_25"
 	org.java_gtk.gtk.SeparatorToolItem ^
 	org.java_gtk.gtk.Grid ^
 	org.java_gtk.gtk.Alignment ^
+	org.java_gtk.gtk.DrawingArea ^
+	org.java_gtk.gtk.TextView
+
+%JAVA_HOME%\bin\javah.exe ^
+	-classpath "bin" ^
+	-d "src\main\c\gdk\include" ^
 	org.java_gtk.gdk.Pixbuf ^
-	org.java_gtk.gtk.TextView ^
 	org.java_gtk.gdk.Event ^
 	org.java_gtk.gdk.EventButton ^
 	org.java_gtk.gdk.EventConfigure ^
 	org.java_gtk.gdk.RGBA
+	
+%JAVA_HOME%\bin\javah.exe ^
+	-classpath "bin" ^
+	-d "src\main\c\glib\include" ^
+	org.java_gtk.glib.Timer
+	
+%JAVA_HOME%\bin\javah.exe ^
+	-classpath "bin" ^
+	-d "src\main\c\cairo\include" ^
+	org.java_gtk.cairo.CairoContext

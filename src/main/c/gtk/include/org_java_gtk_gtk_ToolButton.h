@@ -26,10 +26,10 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_ToolButton_gtk_1tool_1button_1new
 /*
  * Class:     org_java_gtk_gtk_ToolButton
  * Method:    gtk_tool_button_add_clicked_event_handler
- * Signature: (JLorg/java_gtk/gtk/ToolButton/ClickedEventHandler;Lorg/java_gtk/gtk/ToolButton;)V
+ * Signature: (JLorg/java_gtk/gtk/ToolButton/ClickedEventHandler;Ljava/lang/Class;)V
  */
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_ToolButton_gtk_1tool_1button_1add_1clicked_1event_1handler
-  (JNIEnv *, jclass, jlong, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jobject, jclass);
 
 #ifdef __cplusplus
 }
