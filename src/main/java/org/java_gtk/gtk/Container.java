@@ -34,6 +34,7 @@ import org.java_gtk.util.ObjectCache;
 public abstract class Container extends Widget {
 	
 	private static native final void gtk_container_add(long containerPointer, long widgetPointer);
+	private static native final void gtk_container_remove(long containerPointer, long widgetPointer);
 	private static native final void gtk_container_set_border_width(long containerPointer, int border_width);
 	private static native final int gtk_container_get_border_width(long containerPointer);
 	private static native final long[] gtk_container_get_children (long containerPointer);
@@ -73,6 +74,21 @@ public abstract class Container extends Widget {
 		}
 	}
 	
+	/**
+	 * Removes a widget from this Container.
+	 * 
+	 * @param widget a widget to be removed from this Container
+	 */
+	public void remove(Widget widget) {
+		lock.lock();
+		try {
+			gtk_container_remove(this.pointer, widget.getPointer());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
 	/**
 	 * Sets the border width of the container. 
 	 * 
