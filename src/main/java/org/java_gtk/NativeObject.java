@@ -53,7 +53,7 @@ public abstract class NativeObject {
 	
 	/**
 	 * Create a new GObject with the specified address as its pointer.
-	 * If the {@code isTransient} parameter is {@code false} the the
+	 * If the {@code isTransient} parameter is {@code false} then the
 	 * GObject is cached in {@link org.java_gtk.util.ObjectCache ObjectCache} 
 	 * upon instantiation.
 	 * 

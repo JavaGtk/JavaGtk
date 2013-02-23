@@ -26,7 +26,7 @@ public class CairoContext extends NativeObject {
 	private static native final void cairo_move_to(long contextPointer, double x, double y);
 	
 	public CairoContext(long pointer) {
-		super(pointer);
+		super(pointer, true);
 	}
 	
 	public void showText(String text) {

@@ -38,6 +38,7 @@ JNIEnv *getJavaEnv() {
 	if (status != JNI_OK) {
 		status = (*cached_jvm)->AttachCurrentThread(cached_jvm, (void **)&env, NULL);
 		if (status != JNI_OK) {
+			g_error("Unable to attach to current thread");
 			return NULL;
 		}
 	}
@@ -47,8 +48,8 @@ JNIEnv *getJavaEnv() {
 callback* create_callback(JNIEnv *env, jobject handler, jclass receiver, const char *name, const char *sig) {
 	callback *c = (callback*)malloc(sizeof(callback));
 	c->handler = (*env)->NewGlobalRef(env, handler);
-	c->receiver = receiver;
-	c->id = (*env)->GetStaticMethodID(env, receiver, name, sig);
+	c->receiver = (*env)->NewGlobalRef(env, receiver);
+	c->id = (*env)->GetStaticMethodID(env, c->receiver, name, sig);
 	return c;
 }
 
@@ -64,12 +65,9 @@ void update_handle(JNIEnv *env, jobject handler, const char *name, const char *s
 
 void callback_start(callback *c) {
 	c->attached = false;
-	int status = (*cached_jvm)->GetEnv(cached_jvm, (void **)&c->env, JNI_VERSION_1_6);
-	if (status != JNI_OK) {
-		status = (*cached_jvm)->AttachCurrentThread(cached_jvm, (void **)&c->env, NULL);
-		if (status != JNI_OK) {
-			return;
-		}
+	JNIEnv *env = getJavaEnv();
+	if (env != NULL) {
+		c->env = env;
 		c->attached = true;
 	}
 }
@@ -82,7 +80,30 @@ void callback_end(callback *c) {
 }
 
 void free_callback(gpointer data) {
-	free(data);
+	g_debug("free callback");
+	callback *c = data;
+	callback_start(c);
+	(*c->env)->DeleteGlobalRef(c->env, c->handler);
+	(*c->env)->DeleteGlobalRef(c->env, c->receiver);
+	callback_end(c);
+	free(c);
+}
+
+void toggle_java_ref(gpointer data, GObject *object, gboolean is_last_ref) {
+	jobject ref = g_object_get_data(object, JAVA_REF);
+	JNIEnv *env = getJavaEnv();
+	if (is_last_ref) {
+		jobject weak_ref = (*env)->NewWeakGlobalRef(env, ref);
+		g_object_set_data(object, JAVA_REF, weak_ref);
+		(*env)->DeleteGlobalRef(env, ref);
+		g_debug("ref toggled to weak: %ld", (long)object);
+	}
+	else {
+		jobject strong_ref = (*env)->NewGlobalRef(env, ref);
+		g_object_set_data(object, JAVA_REF, strong_ref);
+		(*env)->DeleteWeakGlobalRef(env, ref);
+		g_debug("ref toggled back to strong: %ld", (long)object);
+	}
 }
 
 void printClassName(JNIEnv *env, jobject obj) {

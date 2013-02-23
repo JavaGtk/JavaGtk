@@ -22,6 +22,8 @@
 #include <jni.h>
 #include <stdbool.h>
 
+#define JAVA_REF "javaRef"
+
 JNIEnv *getJavaEnv();
 
 typedef struct callback_tag {
@@ -44,6 +46,8 @@ void callback_start(callback*);
 void callback_end(callback*);
 
 void free_callback(gpointer);
+
+void toggle_java_ref(gpointer, GObject *, gboolean);
 
 void printClassName(JNIEnv *, jobject);
 

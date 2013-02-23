@@ -112,9 +112,8 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1main_1quit
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_g_1object_1cleanup
   (JNIEnv *env, jclass cls, jlong object)
 {
-	if (g_object_is_floating((gpointer)object))
-		g_object_ref_sink((gpointer)object);
-	g_object_unref((gpointer)object);
+	g_debug("cleanup: %ld", (long)object);
+	g_object_remove_toggle_ref((GObject*)object, toggle_java_ref, NULL);
 }
 
 /*
@@ -125,5 +124,6 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_g_1object_1cleanup
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_g_1signal_1handler_1disconnect
   (JNIEnv *env, jclass cls, jlong instance, jlong handler_id)
 {
+	g_debug("disconnecting");
 	g_signal_handler_disconnect((gpointer)instance, (gulong)handler_id);
 }

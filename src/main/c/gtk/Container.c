@@ -33,6 +33,17 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Container_gtk_1container_1add
 
 /*
  * Class:     org_java_gtk_gtk_Container
+ * Method:    gtk_container_remove
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Container_gtk_1container_1remove
+  (JNIEnv *env, jclass cls, jlong container, jlong widget)
+{
+	gtk_container_remove((GtkContainer*)container, (GtkWidget*)widget);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Container
  * Method:    gtk_container_set_border_width
  * Signature: (JI)V
  */

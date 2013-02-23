@@ -16,36 +16,21 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.examples;
 
-import org.java_gtk.gdk.Event;
-import org.java_gtk.gtk.Gtk;
-import org.java_gtk.gtk.Widget;
-import org.java_gtk.gtk.Window;
+#include <jni.h>
+#include <gtk/gtk.h>
+#include "include/org_java_gtk_gobject_GObject.h"
+#include <jni_util.h>
 
-public abstract class ExampleBase {
-	
-	protected Window mainWin;
-	
-	protected void runExample(String[] args, String title, int width, int height, int border) {
-		
-		Gtk.init(args);
-		mainWin = new Window();
-		mainWin.addDestroyHandler(new Widget.DestroyHandler() {
-			public void handle(Widget source) {
-				Gtk.mainQuit();
-			}
-		});
-		mainWin.setTitle(title);
-		mainWin.setDefaultSize(width, height);
-		mainWin.setBorderWidth(border);
-		
-		setupExample();
-		
-		mainWin.showAll();
-		Gtk.main();
-		
-	}
-	
-	protected abstract void setupExample();
+/*
+ * Class:     org_java_gtk_gobject_GObject
+ * Method:    add_toggle_ref
+ * Signature: (JLorg/java_gtk/gobject/GObject;)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gobject_GObject_add_1toggle_1ref
+  (JNIEnv *env, jclass cls, jlong object, jobject target)
+{
+	jobject ref = (*env)->NewGlobalRef(env, target);
+	g_object_set_data(object, JAVA_REF, ref);
+	g_object_add_toggle_ref((GObject*)object, toggle_java_ref, NULL);
 }

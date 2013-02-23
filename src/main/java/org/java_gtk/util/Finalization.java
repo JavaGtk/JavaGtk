@@ -59,12 +59,14 @@ public class Finalization {
 		}
 		
 		public void cleanup() {
+			logger.debug("Cleanup: {}", pointer);
 			Gtk.cleanup(pointer);
 		}
 		
 	}
 
 	public static void addFinalizer(NativeObject object) {
+		logger.debug("Creating finalizer for: {}, {}", object, object.getPointer());
 		phantomReferences.add(new Finalizer(object));
 	}
 	

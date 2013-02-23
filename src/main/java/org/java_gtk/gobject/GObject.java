@@ -27,8 +27,21 @@ import org.java_gtk.NativeObject;
  */
 public abstract class GObject extends NativeObject {
 
+	private static native final void add_toggle_ref(long objectPointer, GObject me);
+	
 	protected GObject(long pointer) {
-		super(pointer);
+		this(pointer, false);
+	}
+	
+	protected GObject(long pointer, boolean isTransient) {
+		super(pointer, isTransient);
+		lock.lock();
+		try {
+			add_toggle_ref(pointer, this);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 
 }

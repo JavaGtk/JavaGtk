@@ -39,6 +39,11 @@ set JAVA_HOME="C:\Program Files\Java\jdk1.6.0_25"
 	org.java_gtk.gdk.EventButton ^
 	org.java_gtk.gdk.EventConfigure ^
 	org.java_gtk.gdk.RGBA
+
+	%JAVA_HOME%\bin\javah.exe ^
+	-classpath "bin" ^
+	-d "src\main\c\gobject\include" ^
+	org.java_gtk.gobject.GObject
 	
 %JAVA_HOME%\bin\javah.exe ^
 	-classpath "bin" ^

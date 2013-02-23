@@ -31,7 +31,7 @@ public class Event extends GObject {
 	private static native final int gtk_event_get_type(long eventPointer);
 
 	public Event(long pointer) {
-		super(pointer);
+		super(pointer, true);
 	}
 	
 	public EventType getEventType() {
