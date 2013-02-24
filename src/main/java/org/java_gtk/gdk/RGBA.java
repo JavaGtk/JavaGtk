@@ -18,7 +18,7 @@
 
 package org.java_gtk.gdk;
 
-import org.java_gtk.gobject.GObject;
+import org.java_gtk.NativeObject;
 
 /**
  * RGBA is used to represent a (possibly translucent) color, 
@@ -27,7 +27,7 @@ import org.java_gtk.gobject.GObject;
  * @author Bill
  *
  */
-public class RGBA extends GObject {
+public class RGBA extends NativeObject {
 	
 	private static native final long gdk_rgba_new(double red, double green, double blue, double alpha);
 

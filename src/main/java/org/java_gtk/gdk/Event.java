@@ -18,7 +18,7 @@
 
 package org.java_gtk.gdk;
 
-import org.java_gtk.gobject.GObject;
+import org.java_gtk.NativeObject;
 
 /**
  * Base class for all events.
@@ -26,7 +26,7 @@ import org.java_gtk.gobject.GObject;
  * @author Bill Hull
  *
  */
-public class Event extends GObject {
+public class Event extends NativeObject {
 
 	private static native final int gtk_event_get_type(long eventPointer);
 

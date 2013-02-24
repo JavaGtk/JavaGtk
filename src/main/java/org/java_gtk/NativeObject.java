@@ -20,7 +20,6 @@ package org.java_gtk;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.java_gtk.util.Finalization;
 import org.java_gtk.util.ObjectCache;
 
 /**
@@ -64,7 +63,6 @@ public abstract class NativeObject {
 		this.pointer = pointer;
 		if (pointer != 0 && !isTransient) {
 			ObjectCache.cache(this);
-			Finalization.addFinalizer(this);
 		}
 	}
 

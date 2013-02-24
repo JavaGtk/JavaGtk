@@ -19,6 +19,7 @@
 package org.java_gtk.gobject;
 
 import org.java_gtk.NativeObject;
+import org.java_gtk.util.Finalization;
 
 /**
  *  
@@ -42,6 +43,7 @@ public abstract class GObject extends NativeObject {
 		finally {
 			lock.unlock();
 		}
+		Finalization.addFinalizer(this);
 	}
 
 }

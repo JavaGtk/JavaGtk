@@ -18,8 +18,8 @@
 
 package org.java_gtk.gdk;
 
+import org.java_gtk.NativeObject;
 import org.java_gtk.glib.GFileError;
-import org.java_gtk.gobject.GObject;
 
 /**
  * Pixbuf contains information that describes an image in memory. 
@@ -27,7 +27,7 @@ import org.java_gtk.gobject.GObject;
  * @author Bill
  *
  */
-public class Pixbuf extends GObject {
+public class Pixbuf extends NativeObject {
 
 	private static native final long gdk_pixbuf_new_from_file(String filename) throws PixbufError, GFileError;
 	

@@ -1,10 +1,11 @@
 package org.java_gtk.glib;
 
+import org.java_gtk.NativeObject;
 import org.java_gtk.gobject.GObject;
 import org.java_gtk.gobject.Handler;
 import org.java_gtk.util.ObjectCache;
 
-public class Timer extends GObject {
+public class Timer extends NativeObject {
 
 	private static native final void g_timer_new(int interval, TimerHandler handler, long dataPointer);
 

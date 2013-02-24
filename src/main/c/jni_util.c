@@ -50,6 +50,7 @@ callback* create_callback(JNIEnv *env, jobject handler, jclass receiver, const c
 	c->handler = (*env)->NewGlobalRef(env, handler);
 	c->receiver = (*env)->NewGlobalRef(env, receiver);
 	c->id = (*env)->GetStaticMethodID(env, c->receiver, name, sig);
+	g_debug("created callback: %ld, with id: %ld", c, c->id);
 	return c;
 }
 

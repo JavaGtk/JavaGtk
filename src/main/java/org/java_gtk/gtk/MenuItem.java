@@ -117,17 +117,18 @@ public class MenuItem extends Bin {
 	 * @return submenu for this menu item, or <code>null</code> if none.
 	 */
 	public Widget getSubMenu() {
+		long widget;
 		lock.lock();
 		try {
-			long widget = gtk_menu_item_get_submenu(this.pointer);
-			if (widget != 0) {
-				return (Widget) ObjectCache.lookup(widget);
-			}
-			return null;
+			widget = gtk_menu_item_get_submenu(this.pointer);
 		}
 		finally {
 			lock.unlock();
 		}
+		if (widget != 0) {
+			return (Widget) ObjectCache.lookup(widget);
+		}
+		return null;
 	}
 	
 	/**
