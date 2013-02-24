@@ -19,6 +19,8 @@
 package org.java_gtk.gtk;
 
 /**
+ * MessageDialog presents a dialog with an image representing the type of 
+ * message (Error, Question, etc.) alongside some message text.
  * 
  * @author Bill
  *
@@ -27,6 +29,10 @@ public class MessageDialog extends Dialog {
 
 	private static native final long gtk_message_dialog_new(long windowPointer, int flags, int type, int buttons, String message);
 
+	/**
+	 * Prebuilt sets of buttons for the dialog.
+	 * 
+	 */
 	public enum ButtonsType {
 		NONE(0),
 		OK(1),
@@ -46,6 +52,10 @@ public class MessageDialog extends Dialog {
 		}
 	}
 	
+	/**
+	 * The type of message being displayed in the dialog.
+	 *
+	 */
 	public enum MessageType {
 		INFO(0),
 		WARNING(1),
@@ -69,22 +79,27 @@ public class MessageDialog extends Dialog {
 	}
 
 	/**
+	 * Constructs a new message dialog, which is a simple dialog with an 
+	 * icon indicating the dialog type (error, warning, etc.) and some 
+	 * text the user may want to see. When the user clicks a button a 
+	 * "response" signal is fired.
 	 * 
-	 * @param parent
-	 * @param flags
-	 * @param type
-	 * @param buttons
-	 * @param messageFormat
-	 * @param args
+	 * @param parent parent or {@code null} for none
+	 * @param flags flags
+	 * @param type type of message
+	 * @param buttons set of buttons to use
+	 * @param messageFormat a formatted string
+	 * @param args arguments for the formatted string
 	 */
 	public MessageDialog (Window parent, DialogFlags flags, MessageType type, ButtonsType buttons, String messageFormat, Object...args) {
 		this(newMessageDialog(parent, flags, type, buttons, messageFormat, args));
 	}
 		
 	private static long newMessageDialog(Window parent, DialogFlags flags, MessageType type, ButtonsType buttons, String messageFormat, Object...args) {
+		String message = String.format(messageFormat, args);
 		lock.lock();
 		try {
-			return gtk_message_dialog_new(parent.getPointer(), flags.getValue(), type.getValue(), buttons.getValue(), String.format(messageFormat, args));
+			return gtk_message_dialog_new(parent.getPointer(), flags.getValue(), type.getValue(), buttons.getValue(), message);
 		}
 		finally {
 			lock.unlock();

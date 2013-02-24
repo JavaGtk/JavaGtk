@@ -18,7 +18,6 @@
 
 package org.java_gtk.examples;
 
-import org.java_gtk.gdk.Event;
 import org.java_gtk.gtk.Gtk;
 import org.java_gtk.gtk.Widget;
 import org.java_gtk.gtk.Window;

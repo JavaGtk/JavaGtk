@@ -35,7 +35,6 @@ public class Dialog extends Window {
 
 	/**
 	 * Flags used to influence dialog construction.
-	 * 
 	 */
 	public enum DialogFlags {
 		MODAL               (1 << 0),
@@ -70,6 +69,9 @@ public class Dialog extends Window {
 
 	}
 
+	/**
+	 * Predefined values for use as response ids
+	 */
 	public enum ResponseType {
 		NONE(-1),
 		REJECT(-2),
