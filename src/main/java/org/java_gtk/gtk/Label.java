@@ -33,6 +33,8 @@ public class Label extends Misc {
 	private static native final long gtk_label_new(String label);
 	private static native final String gtk_label_get_text(long labelPointer);
 	private static native final void gtk_label_set_text(long labelPointer, String label);
+	private static native final boolean gtk_label_get_line_wrap(long labelPointer);
+	private static native final void gtk_label_set_line_wrap(long labelPointer, boolean wrap);
 	
 	protected Label(long pointer) {
 		super(pointer);
@@ -87,4 +89,35 @@ public class Label extends Misc {
 			lock.unlock();
 		}
 	}
+
+	/**
+	 * Toggles line wrapping within the Label widget
+	 * 
+	 * @param wrap {@code true} to enable line wrapping
+	 */
+	public void setLineWrap(boolean wrap) {
+		lock.lock();
+		try {
+			gtk_label_set_line_wrap(this.pointer, wrap);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	/**
+	 * Returns whether lines in the label are automatically wrapped.
+	 * 
+	 * @return {@code true} if the lines of the label are automatically wrapped.
+	 */
+	public boolean getLineWrap() {
+		lock.lock();
+		try {
+			return gtk_label_get_line_wrap(pointer);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
 }

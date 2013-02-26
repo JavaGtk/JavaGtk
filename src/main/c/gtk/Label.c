@@ -70,5 +70,26 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1set_1text
 	if (strText == NULL) return;
 	gtk_label_set_text((GtkLabel*)label, (gchar*)strText);
 	releaseJavaString(env, text, strText);
+}
 
+/*
+ * Class:     org_java_gtk_gtk_Label
+ * Method:    gtk_label_get_line_wrap
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1get_1line_1wrap
+  (JNIEnv *env, jclass cls, jlong label)
+{
+	return (jboolean)gtk_label_get_line_wrap((GtkLabel*)label);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Label
+ * Method:    gtk_label_set_line_wrap
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1set_1line_1wrap
+  (JNIEnv *env, jclass cls, jlong label, jboolean wrap)
+{
+	gtk_label_set_line_wrap((GtkLabel*)label, (gboolean)wrap);
 }

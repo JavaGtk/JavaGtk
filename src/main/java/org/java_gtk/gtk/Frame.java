@@ -18,8 +18,6 @@
 
 package org.java_gtk.gtk;
 
-import org.java_gtk.gtk.Dialog.ResponseType;
-
 /**
  * The frame widget is a Bin that surrounds its child with a decorative 
  * frame and an optional label.

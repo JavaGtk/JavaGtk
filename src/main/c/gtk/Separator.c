@@ -16,36 +16,22 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.examples;
 
-import org.java_gtk.gdk.Pixbuf;
-import org.java_gtk.gdk.PixbufError;
-import org.java_gtk.glib.GFileError;
+#include <jni.h>
+#include <gtk/gtk.h>
+#include "include/org_java_gtk_gtk_Separator.h"
 
-/**
- * example code adapted from http://zetcode.com/tutorials/gtktutorial/firstprograms/
- * 
- * @author Bill
- *
+/*
+ * Class:     org_java_gtk_gtk_Separator
+ * Method:    gtk_separator_new
+ * Signature: (I)J
  */
-public class ExampleIcon extends ExampleBase {
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Separator_gtk_1separator_1new
+  (JNIEnv *env, jclass cls, jint orientation)
+{
+	GtkWidget* widget;
 
-	public static void main(String[] args) {
-		new ExampleIcon().runExample(args, "Icon Example", 230, 150, 0);
-	}
+	widget = gtk_separator_new((GtkOrientation)orientation);
 
-	@Override
-	protected void setupExample() {
-
-		try {
-			Pixbuf icon = new Pixbuf("bin/gnome-gsame.png");
-			mainWin.setIcon(icon);
-		} catch (PixbufError e) {
-			e.printStackTrace();
-		} catch (GFileError e) {
-			e.printStackTrace();
-		}
-
-	}
-
+	return (jlong)widget;
 }

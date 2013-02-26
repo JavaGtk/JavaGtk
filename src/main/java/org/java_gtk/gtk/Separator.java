@@ -16,36 +16,41 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.examples;
+package org.java_gtk.gtk;
 
-import org.java_gtk.gdk.Pixbuf;
-import org.java_gtk.gdk.PixbufError;
-import org.java_gtk.glib.GFileError;
+import org.java_gtk.gtk.Container.Orientation;
 
 /**
- * example code adapted from http://zetcode.com/tutorials/gtktutorial/firstprograms/
  * 
  * @author Bill
  *
  */
-public class ExampleIcon extends ExampleBase {
+public class Separator extends Widget {
 
-	public static void main(String[] args) {
-		new ExampleIcon().runExample(args, "Icon Example", 230, 150, 0);
+	private static native final long gtk_separator_new(int orientation);
+
+	protected Separator(long pointer) {
+		super(pointer);
 	}
 
-	@Override
-	protected void setupExample() {
+	/**
+	 * Constructs a new Box with the specified Orientation and spacing.
+	 * 
+	 * @param orientation the box's orientation.
+	 * @param spacing the number of pixels to place by default between children.
+	 */
+	public Separator(Orientation orientation) {
+		super(newSeparator(orientation));
+	}
 
+	private static long newSeparator(Orientation orientation) {
+		lock.lock();
 		try {
-			Pixbuf icon = new Pixbuf("bin/gnome-gsame.png");
-			mainWin.setIcon(icon);
-		} catch (PixbufError e) {
-			e.printStackTrace();
-		} catch (GFileError e) {
-			e.printStackTrace();
+			return gtk_separator_new(orientation.getValue());
 		}
-
+		finally {
+			lock.unlock();
+		}
 	}
-
+		
 }

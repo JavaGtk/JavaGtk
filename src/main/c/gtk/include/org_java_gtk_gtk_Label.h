@@ -31,6 +31,22 @@ JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1get_1text
 JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1set_1text
   (JNIEnv *, jclass, jlong, jstring);
 
+/*
+ * Class:     org_java_gtk_gtk_Label
+ * Method:    gtk_label_get_line_wrap
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1get_1line_1wrap
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_java_gtk_gtk_Label
+ * Method:    gtk_label_set_line_wrap
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1set_1line_1wrap
+  (JNIEnv *, jclass, jlong, jboolean);
+
 #ifdef __cplusplus
 }
 #endif

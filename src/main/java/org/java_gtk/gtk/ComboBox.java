@@ -19,7 +19,6 @@
 package org.java_gtk.gtk;
 
 import org.java_gtk.gobject.Handler;
-import org.java_gtk.gtk.Button.ClickedEventHandler;
 import org.java_gtk.util.ObjectCache;
 
 /**
