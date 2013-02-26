@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_AboutDialog.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_gtk_AboutDialog
@@ -58,10 +59,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_AboutDialog_gtk_1about_1dialog_1se
 {
 	const char* strName;
 
-	strName = (*env)->GetStringUTFChars(env, name, NULL);
+	strName = getJavaString(env, name);
 	if (strName == NULL) return;
 	gtk_about_dialog_set_program_name((GtkAboutDialog*)dialog, (gchar*)strName);
-	(*env)->ReleaseStringUTFChars(env, name, strName);
+	releaseJavaString(env, name, strName);
 }
 
 /*
@@ -91,10 +92,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_AboutDialog_gtk_1about_1dialog_1se
 {
 	const char* strVersion;
 
-	strVersion = (*env)->GetStringUTFChars(env, version, NULL);
+	strVersion = getJavaString(env, version);
 	if (strVersion == NULL) return;
 	gtk_about_dialog_set_version((GtkAboutDialog*)dialog, (gchar*)strVersion);
-	(*env)->ReleaseStringUTFChars(env, version, strVersion);
+	releaseJavaString(env, version, strVersion);
 }
 
 /*
@@ -124,10 +125,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_AboutDialog_gtk_1about_1dialog_1se
 {
 	const char* strCopyright;
 
-	strCopyright = (*env)->GetStringUTFChars(env, copyright, NULL);
+	strCopyright = getJavaString(env, copyright);
 	if (strCopyright == NULL) return;
 	gtk_about_dialog_set_copyright((GtkAboutDialog*)dialog, (gchar*)strCopyright);
-	(*env)->ReleaseStringUTFChars(env, copyright, strCopyright);
+	releaseJavaString(env, copyright, strCopyright);
 }
 
 /*
@@ -157,10 +158,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_AboutDialog_gtk_1about_1dialog_1se
 {
 	const char* strComments;
 
-	strComments = (*env)->GetStringUTFChars(env, comments, NULL);
+	strComments = getJavaString(env, comments);
 	if (strComments == NULL) return;
 	gtk_about_dialog_set_comments((GtkAboutDialog*)dialog, (gchar*)strComments);
-	(*env)->ReleaseStringUTFChars(env, comments, strComments);
+	releaseJavaString(env, comments, strComments);
 }
 
 /*
@@ -190,10 +191,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_AboutDialog_gtk_1about_1dialog_1se
 {
 	const char* strWebsite;
 
-	strWebsite = (*env)->GetStringUTFChars(env, website, NULL);
+	strWebsite = getJavaString(env, website);
 	if (strWebsite == NULL) return;
 	gtk_about_dialog_set_website((GtkAboutDialog*)dialog, (gchar*)strWebsite);
-	(*env)->ReleaseStringUTFChars(env, website, strWebsite);
+	releaseJavaString(env, website, strWebsite);
 }
 
 /*

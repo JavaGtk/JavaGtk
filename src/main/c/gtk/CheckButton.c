@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_CheckButton.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_gtk_CheckButton
@@ -41,9 +42,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_CheckButton_gtk_1check_1button_1n
 {
 	const char* strLabel;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	GtkWidget* widget = gtk_check_button_new_with_label((gchar*)strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 	return (jlong)widget;
 }
 
@@ -57,8 +58,8 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_CheckButton_gtk_1check_1button_1n
 {
 	const char* strLabel;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	GtkWidget* widget = gtk_check_button_new_with_mnemonic((gchar*)strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 	return (jlong)widget;
 }

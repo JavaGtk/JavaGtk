@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_ImageMenuItem.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_gtk_ImageMenuItem
@@ -46,9 +47,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_ImageMenuItem_gtk_1image_1menu_1i
 	const char* strLabel;
 	GtkWidget* widget;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	widget = gtk_image_menu_item_new_with_label(strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 
 	return (jlong)widget;
 }
@@ -64,9 +65,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_ImageMenuItem_gtk_1image_1menu_1i
 	const char* strLabel;
 	GtkWidget* widget;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	widget = gtk_image_menu_item_new_with_mnemonic(strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 
 	return (jlong)widget;
 }
@@ -82,9 +83,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_ImageMenuItem_gtk_1image_1menu_1i
 	const char* strStockId;
 	GtkWidget* widget;
 
-	strStockId = (*env)->GetStringUTFChars(env, stock_id, NULL);
+	strStockId = getJavaString(env, stock_id);
 	widget = gtk_image_menu_item_new_from_stock(strStockId, (GtkAccelGroup*)accel_group);
-	(*env)->ReleaseStringUTFChars(env, stock_id, strStockId);
+	releaseJavaString(env, stock_id, strStockId);
 
 	return (jlong)widget;
 }

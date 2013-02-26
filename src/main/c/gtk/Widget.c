@@ -180,9 +180,9 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1accel_1pa
 {
 	const char* strPath;
 
-	strPath = (*env)->GetStringUTFChars(env, path, NULL);
+	strPath = getJavaString(env, path);
 	gtk_widget_set_accel_path((GtkWidget*)widget, strPath, (GtkAccelGroup*)accel_group);
-	(*env)->ReleaseStringUTFChars(env, path, strPath);
+	releaseJavaString(env, path, strPath);
 }
 
 /*
@@ -234,10 +234,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Widget_gtk_1widget_1set_1name
 {
 	const char* strName;
 
-	strName = (*env)->GetStringUTFChars(env, name, NULL);
+	strName = getJavaString(env, name);
 	if (strName == NULL) return;
 	gtk_widget_set_name((GtkWidget*)widget, (gchar*)strName);
-	(*env)->ReleaseStringUTFChars(env, name, strName);
+	releaseJavaString(env, name, strName);
 }
 
 /*

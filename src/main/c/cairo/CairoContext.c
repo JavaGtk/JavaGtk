@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <cairo.h>
 #include "include/org_java_gtk_cairo_CairoContext.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_cairo_CairoContext
@@ -30,7 +31,7 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_cairo_CairoContext_cairo_1show_1text
 {
 	const char* strText;
 
-	strText = (*env)->GetStringUTFChars(env, text, NULL);
+	strText = getJavaString(env, text);
 	if (strText == NULL) return;
 	cairo_show_text((cairo_t*)context, strText);
 	(*env)->ReleaseStringUTFChars(env, text, strText);

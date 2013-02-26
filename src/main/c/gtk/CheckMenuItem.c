@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_CheckMenuItem.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_gtk_CheckMenuItem
@@ -46,7 +47,7 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_CheckMenuItem_gtk_1check_1menu_1i
 	const char* strLabel;
 	GtkWidget* widget;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	widget = gtk_check_menu_item_new_with_label(strLabel);
 	(*env)->ReleaseStringUTFChars(env, label, strLabel);
 
@@ -64,7 +65,7 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_CheckMenuItem_gtk_1check_1menu_1i
 	const char* strLabel;
 	GtkWidget* widget;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	widget = gtk_check_menu_item_new_with_mnemonic(strLabel);
 	(*env)->ReleaseStringUTFChars(env, label, strLabel);
 

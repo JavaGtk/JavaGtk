@@ -50,7 +50,7 @@ callback* create_callback(JNIEnv *env, jobject handler, jclass receiver, const c
 	c->handler = (*env)->NewGlobalRef(env, handler);
 	c->receiver = (*env)->NewGlobalRef(env, receiver);
 	c->id = (*env)->GetStaticMethodID(env, c->receiver, name, sig);
-	g_debug("created callback: %ld, with id: %ld", c, c->id);
+	g_debug("created callback: %ld, with id: %ld", (long)c, (long)c->id);
 	return c;
 }
 
@@ -107,6 +107,20 @@ void toggle_java_ref(gpointer data, GObject *object, gboolean is_last_ref) {
 	}
 }
 
+const char* getJavaString(JNIEnv *env, jstring javaStr) {
+	const char* str;
+	if (javaStr == NULL)
+		return NULL;
+	str = (*env)->GetStringUTFChars(env, javaStr, NULL);
+	return str;
+}
+
+void releaseJavaString(JNIEnv *env, jstring javaStr, const char* str) {
+	if (str == NULL)
+		return;
+	(*env)->ReleaseStringUTFChars(env, javaStr, str);
+}
+
 void printClassName(JNIEnv *env, jobject obj) {
 	jclass obj_cls = (*env)->GetObjectClass(env, obj);
 
@@ -123,11 +137,11 @@ void printClassName(JNIEnv *env, jobject obj) {
 	// Call the getName() to get a jstring object back
 	jstring strObj = (jstring)(*env)->CallObjectMethod(env, clsObj, mid);
 
-	const char* cstr = (*env)->GetStringUTFChars(env, strObj, 0);
+	const char* cstr = getJavaString(env, strObj);
 
 	printf("class: %s", cstr);
 
-	(*env)->ReleaseStringUTFChars(env, strObj, cstr);
+	releaseJavaString(env, strObj, cstr);
 
 }
 
@@ -142,9 +156,9 @@ char** convertArgs(JNIEnv *env, jobject _argc, jobjectArray _argv, int* argc) {
 
 	for (int i=0; i<*argc; i++) {
 		jstring string = (jstring)(*env)->GetObjectArrayElement(env, _argv, i);
-		const char* rawString = (*env)->GetStringUTFChars(env, string, 0);
+		const char* rawString = getJavaString(env, string);
 		argv[i+1] = g_strdup(rawString);
-		(*env)->ReleaseStringUTFChars(env, string, rawString);
+		releaseJavaString(env, string, rawString);
 	}
 
 	argv[0] = "";

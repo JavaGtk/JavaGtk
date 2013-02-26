@@ -20,6 +20,7 @@
 #define JNI_UTIL_H_
 
 #include <jni.h>
+#include <gtk/gtk.h>
 #include <stdbool.h>
 
 #define JAVA_REF "javaRef"
@@ -48,6 +49,10 @@ void callback_end(callback*);
 void free_callback(gpointer);
 
 void toggle_java_ref(gpointer, GObject *, gboolean);
+
+const char* getJavaString(JNIEnv *, jstring);
+
+void releaseJavaString(JNIEnv *, jstring, const char*);
 
 void printClassName(JNIEnv *, jobject);
 

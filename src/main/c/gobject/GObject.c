@@ -31,6 +31,6 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gobject_GObject_add_1toggle_1ref
   (JNIEnv *env, jclass cls, jlong object, jobject target)
 {
 	jobject ref = (*env)->NewGlobalRef(env, target);
-	g_object_set_data(object, JAVA_REF, ref);
+	g_object_set_data((GObject*)object, JAVA_REF, (gpointer)ref);
 	g_object_add_toggle_ref((GObject*)object, toggle_java_ref, NULL);
 }

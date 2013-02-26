@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gdk_Pixbuf.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_gdk_Pixbuf
@@ -32,9 +33,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gdk_Pixbuf_gdk_1pixbuf_1new_1from_1fi
 	const char* strFilename;
 	GdkPixbuf* pixbuf;
 
-	strFilename = (*env)->GetStringUTFChars(env, filename, NULL);
+	strFilename = getJavaString(env, filename);
 	pixbuf = gdk_pixbuf_new_from_file(strFilename, &error);
-	(*env)->ReleaseStringUTFChars(env, filename, strFilename);
+	releaseJavaString(env, filename, strFilename);
 
 	if (pixbuf == NULL || error) {
 		jclass error_cls = NULL;

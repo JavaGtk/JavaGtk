@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_Window.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_gtk_Window
@@ -45,10 +46,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Window_gtk_1window_1set_1title
 {
 	const char* strTitle;
 
-	strTitle = (*env)->GetStringUTFChars(env, title, NULL);
+	strTitle = getJavaString(env, title);
 	if (strTitle == NULL) return;
 	gtk_window_set_title((GtkWindow*)window, (gchar*)strTitle);
-	(*env)->ReleaseStringUTFChars(env, title, strTitle);
+	releaseJavaString(env, title, strTitle);
 }
 
 /*

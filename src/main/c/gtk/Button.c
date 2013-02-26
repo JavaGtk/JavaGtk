@@ -42,9 +42,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1with_1la
 {
 	const char* strLabel;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	GtkWidget* widget = gtk_button_new_with_label((gchar*)strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 	return (jlong)widget;
 }
 
@@ -58,9 +58,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1with_1mn
 {
 	const char* strLabel;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	GtkWidget* widget = gtk_button_new_with_mnemonic((gchar*)strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 	return (jlong)widget;
 }
 
@@ -75,9 +75,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1new_1from_1st
 	const char* strStockId;
 	GtkWidget* widget;
 
-	strStockId = (*env)->GetStringUTFChars(env, stock_id, NULL);
+	strStockId = getJavaString(env, stock_id);
 	widget = gtk_button_new_from_stock(strStockId);
-	(*env)->ReleaseStringUTFChars(env, stock_id, strStockId);
+	releaseJavaString(env, stock_id, strStockId);
 
 	return (jlong)widget;
 }
@@ -132,8 +132,8 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Button_gtk_1button_1set_1label
 {
 	const char* strLabel;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	if (strLabel == NULL) return;
 	gtk_button_set_label((GtkButton*)button, (gchar*)strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 }

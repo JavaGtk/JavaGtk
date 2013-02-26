@@ -47,9 +47,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1new_1wi
 	const char* strLabel;
 	GtkWidget* widget;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	widget = gtk_menu_item_new_with_label(strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 
 	return (jlong)widget;
 }
@@ -65,9 +65,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1new_1wi
 	const char* strLabel;
 	GtkWidget* widget;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	widget = gtk_menu_item_new_with_mnemonic(strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 
 	return (jlong)widget;
 }
@@ -82,10 +82,10 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_MenuItem_gtk_1menu_1item_1set_1lab
 {
 	const char* strLabel;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	if (strLabel == NULL) return;
 	gtk_menu_item_set_label((GtkMenuItem*)menu_item, (gchar*)strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 }
 
 /*

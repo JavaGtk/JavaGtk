@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_MessageDialog.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_gtk_MessageDialog
@@ -30,8 +31,8 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_MessageDialog_gtk_1message_1dialo
 {
 	const char* strMessage;
 
-	strMessage = (*env)->GetStringUTFChars(env, message, NULL);
+	strMessage = getJavaString(env, message);
 	GtkWidget* widget = gtk_message_dialog_new((GtkWindow*)parent, (GtkDialogFlags)flags, (GtkMessageType)type, (GtkButtonsType)buttons, (gchar*)strMessage);
-	(*env)->ReleaseStringUTFChars(env, message, strMessage);
+	releaseJavaString(env, message, strMessage);
 	return (jlong)widget;
 }

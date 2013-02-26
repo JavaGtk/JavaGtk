@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_ToggleButton.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_gtk_ToggleButton
@@ -41,9 +42,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_ToggleButton_gtk_1toggle_1button_
 {
 	const char* strLabel;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	GtkWidget* widget = gtk_toggle_button_new_with_label((gchar*)strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 	return (jlong)widget;
 }
 
@@ -57,9 +58,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_ToggleButton_gtk_1toggle_1button_
 {
 	const char* strLabel;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	GtkWidget* widget = gtk_toggle_button_new_with_mnemonic((gchar*)strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 	return (jlong)widget;
 }
 

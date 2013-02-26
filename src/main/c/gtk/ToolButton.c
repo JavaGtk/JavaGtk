@@ -32,9 +32,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_ToolButton_gtk_1tool_1button_1new
 	const char* strLabel;
 	GtkToolItem* widget;
 
-	strLabel = (*env)->GetStringUTFChars(env, label, NULL);
+	strLabel = getJavaString(env, label);
 	widget = gtk_tool_button_new((GtkWidget*)icon, strLabel);
-	(*env)->ReleaseStringUTFChars(env, label, strLabel);
+	releaseJavaString(env, label, strLabel);
 
 	return (jlong)widget;
 }
@@ -50,9 +50,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_ToolButton_gtk_1tool_1button_1new
 	const char* strStockId;
 	GtkToolItem* widget;
 
-	strStockId = (*env)->GetStringUTFChars(env, stock_id, NULL);
+	strStockId = getJavaString(env, stock_id);
 	widget = gtk_tool_button_new_from_stock(strStockId);
-	(*env)->ReleaseStringUTFChars(env, stock_id, strStockId);
+	releaseJavaString(env, stock_id, strStockId);
 
 	return (jlong)widget;
 }

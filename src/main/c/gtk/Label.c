@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_Label.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_gtk_Label
@@ -31,9 +32,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1new
 	const char* strLabel;
 	GtkWidget* widget;
 
-	strLabel = (*env)->GetStringUTFChars(env, text, NULL);
+	strLabel = getJavaString(env, text);
 	widget = gtk_label_new(strLabel);
-	(*env)->ReleaseStringUTFChars(env, text, strLabel);
+	releaseJavaString(env, text, strLabel);
 
 	return (jlong)widget;
 }
@@ -65,9 +66,9 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1set_1text
 {
 	const char* strText;
 
-	strText = (*env)->GetStringUTFChars(env, text, NULL);
+	strText = getJavaString(env, text);
 	if (strText == NULL) return;
 	gtk_label_set_text((GtkLabel*)label, (gchar*)strText);
-	(*env)->ReleaseStringUTFChars(env, text, strText);
+	releaseJavaString(env, text, strText);
 
 }

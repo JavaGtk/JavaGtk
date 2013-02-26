@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_AccelMap.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_gtk_AccelMap
@@ -30,7 +31,7 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_AccelMap_gtk_1accel_1map_1add_1ent
 {
 	const char* strPath;
 
-	strPath = (*env)->GetStringUTFChars(env, path, NULL);
+	strPath = getJavaString(env, path);
 	gtk_accel_map_add_entry(strPath, (gint)key, (gint)mod_type);
-	(*env)->ReleaseStringUTFChars(env, path, strPath);
+	releaseJavaString(env, path, strPath);
 }

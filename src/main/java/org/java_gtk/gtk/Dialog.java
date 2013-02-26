@@ -132,13 +132,15 @@ public class Dialog extends Window {
 	 * @return ResponseType indicating the results of the dialog action
 	 */
 	public ResponseType run() {
+		int response;
 		lock.lock();
 		try {
-			return ResponseType.getResponseType(gtk_dialog_run(this.pointer));
+			response = gtk_dialog_run(this.pointer);
 		}
 		finally {
 			lock.unlock();
 		}
+		return ResponseType.getResponseType(response);
 	}
 
 }
