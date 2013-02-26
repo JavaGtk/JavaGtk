@@ -28,6 +28,12 @@ import org.java_gtk.gtk.Container.Orientation;
 import org.java_gtk.gtk.ToolButton.ClickedEventHandler;
 import org.java_gtk.gtk.Toolbar.ToolbarStyle;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/menusandtoolbars/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleUndoRedoButtons extends ExampleBase {
 
 	public static void main(String[] args) {

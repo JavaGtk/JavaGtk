@@ -5,6 +5,12 @@ import org.java_gtk.gtk.Box;
 import org.java_gtk.gtk.Button;
 import org.java_gtk.gtk.Container.Orientation;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/gtklayoutmanagement/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleAlignment extends ExampleBase {
 
 	public static void main(String[] args) {

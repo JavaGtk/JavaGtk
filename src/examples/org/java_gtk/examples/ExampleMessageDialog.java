@@ -8,6 +8,12 @@ import org.java_gtk.gtk.MessageDialog;
 import org.java_gtk.gtk.MessageDialog.ButtonsType;
 import org.java_gtk.gtk.MessageDialog.MessageType;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/gtkdialogs/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleMessageDialog extends ExampleBase {
 
 	public static void main(String[] args) {

@@ -25,6 +25,12 @@ import org.java_gtk.gtk.Menu;
 import org.java_gtk.gtk.MenuBar;
 import org.java_gtk.gtk.MenuItem;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/menusandtoolbars/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleMenu extends ExampleBase {
 	
 	public static void main(String[] args) {

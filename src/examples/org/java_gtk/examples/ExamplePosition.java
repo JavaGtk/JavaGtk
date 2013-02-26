@@ -5,6 +5,12 @@ import org.java_gtk.gtk.Widget;
 import org.java_gtk.gtk.Widget.ConfigureEventHandler;
 import org.java_gtk.gtk.Window;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/gtkevents/
+ * 
+ * @author Bill
+ *
+ */
 public class ExamplePosition extends ExampleBase {
 
 	public static void main(String[] args) {

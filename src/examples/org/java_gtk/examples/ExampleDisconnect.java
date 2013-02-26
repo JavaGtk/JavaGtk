@@ -4,6 +4,12 @@ import org.java_gtk.gtk.Button;
 import org.java_gtk.gtk.CheckButton;
 import org.java_gtk.gtk.Fixed;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/gtkevents/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleDisconnect extends ExampleBase {
 
 	public static void main(String[] args) {

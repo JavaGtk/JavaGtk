@@ -21,6 +21,12 @@ package org.java_gtk.examples;
 import org.java_gtk.gtk.Button;
 import org.java_gtk.gtk.Grid;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/gtklayoutmanagement/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleGrid extends ExampleBase {
 
 	public static void main(String[] args) {

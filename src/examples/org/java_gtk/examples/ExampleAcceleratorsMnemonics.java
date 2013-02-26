@@ -33,6 +33,12 @@ import org.java_gtk.gtk.MenuItem;
 import org.java_gtk.gtk.SeparatorMenuItem;
 import org.java_gtk.gtk.StockItems;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/menusandtoolbars/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleAcceleratorsMnemonics extends ExampleBase {
 
 	public static void main(String[] args) {

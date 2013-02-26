@@ -7,6 +7,12 @@ import org.java_gtk.gdk.EventMasks;
 import org.java_gtk.gdk.EventType;
 import org.java_gtk.gtk.Widget;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/gtkevents/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleDragDrop extends ExampleBase {
 
 	public static void main(String[] args) {

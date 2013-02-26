@@ -8,6 +8,12 @@ import org.java_gtk.gtk.Grid;
 import org.java_gtk.gtk.Label;
 import org.java_gtk.gtk.TextView;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/gtklayoutmanagement/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleWindowsDialog extends ExampleBase {
 
 	public static void main(String[] args) {

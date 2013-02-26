@@ -26,6 +26,12 @@ import org.java_gtk.gtk.Container.Orientation;
 import org.java_gtk.gtk.MenuItem;
 import org.java_gtk.gtk.StatusBar;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/menusandtoolbars/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleCheckMenuItem extends ExampleBase {
 
 	public static void main(String[] args) {

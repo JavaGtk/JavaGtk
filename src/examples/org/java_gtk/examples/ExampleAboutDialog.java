@@ -6,6 +6,12 @@ import org.java_gtk.gtk.AboutDialog;
 import org.java_gtk.gtk.Widget;
 import org.java_gtk.gtk.Widget.ButtonPressEventHandler;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/gtkdialogs/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleAboutDialog extends ExampleBase {
 
 	public static void main(String[] args) {

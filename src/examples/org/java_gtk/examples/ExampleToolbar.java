@@ -28,6 +28,12 @@ import org.java_gtk.gtk.ToolButton.ClickedEventHandler;
 import org.java_gtk.gtk.Toolbar;
 import org.java_gtk.gtk.Toolbar.ToolbarStyle;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/menusandtoolbars/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleToolbar extends ExampleBase {
 
 	public static void main(String[] args) {

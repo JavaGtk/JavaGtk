@@ -22,6 +22,12 @@ import org.java_gtk.gtk.Button;
 import org.java_gtk.gtk.Fixed;
 import org.java_gtk.gtk.Label;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/firstprograms/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleIncreaseDecrease extends ExampleBase {
 	
 	static int count = 0;
