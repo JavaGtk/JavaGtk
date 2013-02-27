@@ -36,7 +36,8 @@ set JAVA_HOME="C:\Program Files\Java\jdk1.6.0_25"
 	org.java_gtk.gtk.Frame ^
 	org.java_gtk.gtk.ComboBox ^
 	org.java_gtk.gtk.ComboBoxText ^
-	org.java_gtk.gtk.Separator
+	org.java_gtk.gtk.Separator ^
+	org.java_gtk.gtk.Entry
 
 %JAVA_HOME%\bin\javah.exe ^
 	-classpath "bin" ^

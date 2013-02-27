@@ -5,6 +5,12 @@ import org.java_gtk.gtk.Container.Orientation;
 import org.java_gtk.gtk.Label;
 import org.java_gtk.gtk.Separator;
 
+/**
+ * example code adapted from http://zetcode.com/tutorials/gtktutorial/gtkwidgetsII/
+ * 
+ * @author Bill
+ *
+ */
 public class ExampleSeparator extends ExampleBase {
 
 	public static void main(String[] args) {
