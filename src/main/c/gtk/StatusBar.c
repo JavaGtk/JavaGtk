@@ -19,6 +19,7 @@
 #include <jni.h>
 #include <gtk/gtk.h>
 #include "include/org_java_gtk_gtk_StatusBar.h"
+#include <jni_util.h>
 
 /*
  * Class:     org_java_gtk_gtk_StatusBar
@@ -33,4 +34,49 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_StatusBar_gtk_1statusbar_1new
 	widget = gtk_statusbar_new();
 
 	return (jlong)widget;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_StatusBar
+ * Method:    gtk_statusbar_push
+ * Signature: (JILjava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_StatusBar_gtk_1statusbar_1push
+  (JNIEnv *env, jclass cls, jlong statusbar, jint context_id, jstring text)
+{
+	const char* strText;
+	guint message_id;
+
+	strText = getJavaString(env, text);
+	message_id = gtk_statusbar_push((GtkStatusbar*)statusbar, (guint)context_id, (const gchar*)strText);
+	releaseJavaString(env, text, strText);
+	return (jint)message_id;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_StatusBar
+ * Method:    gtk_statusbar_pop
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_StatusBar_gtk_1statusbar_1pop
+  (JNIEnv *env, jclass cls, jlong statusbar, jint context_id)
+{
+	gtk_statusbar_pop((GtkStatusbar*)statusbar, (guint)context_id);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_StatusBar
+ * Method:    gtk_statusbar_get_context_id
+ * Signature: (JLjava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_StatusBar_gtk_1statusbar_1get_1context_1id
+  (JNIEnv *env, jclass cls, jlong statusbar, jstring text)
+{
+	const char* strText;
+	guint context_id;
+
+	strText = getJavaString(env, text);
+	context_id = gtk_statusbar_get_context_id((GtkStatusbar*)statusbar, (const gchar*)strText);
+	releaseJavaString(env, text, strText);
+	return (jint)context_id;
 }

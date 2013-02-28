@@ -15,6 +15,30 @@ extern "C" {
 JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_StatusBar_gtk_1statusbar_1new
   (JNIEnv *, jclass);
 
+/*
+ * Class:     org_java_gtk_gtk_StatusBar
+ * Method:    gtk_statusbar_push
+ * Signature: (JILjava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_StatusBar_gtk_1statusbar_1push
+  (JNIEnv *, jclass, jlong, jint, jstring);
+
+/*
+ * Class:     org_java_gtk_gtk_StatusBar
+ * Method:    gtk_statusbar_pop
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_StatusBar_gtk_1statusbar_1pop
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     org_java_gtk_gtk_StatusBar
+ * Method:    gtk_statusbar_get_context_id
+ * Signature: (JLjava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_StatusBar_gtk_1statusbar_1get_1context_1id
+  (JNIEnv *, jclass, jlong, jstring);
+
 #ifdef __cplusplus
 }
 #endif
