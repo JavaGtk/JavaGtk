@@ -37,7 +37,6 @@ public class Gtk extends GObject {
 	private static native final boolean gtk_main_iteration_do(boolean blocking);
 	private static native final boolean gtk_events_pending();
 	private static native final void gtk_main_quit();
-    private static native final void g_object_cleanup(long objectPointer);
 	private static native final void g_signal_handler_disconnect(long objectPointer, long handler_id);
 	
 	static {
@@ -143,21 +142,6 @@ public class Gtk extends GObject {
 		}
 	}
 	
-	/**
-	 * Perform cleanup on a finalized object.
-	 * 
-	 * @param pointer object pointer
-	 */
-	public static void cleanup(long pointer) {
-		ObjectCache.remove(pointer);
-		lock.lock();
-		try {
-			g_object_cleanup(pointer);
-		}
-		finally {
-			lock.unlock();
-		}
-	}
 
 	/**
 	 * Disconnects a handler from an instance so it will not be called during 

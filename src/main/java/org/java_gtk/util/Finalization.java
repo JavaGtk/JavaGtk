@@ -20,6 +20,8 @@ package org.java_gtk.util;
 
 import java.lang.ref.PhantomReference;
 import java.lang.ref.ReferenceQueue;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,8 +45,8 @@ public class Finalization {
 	private static final Logger logger = LoggerFactory.getLogger(Finalization.class);
 
 	/**
-	 * Holds a reference to the object pointer that can be used after the 
-	 * object has been finalized on the Java side.
+	 * Holds a reference to the cleanup method and the object pointer 
+	 * that can be used after the object has been finalized on the Java side.
 	 * 
 	 * @author Bill
 	 *
@@ -52,15 +54,25 @@ public class Finalization {
 	static class Finalizer extends PhantomReference<NativeObject> {
 
 		private long pointer;
+		private Method cleanup;
 		
-		public Finalizer(NativeObject referent) {
+		public <T extends NativeObject> Finalizer(T referent) {
 			super(referent, queue);
 			this.pointer = referent.getPointer();
+			try {
+				this.cleanup = referent.getClass().getMethod("cleanup", long.class);
+			} catch (Exception e) {
+				logger.error("Error creating Finalizer", e);
+			}
 		}
 		
 		public void cleanup() {
 			logger.debug("Cleanup: {}", pointer);
-			Gtk.cleanup(pointer);
+			try {
+				cleanup.invoke(null, pointer);
+			} catch (Exception e) {
+				logger.error("Error cleaning up", e);
+			}
 		}
 		
 	}
@@ -85,7 +97,7 @@ public class Finalization {
 						ref.cleanup();
 						phantomReferences.remove(ref);
 					} catch (Exception ex) {
-						logger.error("Finalization error");
+						logger.error("Finalization error", ex);
 					}
 				}
 			}

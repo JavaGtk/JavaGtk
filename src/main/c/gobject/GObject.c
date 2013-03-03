@@ -34,3 +34,15 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gobject_GObject_add_1toggle_1ref
 	g_object_set_data((GObject*)object, JAVA_REF, (gpointer)ref);
 	g_object_add_toggle_ref((GObject*)object, toggle_java_ref, NULL);
 }
+
+/*
+ * Class:     org_java_gtk_gobject_GObject
+ * Method:    g_object_cleanup
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gobject_GObject_g_1object_1cleanup
+  (JNIEnv *env, jclass cls, jlong object)
+{
+	g_debug("cleanup: %ld", (long)object);
+	g_object_remove_toggle_ref((GObject*)object, toggle_java_ref, NULL);
+}

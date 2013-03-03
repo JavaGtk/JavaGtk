@@ -106,18 +106,6 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_gtk_1main_1quit
 
 /*
  * Class:     org_java_gtk_gtk_Gtk
- * Method:    g_object_cleanup
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Gtk_g_1object_1cleanup
-  (JNIEnv *env, jclass cls, jlong object)
-{
-	g_debug("cleanup: %ld", (long)object);
-	g_object_remove_toggle_ref((GObject*)object, toggle_java_ref, NULL);
-}
-
-/*
- * Class:     org_java_gtk_gtk_Gtk
  * Method:    g_signal_handler_disconnect
  * Signature: (JJ)V
  */

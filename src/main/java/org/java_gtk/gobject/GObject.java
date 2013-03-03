@@ -29,6 +29,7 @@ import org.java_gtk.util.Finalization;
 public abstract class GObject extends NativeObject {
 
 	private static native final void add_toggle_ref(long objectPointer, GObject me);
+    private static native final void g_object_cleanup(long objectPointer);
 	
 	protected GObject(long pointer) {
 		this(pointer, false);
@@ -44,6 +45,17 @@ public abstract class GObject extends NativeObject {
 			lock.unlock();
 		}
 		Finalization.addFinalizer(this);
+	}
+	
+	public static void cleanup(long pointer) {
+		NativeObject.cleanup(pointer);
+		lock.lock();
+		try {
+			g_object_cleanup(pointer);
+		}
+		finally {
+			lock.unlock();
+		}
 	}
 
 }

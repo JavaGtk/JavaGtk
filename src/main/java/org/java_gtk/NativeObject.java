@@ -20,6 +20,7 @@ package org.java_gtk;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.java_gtk.gobject.GObject;
 import org.java_gtk.util.ObjectCache;
 
 /**
@@ -41,8 +42,8 @@ public abstract class NativeObject {
 	protected static final ReentrantLock lock = new ReentrantLock(true);
 
 	/**
-	 * Create a new GObject with the specified address as its pointer.
-	 * GObjects are cached in {@link org.java_gtk.util.ObjectCache ObjectCache} upon instantiation.
+	 * Create a new NativeObject with the specified address as its pointer.
+	 * NativeObject are cached in {@link org.java_gtk.util.ObjectCache ObjectCache} upon instantiation.
 	 * 
 	 * @param pointer address of c object
 	 */
@@ -51,9 +52,9 @@ public abstract class NativeObject {
 	}
 	
 	/**
-	 * Create a new GObject with the specified address as its pointer.
+	 * Create a new NativeObject with the specified address as its pointer.
 	 * If the {@code isTransient} parameter is {@code false} then the
-	 * GObject is cached in {@link org.java_gtk.util.ObjectCache ObjectCache} 
+	 * NativeObject is cached in {@link org.java_gtk.util.ObjectCache ObjectCache} 
 	 * upon instantiation.
 	 * 
 	 * @param pointer address of c object
@@ -68,6 +69,10 @@ public abstract class NativeObject {
 
 	public long getPointer() {
 		return pointer;
+	}
+	
+	public static void cleanup(long pointer) {
+		ObjectCache.remove(pointer);
 	}
 
 }

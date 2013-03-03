@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT void JNICALL Java_org_java_1gtk_gobject_GObject_add_1toggle_1ref
   (JNIEnv *, jclass, jlong, jobject);
 
+/*
+ * Class:     org_java_gtk_gobject_GObject
+ * Method:    g_object_cleanup
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gobject_GObject_g_1object_1cleanup
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif
