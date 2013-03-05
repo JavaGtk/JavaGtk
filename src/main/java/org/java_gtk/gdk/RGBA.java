@@ -30,9 +30,10 @@ import org.java_gtk.NativeObject;
 public class RGBA extends NativeObject {
 	
 	private static native final long gdk_rgba_new(double red, double green, double blue, double alpha);
+	private static native final long gdk_rgba_free(long rgbaPointer);
 
 	protected RGBA(long pointer) {
-		super(pointer);
+		super(pointer, true, true);
 	}
 	
 	/**
@@ -44,7 +45,7 @@ public class RGBA extends NativeObject {
 	 * @param alpha The opacity of the color from 0.0 for completely translucent to 1.0 for opaque
 	 */
 	public RGBA(double red, double green, double blue, double alpha) {
-		super(newRGBA(red, green, blue, alpha));
+		this(newRGBA(red, green, blue, alpha));
 	}
 	
 	private static long newRGBA(double red, double green, double blue, double alpha) {
@@ -57,4 +58,13 @@ public class RGBA extends NativeObject {
 		}
 	}
 
+	public static void cleanup(long pointer) {
+		lock.lock();
+		try {
+			gdk_rgba_free(pointer);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
 }

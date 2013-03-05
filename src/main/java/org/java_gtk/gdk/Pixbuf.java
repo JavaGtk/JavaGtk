@@ -32,7 +32,7 @@ public class Pixbuf extends NativeObject {
 	private static native final long gdk_pixbuf_new_from_file(String filename) throws PixbufError, GFileError;
 	
 	protected Pixbuf(long pointer) {
-		super(pointer);
+		super(pointer, false, false);
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class Pixbuf extends NativeObject {
 	 * @throws GFileError
 	 */
 	public Pixbuf(String filename) throws PixbufError, GFileError {
-		super(newPixBuf(filename));
+		this(newPixBuf(filename));
 	}
 	
 	private static long newPixBuf(String filename) throws PixbufError, GFileError {

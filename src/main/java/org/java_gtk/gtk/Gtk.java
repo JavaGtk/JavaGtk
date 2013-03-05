@@ -21,7 +21,6 @@ package org.java_gtk.gtk;
 import org.java_gtk.gobject.GObject;
 import org.java_gtk.util.Finalization;
 import org.java_gtk.util.NativeLibraries;
-import org.java_gtk.util.ObjectCache;
 
 /**
  * Utility methods for library initialization, main event loop and events.

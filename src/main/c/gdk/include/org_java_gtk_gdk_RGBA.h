@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT jlong JNICALL Java_org_java_1gtk_gdk_RGBA_gdk_1rgba_1new
   (JNIEnv *, jclass, jdouble, jdouble, jdouble, jdouble);
 
+/*
+ * Class:     org_java_gtk_gdk_RGBA
+ * Method:    gdk_rgba_free
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gdk_RGBA_gdk_1rgba_1free
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif

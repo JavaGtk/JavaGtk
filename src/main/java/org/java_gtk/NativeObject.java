@@ -20,7 +20,7 @@ package org.java_gtk;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.java_gtk.gobject.GObject;
+import org.java_gtk.util.Finalization;
 import org.java_gtk.util.ObjectCache;
 
 /**
@@ -40,30 +40,30 @@ public abstract class NativeObject {
 	protected final long pointer;
 	
 	protected static final ReentrantLock lock = new ReentrantLock(true);
-
-	/**
-	 * Create a new NativeObject with the specified address as its pointer.
-	 * NativeObject are cached in {@link org.java_gtk.util.ObjectCache ObjectCache} upon instantiation.
-	 * 
-	 * @param pointer address of c object
-	 */
-	protected NativeObject(long pointer) {
-		this(pointer, false);
-	}
 	
 	/**
 	 * Create a new NativeObject with the specified address as its pointer.
+	 * <p>
 	 * If the {@code isTransient} parameter is {@code false} then the
 	 * NativeObject is cached in {@link org.java_gtk.util.ObjectCache ObjectCache} 
 	 * upon instantiation.
+	 * <p>
+	 * If the {@code isFinalizable} parameter is {@code true} then 
+	 * a {@link org.java_gtk.util.Finalization.Finalizer} will be created.
+	 * The Finalizer will call {@code cleanup} when the java object is no longer
+	 * strongly or weakly reachable.
 	 * 
 	 * @param pointer address of c object
 	 * @param isTransient {@code true} if object will not be cached
+	 * @param isFinalizable {@code true} if a Finalizer will be created for this object
 	 */
-	protected NativeObject(long pointer, boolean isTransient) {
+	protected NativeObject(long pointer, boolean isTransient, boolean isFinalizable) {
 		this.pointer = pointer;
-		if (pointer != 0 && !isTransient) {
-			ObjectCache.cache(this);
+		if (pointer != 0) {
+			if(!isTransient)
+				ObjectCache.cache(this);
+			if (isFinalizable)
+				Finalization.addFinalizer(this);
 		}
 	}
 

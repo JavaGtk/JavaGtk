@@ -31,7 +31,7 @@ public class Event extends NativeObject {
 	private static native final int gtk_event_get_type(long eventPointer);
 
 	public Event(long pointer) {
-		super(pointer, true);
+		super(pointer, true, false);
 	}
 	
 	public EventType getEventType() {

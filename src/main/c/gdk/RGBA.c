@@ -37,3 +37,14 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gdk_RGBA_gdk_1rgba_1new
 
 	return (jlong)gdk_rgba_copy(&color);
 }
+
+/*
+ * Class:     org_java_gtk_gdk_RGBA
+ * Method:    gdk_rgba_free
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gdk_RGBA_gdk_1rgba_1free
+  (JNIEnv *env, jclass cls, jlong rgba)
+{
+	gdk_rgba_free((GdkRGBA*)rgba);
+}

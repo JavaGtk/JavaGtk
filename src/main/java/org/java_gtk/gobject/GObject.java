@@ -32,11 +32,7 @@ public abstract class GObject extends NativeObject {
     private static native final void g_object_cleanup(long objectPointer);
 	
 	protected GObject(long pointer) {
-		this(pointer, false);
-	}
-	
-	protected GObject(long pointer, boolean isTransient) {
-		super(pointer, isTransient);
+		super(pointer, false, true);
 		lock.lock();
 		try {
 			add_toggle_ref(pointer, this);
@@ -44,7 +40,6 @@ public abstract class GObject extends NativeObject {
 		finally {
 			lock.unlock();
 		}
-		Finalization.addFinalizer(this);
 	}
 	
 	public static void cleanup(long pointer) {
