@@ -21,10 +21,14 @@ package org.java_gtk.examples;
 import org.java_gtk.gtk.Gtk;
 import org.java_gtk.gtk.Widget;
 import org.java_gtk.gtk.Window;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class ExampleBase {
 	
 	protected Window mainWin;
+	
+	protected static final Logger logger = LoggerFactory.getLogger(ExampleBase.class);
 	
 	protected void runExample(String[] args, String title, int width, int height, int border) {
 		
