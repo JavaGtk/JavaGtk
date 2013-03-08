@@ -16,25 +16,37 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.gobject;
+package org.java_gtk.gtk;
 
 import org.java_gtk.NativeObject;
 
 /**
- *  
- * @author Bill Hull
+ * TreeIterator represents a pointer to a specific node in a
+ * TreeModel object.
+ * 
+ * @author Bill
  *
  */
-public abstract class GObject extends NativeObject {
+public class TreeIterator extends NativeObject {
 
-	private static native final void add_toggle_ref(long objectPointer, GObject me);
-    private static native final void g_object_cleanup(long objectPointer);
+	private static native final long gtk_tree_iter_new();
+	private static native final void gtk_tree_iter_free(long iterPointer);
+
+	protected TreeIterator(long pointer) {
+		super(pointer, true, true);
+	}
 	
-	protected GObject(long pointer) {
-		super(pointer, false, true);
+	/**
+	 * Construct a new TreeIterator
+	 */
+	public TreeIterator() {
+		this(newTreeIterator());
+	}
+	
+	private static long newTreeIterator() {
 		lock.lock();
 		try {
-			add_toggle_ref(pointer, this);
+			return gtk_tree_iter_new();
 		}
 		finally {
 			lock.unlock();
@@ -42,10 +54,9 @@ public abstract class GObject extends NativeObject {
 	}
 	
 	public static void cleanup(long pointer) {
-		NativeObject.cleanup(pointer);
 		lock.lock();
 		try {
-			g_object_cleanup(pointer);
+			gtk_tree_iter_free(pointer);
 		}
 		finally {
 			lock.unlock();

@@ -16,40 +16,29 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.gobject;
+#include <jni.h>
+#include <gtk/gtk.h>
+#include "include/org_java_gtk_gtk_TreeIterator.h"
 
-import org.java_gtk.NativeObject;
-
-/**
- *  
- * @author Bill Hull
- *
+/*
+ * Class:     org_java_gtk_gtk_TreeIterator
+ * Method:    gtk_tree_iter_new
+ * Signature: ()J
  */
-public abstract class GObject extends NativeObject {
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_TreeIterator_gtk_1tree_1iter_1new
+  (JNIEnv *env, jclass cls)
+{
+	GtkTreeIter iter = {0, };
+	return (jlong)gtk_tree_iter_copy(&iter);
+}
 
-	private static native final void add_toggle_ref(long objectPointer, GObject me);
-    private static native final void g_object_cleanup(long objectPointer);
-	
-	protected GObject(long pointer) {
-		super(pointer, false, true);
-		lock.lock();
-		try {
-			add_toggle_ref(pointer, this);
-		}
-		finally {
-			lock.unlock();
-		}
-	}
-	
-	public static void cleanup(long pointer) {
-		NativeObject.cleanup(pointer);
-		lock.lock();
-		try {
-			g_object_cleanup(pointer);
-		}
-		finally {
-			lock.unlock();
-		}
-	}
-
+/*
+ * Class:     org_java_gtk_gtk_TreeIterator
+ * Method:    gtk_tree_iter_free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_TreeIterator_gtk_1tree_1iter_1free
+  (JNIEnv *env, jclass cls, jlong tree_iter)
+{
+	gtk_tree_iter_free((GtkTreeIter *)tree_iter);
 }

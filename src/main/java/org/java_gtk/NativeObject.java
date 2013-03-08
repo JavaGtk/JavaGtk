@@ -71,6 +71,10 @@ public abstract class NativeObject {
 		return pointer;
 	}
 	
+	public static ReentrantLock getLock() {
+		return lock;
+	}
+	
 	public static void cleanup(long pointer) {
 		ObjectCache.remove(pointer);
 	}

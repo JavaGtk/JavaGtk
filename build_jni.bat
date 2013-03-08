@@ -40,7 +40,11 @@ set JAVA_HOME="C:\Program Files\Java\jdk1.6.0_25"
 	org.java_gtk.gtk.Entry ^
 	org.java_gtk.gtk.Image ^
 	org.java_gtk.gtk.Adjustment ^
-	org.java_gtk.gtk.ScrolledWindow
+	org.java_gtk.gtk.ScrolledWindow ^
+	org.java_gtk.gtk.IconView ^
+	org.java_gtk.gtk.TreeModel ^
+	org.java_gtk.gtk.ListStore ^
+	org.java_gtk.gtk.TreeIterator
 
 %JAVA_HOME%\bin\javah.exe ^
 	-classpath "bin" ^
@@ -54,7 +58,8 @@ set JAVA_HOME="C:\Program Files\Java\jdk1.6.0_25"
 	%JAVA_HOME%\bin\javah.exe ^
 	-classpath "bin" ^
 	-d "src\main\c\gobject\include" ^
-	org.java_gtk.gobject.GObject
+	org.java_gtk.gobject.GObject ^
+	org.java_gtk.gobject.GType
 	
 %JAVA_HOME%\bin\javah.exe ^
 	-classpath "bin" ^

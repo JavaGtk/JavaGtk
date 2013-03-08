@@ -16,40 +16,21 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.gobject;
+package org.java_gtk.gtk;
 
-import org.java_gtk.NativeObject;
+import org.java_gtk.gobject.GObject;
 
 /**
- *  
- * @author Bill Hull
+ * TreeModel represents a hierarchical tree of strongly-typed, 
+ * columned data.
+ * 
+ * @author Bill
  *
  */
-public abstract class GObject extends NativeObject {
+public abstract class TreeModel extends GObject {
 
-	private static native final void add_toggle_ref(long objectPointer, GObject me);
-    private static native final void g_object_cleanup(long objectPointer);
-	
-	protected GObject(long pointer) {
-		super(pointer, false, true);
-		lock.lock();
-		try {
-			add_toggle_ref(pointer, this);
-		}
-		finally {
-			lock.unlock();
-		}
-	}
-	
-	public static void cleanup(long pointer) {
-		NativeObject.cleanup(pointer);
-		lock.lock();
-		try {
-			g_object_cleanup(pointer);
-		}
-		finally {
-			lock.unlock();
-		}
+	protected TreeModel(long pointer) {
+		super(pointer);
 	}
 
 }

@@ -68,9 +68,11 @@ public class ScrolledWindow extends Bin {
 	}
 		
 	private static long newScrolledWindow(Adjustment hadjustment, Adjustment vadjustment) {
+		long h = (hadjustment == null ? 0 : hadjustment.getPointer());
+		long v = (vadjustment == null ? 0 : vadjustment.getPointer());
 		lock.lock();
 		try {
-			return gtk_scrolled_window_new(hadjustment.getPointer(), vadjustment.getPointer());
+			return gtk_scrolled_window_new(h, v);
 		}
 		finally {
 			lock.unlock();
