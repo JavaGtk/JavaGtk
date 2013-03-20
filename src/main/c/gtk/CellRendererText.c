@@ -16,51 +16,18 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.gtk;
+#include <jni.h>
+#include <gtk/gtk.h>
+#include "include/org_java_gtk_gtk_CellRendererText.h"
+#include <jni_util.h>
 
-import org.java_gtk.NativeObject;
-
-/**
- * TreeIterator represents a pointer to a specific node in a
- * TreeModel object.
- * 
- * @author Bill
- *
+/*
+ * Class:     org_java_gtk_gtk_CellRendererText
+ * Method:    gtk_cell_renderer_text_new
+ * Signature: ()J
  */
-public class TreeIterator extends NativeObject {
-
-	private static native final long gtk_tree_iter_new();
-	private static native final void gtk_tree_iter_free(long iterPointer);
-
-	public TreeIterator(long pointer) {
-		super(pointer, true, true);
-	}
-	
-	/**
-	 * Construct a new TreeIterator
-	 */
-	public TreeIterator() {
-		this(newTreeIterator());
-	}
-	
-	private static long newTreeIterator() {
-		lock.lock();
-		try {
-			return gtk_tree_iter_new();
-		}
-		finally {
-			lock.unlock();
-		}
-	}
-	
-	public static void cleanup(long pointer) {
-		lock.lock();
-		try {
-			gtk_tree_iter_free(pointer);
-		}
-		finally {
-			lock.unlock();
-		}
-	}
-
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_CellRendererText_gtk_1cell_1renderer_1text_1new
+  (JNIEnv *env, jclass cls)
+{
+	return (jlong)gtk_cell_renderer_text_new();
 }

@@ -18,45 +18,33 @@
 
 package org.java_gtk.gtk;
 
-import org.java_gtk.NativeObject;
-
 /**
- * TreeIterator represents a pointer to a specific node in a
- * TreeModel object.
+ * A CellRendererText renders a given text in its cell, 
+ * using the font, color and style information provided.
  * 
  * @author Bill
  *
  */
-public class TreeIterator extends NativeObject {
+public class CellRendererText extends CellRenderer {
 
-	private static native final long gtk_tree_iter_new();
-	private static native final void gtk_tree_iter_free(long iterPointer);
-
-	public TreeIterator(long pointer) {
-		super(pointer, true, true);
+	private static native final long gtk_cell_renderer_text_new();
+	
+	protected CellRendererText(long pointer) {
+		super(pointer);
 	}
 	
 	/**
-	 * Construct a new TreeIterator
+	 * Constructs a new CellRendererText object.
+	 * 
 	 */
-	public TreeIterator() {
-		this(newTreeIterator());
+	public CellRendererText() {
+		this(newCellRendererText());
 	}
-	
-	private static long newTreeIterator() {
+
+	private static long newCellRendererText() {
 		lock.lock();
 		try {
-			return gtk_tree_iter_new();
-		}
-		finally {
-			lock.unlock();
-		}
-	}
-	
-	public static void cleanup(long pointer) {
-		lock.lock();
-		try {
-			gtk_tree_iter_free(pointer);
+			return gtk_cell_renderer_text_new();
 		}
 		finally {
 			lock.unlock();

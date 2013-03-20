@@ -16,51 +16,26 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package org.java_gtk.gtk;
+#include <jni.h>
+#include <gtk/gtk.h>
+#include "include/org_java_gtk_gtk_TreeViewColumn.h"
+#include <jni_util.h>
 
-import org.java_gtk.NativeObject;
-
-/**
- * TreeIterator represents a pointer to a specific node in a
- * TreeModel object.
- * 
- * @author Bill
- *
+/*
+ * Class:     org_java_gtk_gtk_TreeViewTextColumn
+ * Method:    gtk_tree_view_text_column_new
+ * Signature: (Ljava/lang/String;J)J
  */
-public class TreeIterator extends NativeObject {
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_TreeViewTextColumn_gtk_1tree_1view_1text_1column_1new
+  (JNIEnv *env, jclass cls, jstring title, jlong renderer, jint columnNum)
+{
+	const char* strTitle;
+	GtkTreeViewColumn *column;
 
-	private static native final long gtk_tree_iter_new();
-	private static native final void gtk_tree_iter_free(long iterPointer);
+	strTitle = getJavaString(env, title);
+	column = gtk_tree_view_column_new_with_attributes(strTitle, (GtkCellRenderer*)renderer, "text", (int)columnNum, NULL);
+	releaseJavaString(env, title, strTitle);
 
-	public TreeIterator(long pointer) {
-		super(pointer, true, true);
-	}
-	
-	/**
-	 * Construct a new TreeIterator
-	 */
-	public TreeIterator() {
-		this(newTreeIterator());
-	}
-	
-	private static long newTreeIterator() {
-		lock.lock();
-		try {
-			return gtk_tree_iter_new();
-		}
-		finally {
-			lock.unlock();
-		}
-	}
-	
-	public static void cleanup(long pointer) {
-		lock.lock();
-		try {
-			gtk_tree_iter_free(pointer);
-		}
-		finally {
-			lock.unlock();
-		}
-	}
-
+	return (jlong)column;
 }
+

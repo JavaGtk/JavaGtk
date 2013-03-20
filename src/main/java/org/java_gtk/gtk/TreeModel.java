@@ -29,8 +29,44 @@ import org.java_gtk.gobject.GObject;
  */
 public abstract class TreeModel extends GObject {
 
+	private static final native long gtk_tree_model_get_long(long treemodelPointer, long iterPointer, int column);
+	private static final native String gtk_tree_model_get_string(long treemodelPointer, long iterPointer, int column);
+	
 	protected TreeModel(long pointer) {
 		super(pointer);
 	}
 
+	/**
+	 * Retrieves a long value from the model
+	 * 
+	 * @param iter pointer to the row containing the value
+	 * @param columnNum column number of the value
+	 * @return the value
+	 */
+	public long getLong(TreeIterator iter, int columnNum) {
+		lock.lock();
+		try {
+			return gtk_tree_model_get_long(this.pointer, iter.getPointer(), columnNum);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Retrieves a String value from the model
+	 * 
+	 * @param iter pointer to the row containing the value
+	 * @param columnNum column number of the value
+	 * @return the value
+	 */
+	public String getString(TreeIterator iter, int columnNum) {
+		lock.lock();
+		try {
+			return gtk_tree_model_get_string(this.pointer, iter.getPointer(), columnNum);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
 }

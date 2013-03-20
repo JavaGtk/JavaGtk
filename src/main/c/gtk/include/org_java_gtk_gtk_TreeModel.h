@@ -7,6 +7,22 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+/*
+ * Class:     org_java_gtk_gtk_TreeModel
+ * Method:    gtk_tree_model_get_long
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_TreeModel_gtk_1tree_1model_1get_1long
+  (JNIEnv *, jclass, jlong, jlong, jint);
+
+/*
+ * Class:     org_java_gtk_gtk_TreeModel
+ * Method:    gtk_tree_model_get_string
+ * Signature: (JI)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_TreeModel_gtk_1tree_1model_1get_1string
+  (JNIEnv *, jclass, jlong, jlong, jint);
+
 #ifdef __cplusplus
 }
 #endif

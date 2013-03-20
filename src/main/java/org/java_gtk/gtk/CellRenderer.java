@@ -18,49 +18,18 @@
 
 package org.java_gtk.gtk;
 
-import org.java_gtk.NativeObject;
+import org.java_gtk.gobject.GObject;
 
 /**
- * TreeIterator represents a pointer to a specific node in a
- * TreeModel object.
+ * A base class for rendering a single cell.
  * 
  * @author Bill
  *
  */
-public class TreeIterator extends NativeObject {
+public class CellRenderer extends GObject {
 
-	private static native final long gtk_tree_iter_new();
-	private static native final void gtk_tree_iter_free(long iterPointer);
-
-	public TreeIterator(long pointer) {
-		super(pointer, true, true);
-	}
-	
-	/**
-	 * Construct a new TreeIterator
-	 */
-	public TreeIterator() {
-		this(newTreeIterator());
-	}
-	
-	private static long newTreeIterator() {
-		lock.lock();
-		try {
-			return gtk_tree_iter_new();
-		}
-		finally {
-			lock.unlock();
-		}
-	}
-	
-	public static void cleanup(long pointer) {
-		lock.lock();
-		try {
-			gtk_tree_iter_free(pointer);
-		}
-		finally {
-			lock.unlock();
-		}
+	protected CellRenderer(long pointer) {
+		super(pointer);
 	}
 
 }

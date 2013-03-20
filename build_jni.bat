@@ -42,9 +42,15 @@ set JAVA_HOME="C:\Program Files\Java\jdk1.6.0_25"
 	org.java_gtk.gtk.Adjustment ^
 	org.java_gtk.gtk.ScrolledWindow ^
 	org.java_gtk.gtk.IconView ^
+	org.java_gtk.gtk.TreeView ^
 	org.java_gtk.gtk.TreeModel ^
+	org.java_gtk.gtk.TreeViewColumn ^
+	org.java_gtk.gtk.TreeViewTextColumn ^
 	org.java_gtk.gtk.ListStore ^
-	org.java_gtk.gtk.TreeIterator
+	org.java_gtk.gtk.TreeIterator ^
+	org.java_gtk.gtk.TreeSelection ^
+	org.java_gtk.gtk.CellRenderer ^
+	org.java_gtk.gtk.CellRendererText
 
 %JAVA_HOME%\bin\javah.exe ^
 	-classpath "bin" ^
