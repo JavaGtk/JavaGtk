@@ -18,9 +18,11 @@
 
 package org.java_gtk.gtk;
 
+import org.java_gtk.gtk.Dialog.ResponseType;
+
 /**
  * A widget that displays a small to medium amount of text
- * 
+ * <p>
  * The Label widget displays a small amount of text. As the name implies, 
  * most labels are used to label another widget such as a Button, 
  * a MenuItem, or a ComboBox. 
@@ -35,6 +37,36 @@ public class Label extends Misc {
 	private static native final void gtk_label_set_text(long labelPointer, String label);
 	private static native final boolean gtk_label_get_line_wrap(long labelPointer);
 	private static native final void gtk_label_set_line_wrap(long labelPointer, boolean wrap);
+	private static native final int gtk_label_get_justification(long labelPointer);
+	private static native final void gtk_label_set_justification(long labelPointer, int justification);
+	
+	/**
+	 * Used for justifying the text inside a Label widget.
+	 */
+	public enum Justification {
+		LEFT(0),
+		RIGHT(1),
+		CENTER(2),
+		FILL(3);
+		
+		private Justification(int value) {
+			this.value = value;
+		}
+		
+		private int value;
+		
+		public int getValue() {
+			return value;
+		}
+		
+		public static Justification getJustification(int value) {
+			for (Justification justification: Justification.values()) {
+				if (justification.getValue() == value)
+					return justification;
+			}
+			return Justification.LEFT;
+		}
+	}
 	
 	protected Label(long pointer) {
 		super(pointer);
@@ -120,4 +152,37 @@ public class Label extends Misc {
 		}
 	}
 
+	/**
+	 * Sets the alignment of the lines in the text of the label relative to each other.
+	 * Has no effect on labels containing only a single line.
+	 * 
+	 * @param justification Justification value
+	 */
+	public void setJustification(Justification justification) {
+		lock.lock();
+		try {
+			gtk_label_set_justification(this.pointer, justification.getValue());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+	
+	/**
+	 * Returns the justification of the label.
+	 * 
+	 * @return the justification
+	 */
+	public Justification getJustification() {
+		int value;
+		lock.lock();
+		try {
+			value = gtk_label_get_justification(pointer);
+		}
+		finally {
+			lock.unlock();
+		}
+		return Justification.getJustification(value);
+	}
+	
 }

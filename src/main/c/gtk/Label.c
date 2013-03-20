@@ -93,3 +93,25 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1set_1line_1wrap
 {
 	gtk_label_set_line_wrap((GtkLabel*)label, (gboolean)wrap);
 }
+
+/*
+ * Class:     org_java_gtk_gtk_Label
+ * Method:    gtk_label_get_justification
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1get_1justification
+  (JNIEnv *env, jclass cls, jlong label)
+{
+	return (jint)gtk_label_get_justify((GtkLabel *)label);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Label
+ * Method:    gtk_label_set_justification
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_Label_gtk_1label_1set_1justification
+  (JNIEnv *env, jclass cls, jlong label, jint justify)
+{
+	gtk_label_set_justify((GtkLabel *)label, (GtkJustification)justify);
+}
