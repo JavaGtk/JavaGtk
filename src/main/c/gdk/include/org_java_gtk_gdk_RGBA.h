@@ -18,9 +18,9 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gdk_RGBA_gdk_1rgba_1new
 /*
  * Class:     org_java_gtk_gdk_RGBA
  * Method:    gdk_rgba_free
- * Signature: (J)J
+ * Signature: (J)V
  */
-JNIEXPORT jlong JNICALL Java_org_java_1gtk_gdk_RGBA_gdk_1rgba_1free
+JNIEXPORT void JNICALL Java_org_java_1gtk_gdk_RGBA_gdk_1rgba_1free
   (JNIEnv *, jclass, jlong);
 
 #ifdef __cplusplus

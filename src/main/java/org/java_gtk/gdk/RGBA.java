@@ -30,7 +30,7 @@ import org.java_gtk.NativeObject;
 public class RGBA extends NativeObject {
 	
 	private static native final long gdk_rgba_new(double red, double green, double blue, double alpha);
-	private static native final long gdk_rgba_free(long rgbaPointer);
+	private static native final void gdk_rgba_free(long rgbaPointer);
 
 	protected RGBA(long pointer) {
 		super(pointer, true, true);

@@ -43,7 +43,7 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gdk_RGBA_gdk_1rgba_1new
  * Method:    gdk_rgba_free
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_org_java_1gtk_gdk_RGBA_gdk_1rgba_1free
+JNIEXPORT void JNICALL Java_org_java_1gtk_gdk_RGBA_gdk_1rgba_1free
   (JNIEnv *env, jclass cls, jlong rgba)
 {
 	gdk_rgba_free((GdkRGBA*)rgba);
