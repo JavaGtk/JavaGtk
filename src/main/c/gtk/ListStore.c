@@ -51,6 +51,30 @@ JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_ListStore_gtk_1list_1store_1append
 
 /*
  * Class:     org_java_gtk_gtk_ListStore
+ * Method:    gtk_list_store_remove
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_ListStore_gtk_1list_1store_1remove
+  (JNIEnv *env, jclass cls, jlong list_store, jlong iter)
+{
+	gboolean value;
+	value = gtk_list_store_remove((GtkListStore *)list_store, (GtkTreeIter *)iter);
+	return (jboolean)value;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_ListStore
+ * Method:    gtk_list_store_clear
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_java_1gtk_gtk_ListStore_gtk_1list_1store_1clear
+  (JNIEnv *env, jclass cls, jlong list_store)
+{
+	gtk_list_store_clear((GtkListStore *)list_store);
+}
+
+/*
+ * Class:     org_java_gtk_gtk_ListStore
  * Method:    gtk_list_store_set_string
  * Signature: (JJILjava/lang/String;)V
  */

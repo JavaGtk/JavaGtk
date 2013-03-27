@@ -31,6 +31,7 @@ public abstract class TreeModel extends GObject {
 
 	private static final native long gtk_tree_model_get_long(long treemodelPointer, long iterPointer, int column);
 	private static final native String gtk_tree_model_get_string(long treemodelPointer, long iterPointer, int column);
+	private static final native boolean gtk_tree_model_get_iter_first(long treemodelPointer, long iterPointer);
 	
 	protected TreeModel(long pointer) {
 		super(pointer);
@@ -69,4 +70,21 @@ public abstract class TreeModel extends GObject {
 			lock.unlock();
 		}
 	}
+	
+	/**
+	 * Sets iter to the first Iterator in the tree.
+	 *  
+	 * @param iter the TreeIterator to set
+	 * @return {@code true} if iter was set
+	 */
+	public boolean getFirstIterator(TreeIterator iter) {
+		lock.lock();
+		try {
+			return gtk_tree_model_get_iter_first(this.pointer, iter.getPointer());
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
 }

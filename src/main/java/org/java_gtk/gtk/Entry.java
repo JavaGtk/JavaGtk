@@ -27,6 +27,7 @@ package org.java_gtk.gtk;
 public class Entry extends Widget {
 
 	private static native final long gtk_entry_new();
+	private static native final String gtk_entry_get_text(long entryPointer);
 
 	protected Entry(long pointer) {
 		super(pointer);
@@ -49,4 +50,18 @@ public class Entry extends Widget {
 		}
 	}
 
+	/**
+	 * Retrieves the contents of the entry widget.
+	 * 
+	 * @return contents of the widget
+	 */
+	public String getText() {
+		lock.lock();
+		try {
+			return gtk_entry_get_text(this.pointer);
+		}
+		finally {
+			lock.unlock();
+		}
+	}
 }

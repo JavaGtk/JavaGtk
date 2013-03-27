@@ -18,7 +18,7 @@
 
 #include <jni.h>
 #include <gtk/gtk.h>
-#include "include/org_java_gtk_gtk_ListStore.h"
+#include "include/org_java_gtk_gtk_TreeModel.h"
 #include <jni_util.h>
 
 /*
@@ -51,4 +51,17 @@ JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_TreeModel_gtk_1tree_1model_1get
 	g_free(strText);
 
 	return text;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_TreeModel
+ * Method:    gtk_tree_model_get_iter_first
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_TreeModel_gtk_1tree_1model_1get_1iter_1first
+  (JNIEnv *env, jclass cls, jlong tree_model, jlong iter)
+{
+	gboolean value;
+	value = gtk_tree_model_get_iter_first((GtkTreeModel *)tree_model, (GtkTreeIter *)iter);
+	return (jboolean)value;
 }

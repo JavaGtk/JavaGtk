@@ -10,7 +10,7 @@ extern "C" {
 /*
  * Class:     org_java_gtk_gtk_TreeModel
  * Method:    gtk_tree_model_get_long
- * Signature: (JI)J
+ * Signature: (JJI)J
  */
 JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_TreeModel_gtk_1tree_1model_1get_1long
   (JNIEnv *, jclass, jlong, jlong, jint);
@@ -18,10 +18,18 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_TreeModel_gtk_1tree_1model_1get_1
 /*
  * Class:     org_java_gtk_gtk_TreeModel
  * Method:    gtk_tree_model_get_string
- * Signature: (JI)Ljava/lang/String;
+ * Signature: (JJI)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_TreeModel_gtk_1tree_1model_1get_1string
   (JNIEnv *, jclass, jlong, jlong, jint);
+
+/*
+ * Class:     org_java_gtk_gtk_TreeModel
+ * Method:    gtk_tree_model_get_iter_first
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_java_1gtk_gtk_TreeModel_gtk_1tree_1model_1get_1iter_1first
+  (JNIEnv *, jclass, jlong, jlong);
 
 #ifdef __cplusplus
 }

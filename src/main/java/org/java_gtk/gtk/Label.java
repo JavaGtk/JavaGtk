@@ -18,8 +18,6 @@
 
 package org.java_gtk.gtk;
 
-import org.java_gtk.gtk.Dialog.ResponseType;
-
 /**
  * A widget that displays a small to medium amount of text
  * <p>

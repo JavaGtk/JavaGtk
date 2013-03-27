@@ -18,7 +18,7 @@
 
 #include <jni.h>
 #include <gtk/gtk.h>
-#include "include/org_java_gtk_gtk_Fixed.h"
+#include "include/org_java_gtk_gtk_Entry.h"
 
 /*
  * Class:     org_java_gtk_gtk_Entry
@@ -33,4 +33,22 @@ JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Entry_gtk_1entry_1new
 	widget = gtk_entry_new();
 
 	return (jlong)widget;
+}
+
+/*
+ * Class:     org_java_gtk_gtk_Entry
+ * Method:    gtk_entry_get_text
+ * Signature: (J)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Entry_gtk_1entry_1get_1text
+  (JNIEnv *env, jclass cls, jlong entry)
+{
+	const char* strText;
+	jstring text;
+
+	strText = gtk_entry_get_text((GtkEntry*)entry);
+	text = (*env)->NewStringUTF(env, strText);
+
+	return text;
+
 }

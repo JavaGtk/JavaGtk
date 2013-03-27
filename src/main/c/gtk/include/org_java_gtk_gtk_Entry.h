@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT jlong JNICALL Java_org_java_1gtk_gtk_Entry_gtk_1entry_1new
   (JNIEnv *, jclass);
 
+/*
+ * Class:     org_java_gtk_gtk_Entry
+ * Method:    gtk_entry_get_text
+ * Signature: (J)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_org_java_1gtk_gtk_Entry_gtk_1entry_1get_1text
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif
